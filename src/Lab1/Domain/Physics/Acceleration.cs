@@ -13,4 +13,6 @@ public readonly record struct Acceleration
 
         return new Acceleration(force.Value / mass.Value);
     }
+
+    public bool IsZero => Value == 0;
 }
