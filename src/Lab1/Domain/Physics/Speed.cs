@@ -12,6 +12,12 @@ public readonly record struct Speed
     public static Speed operator +(Speed left, Speed right)
         => new Speed(left.Value + right.Value);
 
+    public static bool operator >(Speed left, Speed right)
+        => left.Value > right.Value;
+
+    public static bool operator <(Speed left, Speed right)
+        => left.Value > right.Value;
+
     public bool IsZero => Value == 0;
 
     public bool IsPositive => Value > 0;

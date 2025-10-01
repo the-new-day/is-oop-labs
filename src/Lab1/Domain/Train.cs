@@ -48,24 +48,24 @@ public class Train
             return new TravelResult(false, elapsedTime);
 
         while (!remainingDistance.IsZero)
+        {
+            currentSpeed += Speed.Create(Acceleration, Precision);
+            if (!currentSpeed.IsPositive)
+                return new TravelResult(false, elapsedTime);
+
+            var traveledDistance = Distance.Create(currentSpeed, Precision);
+
+            if (traveledDistance > remainingDistance)
             {
-                currentSpeed += Speed.Create(Acceleration, Precision);
-                if (!currentSpeed.IsPositive)
-                    return new TravelResult(false, elapsedTime);
-
-                var traveledDistance = Distance.Create(currentSpeed, Precision);
-
-                if (traveledDistance > remainingDistance)
-                {
-                    var lastDt = Time.Create(remainingDistance, currentSpeed);
-                    elapsedTime += lastDt;
-                    remainingDistance = new Distance(0);
-                    break;
-                }
-
-                remainingDistance -= traveledDistance;
-                elapsedTime += Precision;
+                var lastDt = Time.Create(remainingDistance, currentSpeed);
+                elapsedTime += lastDt;
+                remainingDistance = new Distance(0);
+                break;
             }
+
+            remainingDistance -= traveledDistance;
+            elapsedTime += Precision;
+        }
 
         Speed = currentSpeed;
         return new TravelResult(true, elapsedTime);
