@@ -4,7 +4,10 @@ public readonly record struct Acceleration
 {
     public double Value { get; }
 
-    public Acceleration(double value) => Value = value;
+    public Acceleration(double value)
+    {
+        Value = value;
+    }
 
     public static Acceleration Create(Force force, Mass mass)
     {

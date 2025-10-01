@@ -4,9 +4,12 @@ public readonly record struct Force
 {
     public double Value { get; }
 
-    public Force(double value) => Value = value;
+    public Force(double value)
+    {
+        Value = value;
+    }
 
-    public bool Exceeds(Force limit) => Math.Abs(Value) > limit.Value;
+    public bool Exceeds(Force limit) => Math.Abs(Value) > Math.Abs(limit.Value);
 
     public bool IsPositive => Value > 0;
 

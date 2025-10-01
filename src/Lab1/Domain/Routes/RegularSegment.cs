@@ -7,7 +7,10 @@ public class RegularSegment : IRouteSegment
 {
     public Distance Length { get; }
 
-    public RegularSegment(Distance length) => Length = length;
+    public RegularSegment(Distance length)
+    {
+        Length = length;
+    }
 
     public SegmentResult Pass(Train train)
     {

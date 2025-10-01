@@ -4,7 +4,10 @@ public readonly record struct Time
 {
     public double Value { get; }
 
-    public Time(double value) => Value = value;
+    public Time(double value)
+    {
+        Value = value;
+    }
 
     public static Time operator +(Time left, Time right)
         => new Time(left.Value + right.Value);

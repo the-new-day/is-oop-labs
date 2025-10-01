@@ -4,7 +4,10 @@ public readonly record struct Speed
 {
     public double Value { get; }
 
-    public Speed(double value) => Value = value;
+    public Speed(double value)
+    {
+        Value = value;
+    }
 
     public static Speed Create(Acceleration a, Time dt)
         => new Speed(a.Value * dt.Value);
