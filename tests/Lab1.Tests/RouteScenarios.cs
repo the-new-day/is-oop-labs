@@ -1,7 +1,6 @@
-using Lab1.Domain;
-using Lab1.Domain.Physics;
-using Lab1.Domain.Results;
-using Lab1.Domain.Routes;
+using Lab1.Physics;
+using Lab1.Results;
+using Lab1.Routes;
 using Xunit;
 
 namespace Lab1.Tests;

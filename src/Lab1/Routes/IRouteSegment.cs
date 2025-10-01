@@ -1,6 +1,6 @@
-using Lab1.Domain.Results;
+using Lab1.Results;
 
-namespace Lab1.Domain.Routes;
+namespace Lab1.Routes;
 
 public interface IRouteSegment
 {

@@ -1,4 +1,4 @@
-namespace Lab1.Domain.Physics;
+namespace Lab1.Physics;
 
 public readonly record struct Distance
 {

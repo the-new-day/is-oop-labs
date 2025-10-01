@@ -1,7 +1,7 @@
-using Lab1.Domain.Physics;
-using Lab1.Domain.Results;
+using Lab1.Physics;
+using Lab1.Results;
 
-namespace Lab1.Domain.Routes;
+namespace Lab1.Routes;
 
 public class RegularSegment : IRouteSegment
 {
