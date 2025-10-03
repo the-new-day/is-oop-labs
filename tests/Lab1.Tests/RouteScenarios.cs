@@ -11,11 +11,12 @@ public class RouteScenarios
     public void RouteSimulate_WhenTrainAcceleratesWithinRouteLimit_ShouldReturnSuccess()
     {
         Train train = CreateDefaultTrain();
-        Route route = Route.Builder
-            .WithEndSpeedLimit(new Speed(50))
-            .AddPowered(new Distance(100), new Force(2000))
-            .AddRegular(new Distance(200))
-            .Build();
+
+        List<IRouteSegment> segments = [
+            new PoweredSegment(new Distance(100), new Force(2000)),
+            new RegularSegment(new Distance(200))
+        ];
+        var route = new Route(segments, new Speed(50));
 
         RouteResult result = route.Simulate(train);
 
@@ -26,11 +27,12 @@ public class RouteScenarios
     public void RouteSimulate_WhenTrainAcceleratesBeyondRouteLimit_ShouldReturnFailure()
     {
         Train train = CreateDefaultTrain();
-        Route route = Route.Builder
-            .WithEndSpeedLimit(new Speed(50))
-            .AddPowered(new Distance(1000), new Force(2000))
-            .AddRegular(new Distance(200))
-            .Build();
+
+        List<IRouteSegment> segments = [
+            new PoweredSegment(new Distance(1000), new Force(2000)),
+            new RegularSegment(new Distance(200))
+        ];
+        var route = new Route(segments, new Speed(50));
 
         RouteResult result = route.Simulate(train);
 
@@ -41,13 +43,14 @@ public class RouteScenarios
     public void RouteSimulate_WhenTrainPassesStationWithinLimit_ShouldReturnSuccess()
     {
         Train train = CreateDefaultTrain();
-        Route route = Route.Builder
-            .WithEndSpeedLimit(new Speed(50))
-            .AddPowered(new Distance(100), new Force(2000))
-            .AddRegular(new Distance(200))
-            .AddStation(new Time(100), new Speed(40))
-            .AddRegular(new Distance(50))
-            .Build();
+
+        List<IRouteSegment> segments = [
+            new PoweredSegment(new Distance(100), new Force(2000)),
+            new RegularSegment(new Distance(200)),
+            new Station(new Speed(40), new Time(100)),
+            new RegularSegment(new Distance(50)),
+        ];
+        var route = new Route(segments, new Speed(50));
 
         RouteResult result = route.Simulate(train);
 
@@ -58,12 +61,13 @@ public class RouteScenarios
     public void RouteSimulate_WhenTrainArrivesAtStationTooFast_ShouldReturnFailure()
     {
         Train train = CreateDefaultTrain();
-        Route route = Route.Builder
-            .WithEndSpeedLimit(new Speed(50))
-            .AddPowered(new Distance(100), new Force(2000))
-            .AddStation(new Time(100), new Speed(15))
-            .AddRegular(new Distance(500))
-            .Build();
+
+        List<IRouteSegment> segments = [
+            new PoweredSegment(new Distance(100), new Force(2000)),
+            new Station(new Speed(15), new Time(100)),
+            new RegularSegment(new Distance(500)),
+        ];
+        var route = new Route(segments, new Speed(50));
 
         RouteResult result = route.Simulate(train);
 
@@ -74,13 +78,14 @@ public class RouteScenarios
     public void RouteSimulate_WhenTrainExceedsRouteEndLimit_ShouldReturnFailure()
     {
         Train train = CreateDefaultTrain();
-        Route route = Route.Builder
-            .WithEndSpeedLimit(new Speed(50))
-            .AddPowered(new Distance(1000), new Force(2000))
-            .AddRegular(new Distance(100))
-            .AddStation(new Time(100), new Speed(150000))
-            .AddRegular(new Distance(100))
-            .Build();
+
+        List<IRouteSegment> segments = [
+            new PoweredSegment(new Distance(1000), new Force(2000)),
+            new RegularSegment(new Distance(100)),
+            new Station(new Speed(150000), new Time(100)),
+            new RegularSegment(new Distance(100)),
+        ];
+        var route = new Route(segments, new Speed(50));
 
         RouteResult result = route.Simulate(train);
 
@@ -91,17 +96,18 @@ public class RouteScenarios
     public void RouteSimulate_WhenTrainDeceleratesWithinAllLimits_ShouldReturnSuccess()
     {
         Train train = CreateDefaultTrain();
-        Route route = Route.Builder
-            .WithEndSpeedLimit(new Speed(50))
-            .AddPowered(new Distance(1000), new Force(2000))
-            .AddRegular(new Distance(100))
-            .AddPowered(new Distance(900), new Force(-2000))
-            .AddStation(new Time(100), new Speed(30))
-            .AddRegular(new Distance(100))
-            .AddPowered(new Distance(1000), new Force(2000))
-            .AddRegular(new Distance(100))
-            .AddPowered(new Distance(900), new Force(-2000))
-            .Build();
+
+        List<IRouteSegment> segments = [
+            new PoweredSegment(new Distance(1000), new Force(2000)),
+            new RegularSegment(new Distance(100)),
+            new PoweredSegment(new Distance(900), new Force(-2000)),
+            new Station(new Speed(30), new Time(100)),
+            new RegularSegment(new Distance(100)),
+            new PoweredSegment(new Distance(1000), new Force(2000)),
+            new RegularSegment(new Distance(100)),
+            new PoweredSegment(new Distance(900), new Force(-2000)),
+        ];
+        var route = new Route(segments, new Speed(50));
 
         RouteResult result = route.Simulate(train);
 
@@ -112,10 +118,11 @@ public class RouteScenarios
     public void RouteSimulate_WhenTrainHasNoInitialSpeedOrAcceleration_ShouldReturnFailure()
     {
         Train train = CreateDefaultTrain();
-        Route route = Route.Builder
-            .WithEndSpeedLimit(new Speed(50))
-            .AddRegular(new Distance(100))
-            .Build();
+
+        List<IRouteSegment> segments = [
+            new RegularSegment(new Distance(100)),
+        ];
+        var route = new Route(segments, new Speed(50));
 
         RouteResult result = route.Simulate(train);
 
@@ -126,11 +133,12 @@ public class RouteScenarios
     public void RouteSimulate_WhenTrainStopsOrReversesOnPoweredSegments_ShouldReturnFailure()
     {
         Train train = CreateDefaultTrain();
-        Route route = Route.Builder
-            .WithEndSpeedLimit(new Speed(50))
-            .AddPowered(new Distance(100), new Force(1000))
-            .AddPowered(new Distance(100), new Force(-2000))
-            .Build();
+
+        List<IRouteSegment> segments = [
+            new PoweredSegment(new Distance(100), new Force(1000)),
+            new PoweredSegment(new Distance(100), new Force(-2000)),
+        ];
+        var route = new Route(segments, new Speed(50));
 
         RouteResult result = route.Simulate(train);
 
