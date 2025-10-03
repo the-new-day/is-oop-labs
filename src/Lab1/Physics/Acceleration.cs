@@ -11,9 +11,6 @@ public readonly record struct Acceleration
 
     public static Acceleration Create(Force force, Mass mass)
     {
-        if (mass.IsZero)
-            throw new ArgumentException("Can't calculate acceleration: mass is zero", nameof(mass));
-
         return new Acceleration(force.Value / mass.Value);
     }
 
