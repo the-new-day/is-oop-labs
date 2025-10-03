@@ -15,22 +15,23 @@ public class Route
         MaxEndSpeed = maxEndSpeed;
     }
 
-    public RouteResult Simulate(Train train)
+    public RouteSimulationResult Simulate(Train train)
     {
         var totalTime = new Time(0);
 
         foreach (IRouteSegment segment in Segments)
         {
-            SegmentResult result = segment.Pass(train);
-            totalTime += result.Time;
+            SegmentPassingResult result = segment.Pass(train);
 
-            if (!result.Success)
-                return new RouteResult(false, totalTime);
+            if (result is not SegmentPassingResult.Success success)
+                return new RouteSimulationResult.SegmentPassFailed(result);
+
+            totalTime += success.Time;
         }
 
         if (train.Speed > MaxEndSpeed)
-            return new RouteResult(false, totalTime);
+            return new RouteSimulationResult.MaxEndSpeedExceeded();
 
-        return new RouteResult(true, totalTime);
+        return new RouteSimulationResult.Success(totalTime);
     }
 }

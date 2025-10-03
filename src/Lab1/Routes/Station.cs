@@ -15,11 +15,11 @@ public class Station : IRouteSegment
         UnloadLoadTime = unloadLoadTime;
     }
 
-    public SegmentResult Pass(Train train)
+    public SegmentPassingResult Pass(Train train)
     {
         if (train.Speed > MaxArrivalSpeed)
-            return new SegmentResult(false, new Time(0));
+            return new SegmentPassingResult.TrainExceededMaxStationSpeed(MaxArrivalSpeed);
 
-        return new SegmentResult(true, UnloadLoadTime);
+        return new SegmentPassingResult.Success(UnloadLoadTime);
     }
 }

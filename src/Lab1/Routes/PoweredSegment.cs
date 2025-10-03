@@ -15,12 +15,18 @@ public class PoweredSegment : IRouteSegment
         Force = force;
     }
 
-    public SegmentResult Pass(Train train)
+    public SegmentPassingResult Pass(Train train)
     {
-        if (!train.TryApplyForce(Force))
-            return new SegmentResult(false, new Time(0));
+        TrainForceApplyingResult forceApplyingResult = train.TryApplyForce(Force);
 
-        TravelResult result = train.Travel(Length);
-        return new SegmentResult(result.Success, result.Time);
+        if (forceApplyingResult is TrainForceApplyingResult.AppliedForceExceedsLimit err)
+            return new SegmentPassingResult.AppliedForceExceedsTrainLimit(err.Limit);
+
+        TrainTravelResult result = train.Travel(Length);
+
+        if (result is TrainTravelResult.Success success)
+            return new SegmentPassingResult.Success(success.Time);
+
+        return new SegmentPassingResult.TrainTravelFailed(result);
     }
 }

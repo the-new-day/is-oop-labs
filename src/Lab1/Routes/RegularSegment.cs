@@ -12,9 +12,13 @@ public class RegularSegment : IRouteSegment
         Length = length;
     }
 
-    public SegmentResult Pass(Train train)
+    public SegmentPassingResult Pass(Train train)
     {
-        TravelResult result = train.Travel(Length);
-        return new SegmentResult(result.Success, result.Time);
+        TrainTravelResult result = train.Travel(Length);
+
+        if (result is TrainTravelResult.Success success)
+            return new SegmentPassingResult.Success(success.Time);
+
+        return new SegmentPassingResult.TrainTravelFailed(result);
     }
 }

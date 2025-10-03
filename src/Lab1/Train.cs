@@ -29,22 +29,22 @@ public class Train
         Precision = precision;
     }
 
-    public bool TryApplyForce(Force force)
+    public TrainForceApplyingResult TryApplyForce(Force force)
     {
         if (force.Exceeds(MaxForce))
-            return false;
+            return new TrainForceApplyingResult.AppliedForceExceedsLimit(MaxForce);
 
         Acceleration = Acceleration.Create(force, Mass);
-        return true;
+        return new TrainForceApplyingResult.Success();
     }
 
-    public TravelResult Travel(Distance distance)
+    public TrainTravelResult Travel(Distance distance)
     {
         Distance remainingDistance = distance;
         var elapsedTime = new Time(0);
 
         if (Acceleration.IsZero && Speed.IsZero)
-            return new TravelResult(false, elapsedTime);
+            return new TrainTravelResult.AccelerationAndSpeedAreZero();
 
         while (!remainingDistance.IsZero)
         {
@@ -53,7 +53,7 @@ public class Train
             if (!Speed.IsPositive)
             {
                 Speed = new Speed(0);
-                return new TravelResult(false, elapsedTime);
+                return new TrainTravelResult.SpeedBecameNonPositive();
             }
 
             var traveledDistance = Distance.Create(Speed, Precision);
@@ -70,6 +70,6 @@ public class Train
             elapsedTime += Precision;
         }
 
-        return new TravelResult(true, elapsedTime);
+        return new TrainTravelResult.Success(elapsedTime);
     }
 }
