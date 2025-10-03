@@ -1,6 +1,6 @@
-using Lab1.Physics;
+using Itmo.ObjectOrientedProgramming.Lab1.Physics;
 
-namespace Lab1.Results;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Results;
 
 public abstract record TrainTravelResult
 {

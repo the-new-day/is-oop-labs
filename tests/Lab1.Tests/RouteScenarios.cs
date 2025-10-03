@@ -1,9 +1,9 @@
-using Lab1.Physics;
-using Lab1.Results;
-using Lab1.Routes;
+using Itmo.ObjectOrientedProgramming.Lab1.Physics;
+using Itmo.ObjectOrientedProgramming.Lab1.Results;
+using Itmo.ObjectOrientedProgramming.Lab1.Routes;
 using Xunit;
 
-namespace Lab1.Tests;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 
 public class RouteScenarios
 {

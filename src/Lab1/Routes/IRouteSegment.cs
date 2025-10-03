@@ -1,6 +1,6 @@
-using Lab1.Results;
+using Itmo.ObjectOrientedProgramming.Lab1.Results;
 
-namespace Lab1.Routes;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Routes;
 
 public interface IRouteSegment
 {
