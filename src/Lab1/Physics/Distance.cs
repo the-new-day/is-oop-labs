@@ -30,7 +30,7 @@ public readonly record struct Distance
         => left.Value > right.Value;
 
     public static bool operator <(Distance left, Distance right)
-        => left.Value > right.Value;
+        => left.Value < right.Value;
 
     public bool IsZero => Value == 0;
 }
