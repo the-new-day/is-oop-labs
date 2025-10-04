@@ -24,4 +24,6 @@ public readonly record struct Speed
     public bool IsZero => Value == 0;
 
     public bool IsPositive => Value > 0;
+
+    public bool IsNegative => Value < 0;
 }

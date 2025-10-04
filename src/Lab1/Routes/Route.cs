@@ -11,6 +11,9 @@ public class Route
 
     public Route(IEnumerable<IRouteSegment> segments, Speed maxEndSpeed)
     {
+        if (maxEndSpeed.IsNegative)
+            throw new ArgumentException("Can't create route: max end speed is negative", nameof(maxEndSpeed));
+
         Segments = segments.ToList();
         MaxEndSpeed = maxEndSpeed;
     }
