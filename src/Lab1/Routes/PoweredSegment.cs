@@ -19,8 +19,8 @@ public class PoweredSegment : IRouteSegment
     {
         TrainForceApplyingResult forceApplyingResult = train.TryApplyForce(Force);
 
-        if (forceApplyingResult is TrainForceApplyingResult.AppliedForceExceedsLimit err)
-            return new SegmentPassingResult.AppliedForceExceedsTrainLimit(err.Limit);
+        if (forceApplyingResult is TrainForceApplyingResult.AppliedForceExceedsLimit error)
+            return new SegmentPassingResult.AppliedForceExceedsTrainLimit(error.Limit);
 
         TrainTravelResult result = train.Travel(Length);
 

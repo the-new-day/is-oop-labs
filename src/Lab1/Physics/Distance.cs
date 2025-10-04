@@ -12,12 +12,12 @@ public readonly record struct Distance
         Value = value;
     }
 
-    public static Distance Create(Speed speed, Time dt)
+    public static Distance Create(Speed speed, Time time)
     {
-        if (dt.IsZero)
-            throw new ArgumentException("Can't calculate distance: time is zero", nameof(dt));
+        if (time.IsZero)
+            throw new ArgumentException("Can't calculate distance: time is zero", nameof(time));
 
-        return new Distance(Math.Abs(speed.Value) * dt.Value);
+        return new Distance(Math.Abs(speed.Value) * time.Value);
     }
 
     public static Distance operator +(Distance left, Distance right)
