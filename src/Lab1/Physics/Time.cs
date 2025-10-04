@@ -6,6 +6,9 @@ public readonly record struct Time
 
     public Time(double value)
     {
+        if (value < 0)
+            throw new ArgumentException("Can't create Time: value can't be negative");
+
         Value = value;
     }
 
