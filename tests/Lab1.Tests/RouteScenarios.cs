@@ -10,6 +10,7 @@ public class RouteScenarios
     [Fact]
     public void RouteSimulate_WhenTrainAcceleratesWithinRouteLimit_ShouldReturnSuccess()
     {
+        // Arrange
         Train train = CreateDefaultTrain();
 
         List<IRouteSegment> segments = [
@@ -18,14 +19,17 @@ public class RouteScenarios
         ];
         var route = new Route(segments, new Speed(50));
 
+        // Act
         RouteSimulationResult result = route.Simulate(train);
 
+        // Assert
         Assert.IsType<RouteSimulationResult.Success>(result);
     }
 
     [Fact]
     public void RouteSimulate_WhenTrainAcceleratesBeyondRouteLimit_ShouldReturnFailure()
     {
+        // Arrange
         Train train = CreateDefaultTrain();
 
         List<IRouteSegment> segments = [
@@ -34,14 +38,17 @@ public class RouteScenarios
         ];
         var route = new Route(segments, new Speed(50));
 
+        // Act
         RouteSimulationResult result = route.Simulate(train);
 
+        // Assert
         Assert.IsType<RouteSimulationResult.MaxEndSpeedExceeded>(result);
     }
 
     [Fact]
     public void RouteSimulate_WhenTrainPassesStationWithinLimit_ShouldReturnSuccess()
     {
+        // Arrange
         Train train = CreateDefaultTrain();
 
         List<IRouteSegment> segments = [
@@ -52,14 +59,17 @@ public class RouteScenarios
         ];
         var route = new Route(segments, new Speed(50));
 
+        // Act
         RouteSimulationResult result = route.Simulate(train);
 
+        // Assert
         Assert.IsType<RouteSimulationResult.Success>(result);
     }
 
     [Fact]
     public void RouteSimulate_WhenTrainArrivesAtStationTooFast_ShouldReturnFailure()
     {
+        // Arrange
         Train train = CreateDefaultTrain();
 
         List<IRouteSegment> segments = [
@@ -69,8 +79,10 @@ public class RouteScenarios
         ];
         var route = new Route(segments, new Speed(50));
 
+        // Act
         RouteSimulationResult result = route.Simulate(train);
 
+        // Assert
         RouteSimulationResult.SegmentPassFailed segmentFail = Assert.IsType<RouteSimulationResult.SegmentPassFailed>(result);
         Assert.IsType<SegmentPassingResult.TrainExceededMaxStationSpeed>(segmentFail.SegmentPassingResult);
     }
@@ -78,6 +90,7 @@ public class RouteScenarios
     [Fact]
     public void RouteSimulate_WhenTrainExceedsRouteEndLimit_ShouldReturnFailure()
     {
+        // Arrange
         Train train = CreateDefaultTrain();
 
         List<IRouteSegment> segments = [
@@ -88,14 +101,17 @@ public class RouteScenarios
         ];
         var route = new Route(segments, new Speed(50));
 
+        // Act
         RouteSimulationResult result = route.Simulate(train);
 
+        // Assert
         Assert.IsType<RouteSimulationResult.MaxEndSpeedExceeded>(result);
     }
 
     [Fact]
     public void RouteSimulate_WhenTrainDeceleratesWithinAllLimits_ShouldReturnSuccess()
     {
+        // Arrange
         Train train = CreateDefaultTrain();
 
         List<IRouteSegment> segments = [
@@ -110,14 +126,17 @@ public class RouteScenarios
         ];
         var route = new Route(segments, new Speed(50));
 
+        // Act
         RouteSimulationResult result = route.Simulate(train);
 
+        // Assert
         Assert.IsType<RouteSimulationResult.Success>(result);
     }
 
     [Fact]
     public void RouteSimulate_WhenTrainHasNoInitialSpeedAndAcceleration_ShouldReturnFailure()
     {
+        // Arrange
         Train train = CreateDefaultTrain();
 
         List<IRouteSegment> segments = [
@@ -125,8 +144,10 @@ public class RouteScenarios
         ];
         var route = new Route(segments, new Speed(50));
 
+        // Act
         RouteSimulationResult result = route.Simulate(train);
 
+        // Assert
         var segmentFail = Assert.IsType<RouteSimulationResult.SegmentPassFailed>(result);
         var trainFail = Assert.IsType<SegmentPassingResult.TrainTravelFailed>(segmentFail.SegmentPassingResult);
         Assert.IsType<TrainTravelResult.AccelerationAndSpeedAreZero>(trainFail.TrainTravelResult);
@@ -135,6 +156,7 @@ public class RouteScenarios
     [Fact]
     public void RouteSimulate_WhenTrainStopsOrReversesOnPoweredSegments_ShouldReturnFailure()
     {
+        // Arrange
         Train train = CreateDefaultTrain();
 
         List<IRouteSegment> segments = [
@@ -143,8 +165,10 @@ public class RouteScenarios
         ];
         var route = new Route(segments, new Speed(50));
 
+        // Act
         RouteSimulationResult result = route.Simulate(train);
 
+        // Assert
         var segmentFail = Assert.IsType<RouteSimulationResult.SegmentPassFailed>(result);
         var trainFail = Assert.IsType<SegmentPassingResult.TrainTravelFailed>(segmentFail.SegmentPassingResult);
         Assert.IsType<TrainTravelResult.SpeedBecameNonPositive>(trainFail.TrainTravelResult);
