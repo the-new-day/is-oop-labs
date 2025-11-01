@@ -1,0 +1,75 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Physics;
+using Itmo.ObjectOrientedProgramming.Lab1.Results;
+
+namespace Itmo.ObjectOrientedProgramming.Lab1;
+
+public class Train
+{
+    public Mass Mass { get; }
+
+    public Speed Speed { get; private set; }
+
+    public Acceleration Acceleration { get; private set; }
+
+    public Force MaxForce { get; }
+
+    public Time Precision { get; }
+
+    public Train(Mass mass, Force maxForce, Time precision)
+    {
+        if (precision.IsZero)
+            throw new ArgumentException("Can't create Train: precision is zero", nameof(precision));
+        else if (maxForce.IsNegative)
+            throw new ArgumentException("Can't create Train: maxForce is negative", nameof(maxForce));
+
+        Mass = mass;
+        MaxForce = maxForce;
+        Speed = new Speed(0);
+        Acceleration = new Acceleration(0);
+        Precision = precision;
+    }
+
+    public TrainForceApplyingResult TryApplyForce(Force force)
+    {
+        if (force.Exceeds(MaxForce))
+            return new TrainForceApplyingResult.AppliedForceExceedsLimit(MaxForce);
+
+        Acceleration = Acceleration.Create(force, Mass);
+        return new TrainForceApplyingResult.Success();
+    }
+
+    public TrainTravelResult Travel(Distance distance)
+    {
+        Distance remainingDistance = distance;
+        var elapsedTime = new Time(0);
+
+        if (Acceleration.IsZero && Speed.IsZero)
+            return new TrainTravelResult.AccelerationAndSpeedAreZero();
+
+        while (!remainingDistance.IsZero)
+        {
+            Speed += Speed.Create(Acceleration, Precision);
+
+            if (!Speed.IsPositive)
+            {
+                Speed = new Speed(0);
+                return new TrainTravelResult.SpeedBecameNonPositive();
+            }
+
+            var traveledDistance = Distance.Create(Speed, Precision);
+
+            if (traveledDistance > remainingDistance)
+            {
+                var lastDt = Time.Create(remainingDistance, Speed);
+                elapsedTime += lastDt;
+                remainingDistance = new Distance(0);
+                break;
+            }
+
+            remainingDistance -= traveledDistance;
+            elapsedTime += Precision;
+        }
+
+        return new TrainTravelResult.Success(elapsedTime);
+    }
+}
