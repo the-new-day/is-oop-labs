@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab2.Interfaces;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Formatters;
+namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Formatting;
 
 public class ConsoleMessageFormatter : IMessageFormatter
 {
