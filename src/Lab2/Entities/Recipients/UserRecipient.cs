@@ -14,6 +14,6 @@ public class UserRecipient : IRecipient
 
     public void ReceiveMessage(Message message)
     {
-        _user.RecieveMessage(message);
+        _user.ReceiveMessage(message);
     }
 }

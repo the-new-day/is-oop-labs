@@ -6,22 +6,29 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities;
 
 public class User : IUser
 {
-    private readonly Dictionary<Message, MessageReadStatus> _receivedMessages = new();
+    private readonly Dictionary<Message, MessageReadStatus> _receivedMessagesStatus = new();
 
-    public void RecieveMessage(Message message)
+    public void ReceiveMessage(Message message)
     {
-        _receivedMessages[message] = MessageReadStatus.Unread;
+        _receivedMessagesStatus[message] = MessageReadStatus.Unread;
     }
 
-    public UserMarkMessageAsReadResult MarkMessageAsRead(Message message)
+    public UserTryMarkMessageAsReadResult TryMarkMessageAsRead(Message message)
     {
-        if (!_receivedMessages.ContainsKey(message))
-            return new UserMarkMessageAsReadResult.MessageHasNotBeenRecieved();
+        if (!_receivedMessagesStatus.ContainsKey(message))
+            return new UserTryMarkMessageAsReadResult.MessageHasNotBeenReceived();
 
-        if (_receivedMessages[message] == MessageReadStatus.Read)
-            return new UserMarkMessageAsReadResult.MessageIsAlreadyRead();
+        if (_receivedMessagesStatus[message] == MessageReadStatus.Read)
+            return new UserTryMarkMessageAsReadResult.MessageIsAlreadyRead();
 
-        _receivedMessages[message] = MessageReadStatus.Read;
-        return new UserMarkMessageAsReadResult.Success();
+        _receivedMessagesStatus[message] = MessageReadStatus.Read;
+        return new UserTryMarkMessageAsReadResult.Success();
+    }
+
+    public MessageReadStatus? FindMessageReadStatus(Message message)
+    {
+        return _receivedMessagesStatus.TryGetValue(message, out MessageReadStatus status)
+            ? status
+            : null;
     }
 }

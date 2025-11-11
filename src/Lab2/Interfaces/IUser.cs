@@ -5,7 +5,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Interfaces;
 
 public interface IUser
 {
-    void RecieveMessage(Message message);
+    void ReceiveMessage(Message message);
 
-    UserMarkMessageAsReadResult MarkMessageAsRead(Message message);
+    UserTryMarkMessageAsReadResult TryMarkMessageAsRead(Message message);
+
+    MessageReadStatus? FindMessageReadStatus(Message message);
 }
