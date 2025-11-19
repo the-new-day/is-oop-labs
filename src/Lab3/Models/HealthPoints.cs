@@ -7,12 +7,20 @@ public readonly record struct HealthPoints
     public HealthPoints(int value)
     {
         if (value < 0)
-            throw new ArgumentException("HealthValue can't be negative", nameof(value));
+            throw new ArgumentException("HealthPoints can't be negative", nameof(value));
 
         Value = value;
     }
 
+    public HealthPoints MultipliedBy(int multiplier)
+    {
+        return new HealthPoints(Value * multiplier);
+    }
+
     public bool IsZero => Value == 0;
+
+    public static HealthPoints Max(HealthPoints left, HealthPoints right)
+        => new HealthPoints(Math.Max(left.Value, right.Value));
 
     public static HealthPoints operator +(HealthPoints left, HealthPoints right)
         => new HealthPoints(left.Value + right.Value);

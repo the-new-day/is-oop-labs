@@ -2,24 +2,26 @@ using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Entities;
 
-public abstract class CreatureBase : ICreature
+public class CreatureBase : ICreature
 {
-    public HealthPoints HealthValue { get; set; }
-
     public HealthPoints AttackValue { get; set; }
 
-    protected CreatureBase(HealthPoints healthValue, HealthPoints attackValue)
+    public HealthPoints HealthValue { get; set; }
+
+    public bool IsAlive => !HealthValue.IsZero;
+
+    public bool CanAttack => !AttackValue.IsZero;
+
+    public CreatureBase(HealthPoints attackValue, HealthPoints healthValue)
     {
-        HealthValue = healthValue;
         AttackValue = attackValue;
+        HealthValue = healthValue;
     }
 
     public virtual void Attack(ICreature otherCreature)
     {
-        if (HealthValue.IsZero)
-            return; // TODO: error? exception?
-
-        otherCreature.TakeDamage(AttackValue);
+        if (IsAlive && CanAttack)
+            otherCreature.TakeDamage(AttackValue);
     }
 
     public virtual void TakeDamage(HealthPoints damage)

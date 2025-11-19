@@ -2,9 +2,10 @@ using Itmo.ObjectOrientedProgramming.Lab3.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Modifiers;
 
-public class AttackMastery : CreatureModifier
+public class AttackMasteryModifier : CreatureModifier
 {
-    public AttackMastery(ICreature creature) : base(creature)
+    public AttackMasteryModifier(ICreature creature)
+        : base(creature)
     {
     }
 

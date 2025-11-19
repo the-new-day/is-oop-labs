@@ -5,16 +5,16 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Modifiers;
 
 public abstract class CreatureModifier : ICreature
 {
-    public virtual HealthPoints HealthValue
-    {
-        get => _creature.HealthValue;
-        set => _creature.HealthValue = value;
-    }
-
     public virtual HealthPoints AttackValue
     {
         get => _creature.AttackValue;
         set => _creature.AttackValue = value;
+    }
+
+    public virtual HealthPoints HealthValue
+    {
+        get => _creature.HealthValue;
+        set => _creature.HealthValue = value;
     }
 
     private readonly ICreature _creature;

@@ -3,11 +3,12 @@ using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Modifiers;
 
-public class MagicShield : CreatureModifier
+public class MagicShieldModifier : CreatureModifier
 {
     private bool _isShieldActive = true;
 
-    public MagicShield(ICreature creature) : base(creature)
+    public MagicShieldModifier(ICreature creature)
+        : base(creature)
     {
     }
 
