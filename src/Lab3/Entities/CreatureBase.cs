@@ -4,13 +4,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Entities;
 
 public class CreatureBase : ICreature
 {
-    public HealthPoints AttackValue { get; set; }
+    public HealthPoints AttackValue { get; protected set; }
 
-    public HealthPoints HealthValue { get; set; }
-
-    public bool IsAlive => !HealthValue.IsZero;
-
-    public bool CanAttack => !AttackValue.IsZero;
+    public HealthPoints HealthValue { get; protected set; }
 
     public CreatureBase(HealthPoints attackValue, HealthPoints healthValue)
     {
@@ -20,15 +16,23 @@ public class CreatureBase : ICreature
 
     public virtual void Attack(ICreature otherCreature)
     {
-        if (IsAlive && CanAttack)
+        if (!HealthValue.IsZero && !AttackValue.IsZero)
             otherCreature.TakeDamage(AttackValue);
     }
 
     public virtual void TakeDamage(HealthPoints damage)
     {
-        if (damage.IsZero)
-            return;
+        if (!HealthValue.IsZero)
+            HealthValue = (HealthValue > damage) ? (HealthValue - damage) : new HealthPoints(0);
+    }
 
-        HealthValue = (HealthValue > damage) ? (HealthValue - damage) : new HealthPoints(0);
+    public virtual void SetAttackValue(HealthPoints newValue)
+    {
+        AttackValue = newValue;
+    }
+
+    public virtual void SetHealthValue(HealthPoints newValue)
+    {
+        HealthValue = newValue;
     }
 }

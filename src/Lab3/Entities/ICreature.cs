@@ -4,11 +4,15 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Entities;
 
 public interface ICreature
 {
-    HealthPoints HealthValue { get; set; }
+    HealthPoints HealthValue { get; }
 
-    HealthPoints AttackValue { get; set; }
+    HealthPoints AttackValue { get; }
 
     void Attack(ICreature otherCreature);
 
     void TakeDamage(HealthPoints damage);
+
+    void SetHealthValue(HealthPoints newValue);
+
+    void SetAttackValue(HealthPoints newValue);
 }

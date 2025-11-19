@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Modifiers;
 
-public class MagicShieldModifier : CreatureModifier
+public class MagicShieldModifier : CreatureDecorator
 {
     private bool _isShieldActive = true;
 
