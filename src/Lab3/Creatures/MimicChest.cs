@@ -17,4 +17,9 @@ public class MimicChest : CreatureBase
 
         base.Attack(otherCreature);
     }
+
+    public override MimicChest Clone()
+    {
+        return new MimicChest(AttackValue, HealthValue);
+    }
 }

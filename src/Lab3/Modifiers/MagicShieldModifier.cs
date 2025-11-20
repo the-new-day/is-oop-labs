@@ -22,4 +22,12 @@ public class MagicShieldModifier : CreatureDecorator
 
         base.TakeDamage(damage);
     }
+
+    public override MagicShieldModifier Clone()
+    {
+        return new MagicShieldModifier(Creature.Clone())
+        {
+            _isShieldActive = _isShieldActive,
+        };
+    }
 }

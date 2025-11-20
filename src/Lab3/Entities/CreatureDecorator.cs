@@ -5,34 +5,40 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Modifiers;
 
 public abstract class CreatureDecorator : ICreature
 {
-    public virtual HealthPoints AttackValue => _creature.AttackValue;
+    public virtual HealthPoints AttackValue => Creature.AttackValue;
 
-    public virtual HealthPoints HealthValue => _creature.HealthValue;
+    public virtual HealthPoints HealthValue => Creature.HealthValue;
 
-    private readonly ICreature _creature;
+    public virtual bool IsAlive => !HealthValue.IsZero;
+
+    public virtual bool CanAttack => IsAlive && !AttackValue.IsZero;
+
+    protected ICreature Creature { get; }
 
     protected CreatureDecorator(ICreature creature)
     {
-        _creature = creature;
+        Creature = creature;
     }
 
     public virtual void Attack(ICreature otherCreature)
     {
-        _creature.Attack(otherCreature);
+        Creature.Attack(otherCreature);
     }
 
     public virtual void TakeDamage(HealthPoints damage)
     {
-        _creature.TakeDamage(damage);
+        Creature.TakeDamage(damage);
     }
+
+    public abstract ICreature Clone();
 
     public virtual void SetAttackValue(HealthPoints newValue)
     {
-        _creature.SetAttackValue(newValue);
+        Creature.SetAttackValue(newValue);
     }
 
     public virtual void SetHealthValue(HealthPoints newValue)
     {
-        _creature.SetHealthValue(newValue);
+        Creature.SetHealthValue(newValue);
     }
 }

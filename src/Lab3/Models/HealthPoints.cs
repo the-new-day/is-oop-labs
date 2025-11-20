@@ -14,6 +14,9 @@ public readonly record struct HealthPoints
 
     public HealthPoints MultipliedBy(int multiplier)
     {
+        if (multiplier < 0)
+            throw new ArgumentException("multiplier can't be negative", nameof(multiplier));
+
         return new HealthPoints(Value * multiplier);
     }
 

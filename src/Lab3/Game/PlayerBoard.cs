@@ -1,11 +1,10 @@
-using Itmo.ObjectOrientedProgramming.Lab3.CreatureFactories;
 using Itmo.ObjectOrientedProgramming.Lab3.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Results;
 using Itmo.ObjectOrientedProgramming.Lab3.Spells;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Game;
 
-public class PlayerBoard
+public class PlayerBoard : IPlayerBoard
 {
     private readonly int _maxCreaturesCount;
 
@@ -19,12 +18,10 @@ public class PlayerBoard
         _maxCreaturesCount = maxCreaturesCount;
     }
 
-    public PlayerBoardAddingCreatureResult AddCreature(ICreatureFactory factory)
+    public PlayerBoardAddingCreatureResult AddCreature(ICreature creature)
     {
         if (_creatures.Count == _maxCreaturesCount)
             return new PlayerBoardAddingCreatureResult.CreatureLimitExceeded(_maxCreaturesCount);
-
-        ICreature creature = factory.CreateCreature();
 
         _creatures.Add(creature);
         return new PlayerBoardAddingCreatureResult.Success(_creatures.Count - 1);
@@ -48,5 +45,21 @@ public class PlayerBoard
     public IEnumerable<ICreature> GetTargets()
     {
         return _creatures.Where(creature => !creature.HealthValue.IsZero);
+    }
+
+    public PlayerBoard Clone()
+    {
+        var board = new PlayerBoard(_maxCreaturesCount);
+        foreach (ICreature creature in _creatures)
+        {
+            board.AddCreature(creature);
+        }
+
+        return board;
+    }
+
+    IPlayerBoard IPlayerBoard.Clone()
+    {
+        return Clone();
     }
 }

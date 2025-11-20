@@ -8,9 +8,15 @@ public interface ICreature
 
     HealthPoints AttackValue { get; }
 
+    bool IsAlive { get; }
+
+    bool CanAttack { get; }
+
     void Attack(ICreature otherCreature);
 
     void TakeDamage(HealthPoints damage);
+
+    ICreature Clone();
 
     void SetHealthValue(HealthPoints newValue);
 

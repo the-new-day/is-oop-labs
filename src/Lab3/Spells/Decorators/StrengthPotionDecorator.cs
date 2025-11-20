@@ -15,4 +15,9 @@ public class StrengthPotionDecorator : CreatureDecorator
     {
         _attackBonus = attackBonus;
     }
+
+    public override StrengthPotionDecorator Clone()
+    {
+        return new StrengthPotionDecorator(Creature.Clone(), _attackBonus);
+    }
 }

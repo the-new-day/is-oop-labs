@@ -15,4 +15,9 @@ public class EndurancePotionDecorator : CreatureDecorator
     {
         _healthBonus = healthBonus;
     }
+
+    public override EndurancePotionDecorator Clone()
+    {
+        return new EndurancePotionDecorator(Creature.Clone(), _healthBonus);
+    }
 }

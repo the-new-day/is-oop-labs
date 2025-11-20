@@ -10,6 +10,9 @@ public class ViciousFighter : CreatureBase
     public ViciousFighter(HealthPoints attackValue, HealthPoints healthValue, int multiplier)
         : base(attackValue, healthValue)
     {
+        if (multiplier < 0)
+            throw new ArgumentException("multiplier can't be negative", nameof(multiplier));
+
         _multiplier = multiplier;
     }
 
@@ -17,9 +20,14 @@ public class ViciousFighter : CreatureBase
     {
         base.TakeDamage(damage);
 
-        if (!HealthValue.IsZero)
+        if (IsAlive)
         {
             AttackValue = AttackValue.MultipliedBy(_multiplier);
         }
+    }
+
+    public override ViciousFighter Clone()
+    {
+        return new ViciousFighter(AttackValue, HealthValue, _multiplier);
     }
 }

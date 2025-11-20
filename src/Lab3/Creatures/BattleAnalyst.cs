@@ -18,4 +18,9 @@ public class BattleAnalyst : CreatureBase
         AttackValue += _attackBonus;
         base.Attack(otherCreature);
     }
+
+    public override BattleAnalyst Clone()
+    {
+        return new BattleAnalyst(AttackValue, HealthValue, _attackBonus);
+    }
 }

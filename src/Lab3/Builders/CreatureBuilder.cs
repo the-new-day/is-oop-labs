@@ -1,3 +1,4 @@
+using Itmo.ObjectOrientedProgramming.Lab3.Creatures;
 using Itmo.ObjectOrientedProgramming.Lab3.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Modifiers;
@@ -32,7 +33,7 @@ public class CreatureBuilder : ICreatureBuilder
 
     public ICreature Build()
     {
-        ICreature creature = new CreatureBase(_attackValue, _healthValue);
+        ICreature creature = new OrdinaryCreature(_attackValue, _healthValue);
 
         foreach (Func<ICreature, ICreature> modifier in _modifiers)
         {

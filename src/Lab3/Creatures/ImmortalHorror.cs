@@ -19,10 +19,15 @@ public class ImmortalHorror : CreatureBase
     {
         base.TakeDamage(damage);
 
-        if (HealthValue.IsZero && !_wasReborned)
+        if (!IsAlive && !_wasReborned)
         {
             HealthValue = _healthValueAfterRebirth;
             _wasReborned = true;
         }
+    }
+
+    public override ImmortalHorror Clone()
+    {
+        return new ImmortalHorror(AttackValue, HealthValue, _healthValueAfterRebirth);
     }
 }

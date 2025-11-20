@@ -14,4 +14,9 @@ public class AttackMasteryModifier : CreatureDecorator
         base.Attack(otherCreature);
         base.Attack(otherCreature);
     }
+
+    public override AttackMasteryModifier Clone()
+    {
+        return new AttackMasteryModifier(Creature.Clone());
+    }
 }

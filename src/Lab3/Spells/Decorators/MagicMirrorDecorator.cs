@@ -14,4 +14,9 @@ public class MagicMirrorDecorator : CreatureDecorator
         : base(creature)
     {
     }
+
+    public override MagicMirrorDecorator Clone()
+    {
+        return new MagicMirrorDecorator(Creature.Clone());
+    }
 }
