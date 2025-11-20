@@ -11,9 +11,17 @@ public class CreatureMock : CreatureBase
 
     public int HitCount { get; private set; } = 0;
 
+    public int AttackCallCount { get; private set; } = 0;
+
     public CreatureMock(HealthPoints attackValue, HealthPoints healthValue)
         : base(attackValue, healthValue)
     {
+    }
+
+    public override void Attack(ICreature otherCreature)
+    {
+        base.Attack(otherCreature);
+        ++AttackCallCount;
     }
 
     public override void TakeDamage(HealthPoints damage)
