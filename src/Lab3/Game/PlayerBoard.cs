@@ -23,7 +23,7 @@ public class PlayerBoard : IPlayerBoard
         if (_creatures.Count == _maxCreaturesCount)
             return new PlayerBoardAddingCreatureResult.CreatureLimitExceeded(_maxCreaturesCount);
 
-        _creatures.Add(creature);
+        _creatures.Add(creature.Clone());
         return new PlayerBoardAddingCreatureResult.Success(_creatures.Count - 1);
     }
 
@@ -39,12 +39,14 @@ public class PlayerBoard : IPlayerBoard
 
     public IEnumerable<ICreature> GetAttackers()
     {
-        return _creatures.Where(creature => !creature.HealthValue.IsZero && !creature.AttackValue.IsZero);
+        return _creatures
+            .Where(creature => !creature.HealthValue.IsZero && !creature.AttackValue.IsZero);
     }
 
     public IEnumerable<ICreature> GetTargets()
     {
-        return _creatures.Where(creature => !creature.HealthValue.IsZero);
+        return _creatures
+            .Where(creature => !creature.HealthValue.IsZero);
     }
 
     public PlayerBoard Clone()
