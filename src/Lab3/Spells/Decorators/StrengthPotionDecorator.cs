@@ -1,6 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab3.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
-using Itmo.ObjectOrientedProgramming.Lab3.Modifiers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Spells.Decorators;
 
