@@ -24,7 +24,7 @@ public class BattleAnalystTests
         analyst.Attack(target);
 
         // Assert
-        Assert.Equal(analyst.AttackValue, expectedNewAttackValue);
+        Assert.Equal(expectedNewAttackValue, analyst.AttackValue);
     }
 
     [Fact]
@@ -48,6 +48,6 @@ public class BattleAnalystTests
         }
 
         // Assert
-        Assert.Equal(analyst.AttackValue, expectedNewAttackValue);
+        Assert.Equal(expectedNewAttackValue, analyst.AttackValue);
     }
 }

@@ -23,7 +23,7 @@ public class ImmortalHorrorTests
         horror.TakeDamage(damage);
 
         // Assert
-        Assert.Equal(horror.HealthValue, expectedNewHealthValue);
+        Assert.Equal(expectedNewHealthValue, horror.HealthValue);
     }
 
     [Fact]
@@ -43,7 +43,7 @@ public class ImmortalHorrorTests
         horror.TakeDamage(damage);
 
         // Assert
-        Assert.Equal(horror.HealthValue, expectedNewHealthValue);
+        Assert.Equal(expectedNewHealthValue, horror.HealthValue);
     }
 
     [Fact]
@@ -82,6 +82,6 @@ public class ImmortalHorrorTests
         horror.TakeDamage(damage);
 
         // Assert
-        Assert.Equal(horror.HealthValue, expectedNewHealthValue);
+        Assert.Equal(expectedNewHealthValue, horror.HealthValue);
     }
 }

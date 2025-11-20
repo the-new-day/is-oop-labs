@@ -53,7 +53,7 @@ public class ViciousFighterTests
         }
 
         // Assert
-        Assert.Equal(fighter.AttackValue, expectedNewAttackValue);
+        Assert.Equal(expectedNewAttackValue, fighter.AttackValue);
     }
 
     [Fact]
@@ -71,7 +71,7 @@ public class ViciousFighterTests
         fighter.TakeDamage(damage);
 
         // Assert
-        Assert.Equal(fighter.AttackValue, initialAttackValue);
+        Assert.Equal(initialAttackValue, fighter.AttackValue);
     }
 
     [Fact]
@@ -89,6 +89,6 @@ public class ViciousFighterTests
         fighter.TakeDamage(damage);
 
         // Assert
-        Assert.Equal(fighter.AttackValue, initialAttackValue);
+        Assert.Equal(initialAttackValue, fighter.AttackValue);
     }
 }

@@ -26,8 +26,8 @@ public class MimicChestTests
         mimicChest.Attack(targetWithHigherStats);
 
         // Assert
-        Assert.Equal(mimicChest.AttackValue, expectedNewAttackValue);
-        Assert.Equal(mimicChest.HealthValue, expectedNewHealthValue);
+        Assert.Equal(expectedNewAttackValue, mimicChest.AttackValue);
+        Assert.Equal(expectedNewHealthValue, mimicChest.HealthValue);
     }
 
     [Fact]
@@ -49,8 +49,8 @@ public class MimicChestTests
         mimicChest.Attack(targetWithLowerStats);
 
         // Assert
-        Assert.Equal(mimicChest.AttackValue, expectedNewAttackValue);
-        Assert.Equal(mimicChest.HealthValue, expectedNewHealthValue);
+        Assert.Equal(expectedNewAttackValue, mimicChest.AttackValue);
+        Assert.Equal(expectedNewHealthValue, mimicChest.HealthValue);
     }
 
     [Fact]
@@ -72,8 +72,8 @@ public class MimicChestTests
         mimicChest.Attack(targetWithHigherStat);
 
         // Assert
-        Assert.Equal(mimicChest.AttackValue, expectedNewAttackValue);
-        Assert.Equal(mimicChest.HealthValue, expectedNewHealthValue);
+        Assert.Equal(expectedNewAttackValue, mimicChest.AttackValue);
+        Assert.Equal(expectedNewHealthValue, mimicChest.HealthValue);
     }
 
     [Fact]
@@ -95,8 +95,8 @@ public class MimicChestTests
         mimicChest.Attack(targetWithHigherStat);
 
         // Assert
-        Assert.Equal(mimicChest.AttackValue, expectedNewAttackValue);
-        Assert.Equal(mimicChest.HealthValue, expectedNewHealthValue);
+        Assert.Equal(expectedNewAttackValue, mimicChest.AttackValue);
+        Assert.Equal(expectedNewHealthValue, mimicChest.HealthValue);
     }
 
     [Fact]
@@ -120,7 +120,7 @@ public class MimicChestTests
         mimicChest.Attack(target3);
 
         // Assert
-        Assert.Equal(mimicChest.AttackValue, expectedNewAttackValue);
-        Assert.Equal(mimicChest.HealthValue, expectedNewHealthValue);
+        Assert.Equal(expectedNewAttackValue, mimicChest.AttackValue);
+        Assert.Equal(expectedNewHealthValue, mimicChest.HealthValue);
     }
 }

@@ -9,6 +9,8 @@ public class CreatureMock : CreatureBase
 
     public HealthPoints TotalDamageTaken { get; private set; } = new HealthPoints(0);
 
+    public int HitCount { get; private set; } = 0;
+
     public CreatureMock(HealthPoints attackValue, HealthPoints healthValue)
         : base(attackValue, healthValue)
     {
@@ -19,6 +21,7 @@ public class CreatureMock : CreatureBase
         base.TakeDamage(damage);
         LastDamageTaken = damage;
         TotalDamageTaken += damage;
+        ++HitCount;
     }
 
     public override CreatureMock Clone()
