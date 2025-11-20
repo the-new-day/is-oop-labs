@@ -17,8 +17,4 @@ public interface ICreature
     void TakeDamage(HealthPoints damage);
 
     ICreature Clone();
-
-    void SetHealthValue(HealthPoints newValue);
-
-    void SetAttackValue(HealthPoints newValue);
 }

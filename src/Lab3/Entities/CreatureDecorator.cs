@@ -31,14 +31,4 @@ public abstract class CreatureDecorator : ICreature
     }
 
     public abstract ICreature Clone();
-
-    public virtual void SetAttackValue(HealthPoints newValue)
-    {
-        Creature.SetAttackValue(newValue);
-    }
-
-    public virtual void SetHealthValue(HealthPoints newValue)
-    {
-        Creature.SetHealthValue(newValue);
-    }
 }

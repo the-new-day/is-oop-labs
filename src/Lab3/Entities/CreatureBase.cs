@@ -29,14 +29,4 @@ public abstract class CreatureBase : ICreature
     }
 
     public abstract ICreature Clone();
-
-    public virtual void SetAttackValue(HealthPoints newValue)
-    {
-        AttackValue = newValue;
-    }
-
-    public virtual void SetHealthValue(HealthPoints newValue)
-    {
-        HealthValue = newValue;
-    }
 }
