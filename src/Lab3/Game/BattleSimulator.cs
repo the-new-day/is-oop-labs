@@ -1,5 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab3.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Results;
+using System.Security.Cryptography;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Game;
 
@@ -70,7 +71,7 @@ public class BattleSimulator
         if (attacker == null)
             return new TurnPerformingResult.AttackerPasses();
 
-        attacker.Attack(targets[0]);
+        attacker.Attack(targets[RandomNumberGenerator.GetInt32(targets.Count)]);
         return new TurnPerformingResult.PerformedNormally();
     }
 }
