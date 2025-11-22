@@ -1,10 +1,9 @@
-using Itmo.ObjectOrientedProgramming.Lab2.Interfaces;
 using Itmo.ObjectOrientedProgramming.Lab2.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities;
 
-public class User : IUser
+public class User
 {
     private readonly Dictionary<Message, MessageReadStatus> _receivedMessagesStatus = new();
 

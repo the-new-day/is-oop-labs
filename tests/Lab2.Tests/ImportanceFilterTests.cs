@@ -27,8 +27,7 @@ public class ImportanceFilterTests
     public void ReceiveMessage_OneUserWithAndWithoutImportanceFilter_NotDeliveredAndDelivered()
     {
         // Arrange
-        var userMock = new CountingUserMock();
-        var userRecipient = new UserRecipient(userMock);
+        var userRecipient = new MockRecipient();
         var userImportanceFilter = new ImportanceFilterRecipient(userRecipient, MessageImportanceLevel.High);
         var groupRecipient = new GroupRecipient([userRecipient, userImportanceFilter]);
         var message = new Message("Header", "Body", MessageImportanceLevel.Low);
@@ -37,6 +36,6 @@ public class ImportanceFilterTests
         groupRecipient.ReceiveMessage(message);
 
         // Assert
-        Assert.Equal(1, userMock.GetReceiveCount(message));
+        Assert.Equal(1, userRecipient.GetReceiveCount(message));
     }
 }

@@ -5,9 +5,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Recipients;
 
 public class UserRecipient : IRecipient
 {
-    private readonly IUser _user;
+    private readonly User _user;
 
-    public UserRecipient(IUser user)
+    public UserRecipient(User user)
     {
         _user = user;
     }
