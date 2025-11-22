@@ -4,11 +4,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Game;
 
 public class PlayerBoardAttackerSelector
 {
-    private readonly IPlayerBoard _board;
+    private readonly PlayerBoard _board;
 
     private int _currentAttackerIndex = 0;
 
-    public PlayerBoardAttackerSelector(IPlayerBoard board)
+    public PlayerBoardAttackerSelector(PlayerBoard board)
     {
         _board = board;
     }

@@ -6,11 +6,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Game;
 
 public class BattleSimulator
 {
-    private readonly IPlayerBoard _firstInitialBoard;
+    private readonly PlayerBoard _firstInitialBoard;
 
-    private readonly IPlayerBoard _secondInitialBoard;
+    private readonly PlayerBoard _secondInitialBoard;
 
-    public BattleSimulator(IPlayerBoard board1, IPlayerBoard board2)
+    public BattleSimulator(PlayerBoard board1, PlayerBoard board2)
     {
         _firstInitialBoard = board1.Clone();
         _secondInitialBoard = board2.Clone();
@@ -18,13 +18,13 @@ public class BattleSimulator
 
     public BattleResult StartBattle()
     {
-        IPlayerBoard firstBoard = _firstInitialBoard.Clone();
-        IPlayerBoard secondBoard = _secondInitialBoard.Clone();
+        PlayerBoard firstBoard = _firstInitialBoard.Clone();
+        PlayerBoard secondBoard = _secondInitialBoard.Clone();
         var firstAttackerSelector = new PlayerBoardAttackerSelector(firstBoard);
         var secondAttackerSelector = new PlayerBoardAttackerSelector(secondBoard);
 
-        IPlayerBoard attackingBoard = firstBoard;
-        IPlayerBoard targetsBoard = secondBoard;
+        PlayerBoard attackingBoard = firstBoard;
+        PlayerBoard targetsBoard = secondBoard;
         PlayerBoardAttackerSelector attackerSelector = firstAttackerSelector;
 
         while (true)
@@ -57,7 +57,7 @@ public class BattleSimulator
 
     private TurnPerformingResult PerformTurn(
         PlayerBoardAttackerSelector attackerSelector,
-        IPlayerBoard targetsBoard)
+        PlayerBoard targetsBoard)
     {
         ICreature? attacker = attackerSelector.FindNextAttacker();
         var targets = targetsBoard.GetTargets().ToList();

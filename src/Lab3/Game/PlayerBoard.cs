@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.Spells;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Game;
 
-public class PlayerBoard : IPlayerBoard
+public class PlayerBoard
 {
     private readonly int _maxCreaturesCount;
 
@@ -58,10 +58,5 @@ public class PlayerBoard : IPlayerBoard
         }
 
         return board;
-    }
-
-    IPlayerBoard IPlayerBoard.Clone()
-    {
-        return Clone();
     }
 }
