@@ -27,7 +27,7 @@ public class CreatureBuilderTests
     {
         // Arrange
         var builder = new CreatureBuilder(new HealthPoints(3), new HealthPoints(8));
-        builder.WithMagicShield();
+        builder.WithModifier(creature => new MagicShieldModifier(creature));
 
         // Act
         ICreature creature = builder.Build();
@@ -41,7 +41,7 @@ public class CreatureBuilderTests
     {
         // Arrange
         var builder = new CreatureBuilder(new HealthPoints(3), new HealthPoints(8));
-        builder.WithAttackMastery();
+        builder.WithModifier(creature => new AttackMasteryModifier(creature));
 
         // Act
         ICreature creature = builder.Build();
@@ -55,7 +55,7 @@ public class CreatureBuilderTests
     {
         // Arrange
         var builder = new CreatureBuilder(new HealthPoints(3), new HealthPoints(8));
-        builder.WithMagicShield();
+        builder.WithModifier(creature => new MagicShieldModifier(creature));
 
         // Act
         ICreature creature1 = builder.Build();

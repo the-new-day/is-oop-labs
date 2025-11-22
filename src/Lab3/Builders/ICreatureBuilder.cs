@@ -4,9 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Builders;
 
 public interface ICreatureBuilder
 {
-    ICreatureBuilder WithAttackMastery();
-
-    ICreatureBuilder WithMagicShield();
+    ICreatureBuilder WithModifier(Func<ICreature, ICreature> modifierFactory);
 
     ICreature Build();
 }

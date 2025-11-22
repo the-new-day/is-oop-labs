@@ -1,7 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab3.Creatures;
 using Itmo.ObjectOrientedProgramming.Lab3.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
-using Itmo.ObjectOrientedProgramming.Lab3.Modifiers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Builders;
 
@@ -19,27 +18,15 @@ public class CreatureBuilder : ICreatureBuilder
         _healthValue = healthValue;
     }
 
-    public ICreatureBuilder WithMagicShield()
+    public ICreatureBuilder WithModifier(Func<ICreature, ICreature> modifierFactory)
     {
-        _modifiers.Add(creature => new MagicShieldModifier(creature));
-        return this;
-    }
-
-    public ICreatureBuilder WithAttackMastery()
-    {
-        _modifiers.Add(creature => new AttackMasteryModifier(creature));
+        _modifiers.Add(modifierFactory);
         return this;
     }
 
     public ICreature Build()
     {
         ICreature creature = new OrdinaryCreature(_attackValue, _healthValue);
-
-        foreach (Func<ICreature, ICreature> modifier in _modifiers)
-        {
-            creature = modifier(creature);
-        }
-
-        return creature;
+        return _modifiers.Aggregate(creature, (current, modifier) => modifier(current));
     }
 }
