@@ -9,8 +9,8 @@ public class BattleAnalystFactory : ICreatureFactory
     public ICreature CreateCreature()
     {
         return new BattleAnalyst(
-            attackValue: new HealthPoints(2),
+            attackValue: new AttackPoints(2),
             healthValue: new HealthPoints(4),
-            attackBonus: new HealthPoints(2));
+            attackBonus: new AttackPoints(2));
     }
 }

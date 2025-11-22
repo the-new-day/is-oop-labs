@@ -11,9 +11,9 @@ public class MagicShieldModifierTests
     public void TakeDamage_NonLethalDamageOnce_ShouldKeepHealth()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(4);
+        var initialAttackValue = new AttackPoints(4);
         var initialHealthValue = new HealthPoints(4);
-        var attackerAttackValue = new HealthPoints(1);
+        var attackerAttackValue = new AttackPoints(1);
 
         var shieldBaseCreature = new CreatureMock(initialAttackValue, initialHealthValue);
         var attacker = new CreatureMock(attackerAttackValue, initialHealthValue);
@@ -31,9 +31,9 @@ public class MagicShieldModifierTests
     public void TakeDamage_LethalDamageOnce_ShouldKeepHealth()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(4);
+        var initialAttackValue = new AttackPoints(4);
         var initialHealthValue = new HealthPoints(4);
-        var attackerAttackValue = new HealthPoints(5);
+        var attackerAttackValue = new AttackPoints(5);
 
         var shieldBaseCreature = new CreatureMock(initialAttackValue, initialHealthValue);
         var attacker = new CreatureMock(attackerAttackValue, initialHealthValue);
@@ -51,16 +51,16 @@ public class MagicShieldModifierTests
     public void TakeDamage_TakesDamageTwice_ShouldBlockFirstAndTakeSecond()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(4);
+        var initialAttackValue = new AttackPoints(4);
         var initialHealthValue = new HealthPoints(4);
-        var attackerAttackValue = new HealthPoints(1);
+        var attackerAttackValue = new AttackPoints(1);
 
         var shieldBaseCreature = new CreatureMock(initialAttackValue, initialHealthValue);
         var attacker = new CreatureMock(attackerAttackValue, initialHealthValue);
 
         var shield = new MagicShieldModifier(shieldBaseCreature);
 
-        HealthPoints expectedNewHealthValue = initialHealthValue - attackerAttackValue;
+        var expectedNewHealthValue = new HealthPoints(3);
 
         // Act
         attacker.Attack(shield);

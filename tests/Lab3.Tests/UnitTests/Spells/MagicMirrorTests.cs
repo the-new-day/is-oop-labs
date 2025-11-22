@@ -13,8 +13,8 @@ public class MagicMirrorTests
     {
         // Arrange
         var mirror = new MagicMirror();
-        var creature = new CreatureMock(new HealthPoints(3), new HealthPoints(8));
-        var expectedAttack = new HealthPoints(8);
+        var creature = new CreatureMock(new AttackPoints(3), new HealthPoints(8));
+        var expectedAttack = new AttackPoints(8);
         var expectedHealth = new HealthPoints(3);
 
         // Act
@@ -30,7 +30,7 @@ public class MagicMirrorTests
     {
         // Arrange
         var mirror = new MagicMirror();
-        var creature = new CreatureMock(new HealthPoints(5), new HealthPoints(5));
+        var creature = new CreatureMock(new AttackPoints(5), new HealthPoints(5));
 
         // Act
         ICreature result = mirror.GetCasted(creature);

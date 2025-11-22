@@ -16,7 +16,7 @@ public class BattleSimulatorTests
         var board1 = new PlayerBoard(3);
         var board2 = new PlayerBoard(3); // stays empty
 
-        board1.AddCreature(new OrdinaryCreature(new HealthPoints(2), new HealthPoints(4)));
+        board1.AddCreature(new OrdinaryCreature(new AttackPoints(2), new HealthPoints(4)));
 
         var simulator = new BattleSimulator(board1, board2);
 
@@ -34,7 +34,7 @@ public class BattleSimulatorTests
         var board1 = new PlayerBoard(3);
         var board2 = new PlayerBoard(3);
 
-        var deadCreature = new OrdinaryCreature(new HealthPoints(2), new HealthPoints(0));
+        var deadCreature = new OrdinaryCreature(new AttackPoints(2), new HealthPoints(0));
         board1.AddCreature(deadCreature);
         board2.AddCreature(deadCreature);
 
@@ -54,8 +54,8 @@ public class BattleSimulatorTests
         var board1 = new PlayerBoard(3);
         var board2 = new PlayerBoard(3);
 
-        board1.AddCreature(new OrdinaryCreature(new HealthPoints(0), new HealthPoints(4)));
-        board2.AddCreature(new OrdinaryCreature(new HealthPoints(2), new HealthPoints(4)));
+        board1.AddCreature(new OrdinaryCreature(new AttackPoints(0), new HealthPoints(4)));
+        board2.AddCreature(new OrdinaryCreature(new AttackPoints(2), new HealthPoints(4)));
 
         var simulator = new BattleSimulator(board1, board2);
 
@@ -74,10 +74,10 @@ public class BattleSimulatorTests
         var board2 = new PlayerBoard(3);
 
         // Player 1: strong creature
-        board1.AddCreature(new OrdinaryCreature(new HealthPoints(5), new HealthPoints(10)));
+        board1.AddCreature(new OrdinaryCreature(new AttackPoints(5), new HealthPoints(10)));
 
         // Player 2: weak creature
-        board2.AddCreature(new OrdinaryCreature(new HealthPoints(1), new HealthPoints(3)));
+        board2.AddCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(3)));
 
         var simulator = new BattleSimulator(board1, board2);
 
@@ -96,10 +96,10 @@ public class BattleSimulatorTests
         var board2 = new PlayerBoard(3);
 
         // Player 1: weak creature
-        board1.AddCreature(new OrdinaryCreature(new HealthPoints(1), new HealthPoints(3)));
+        board1.AddCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(3)));
 
         // Player 2: strong creature
-        board2.AddCreature(new OrdinaryCreature(new HealthPoints(5), new HealthPoints(10)));
+        board2.AddCreature(new OrdinaryCreature(new AttackPoints(5), new HealthPoints(10)));
 
         var simulator = new BattleSimulator(board1, board2);
 
@@ -118,11 +118,11 @@ public class BattleSimulatorTests
         var board2 = new PlayerBoard(3);
 
         // Player 1: 2 attackers
-        board1.AddCreature(new OrdinaryCreature(new HealthPoints(2), new HealthPoints(4)));
-        board1.AddCreature(new OrdinaryCreature(new HealthPoints(3), new HealthPoints(5)));
+        board1.AddCreature(new OrdinaryCreature(new AttackPoints(2), new HealthPoints(4)));
+        board1.AddCreature(new OrdinaryCreature(new AttackPoints(3), new HealthPoints(5)));
 
         // Player 2: 1 target
-        board2.AddCreature(new OrdinaryCreature(new HealthPoints(1), new HealthPoints(20)));
+        board2.AddCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(20)));
 
         var simulator = new BattleSimulator(board1, board2);
 
@@ -140,8 +140,8 @@ public class BattleSimulatorTests
         var originalBoard1 = new PlayerBoard(3);
         var originalBoard2 = new PlayerBoard(3);
 
-        originalBoard1.AddCreature(new OrdinaryCreature(new HealthPoints(2), new HealthPoints(4)));
-        originalBoard2.AddCreature(new OrdinaryCreature(new HealthPoints(1), new HealthPoints(3)));
+        originalBoard1.AddCreature(new OrdinaryCreature(new AttackPoints(2), new HealthPoints(4)));
+        originalBoard2.AddCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(3)));
 
         var simulator = new BattleSimulator(originalBoard1, originalBoard2);
 
@@ -164,10 +164,10 @@ public class BattleSimulatorTests
         var board2 = new PlayerBoard(3);
 
         var analyst = new BattleAnalyst(
-            new HealthPoints(2), new HealthPoints(4), new HealthPoints(2));
+            new AttackPoints(2), new HealthPoints(4), new AttackPoints(2));
         board1.AddCreature(analyst);
 
-        board2.AddCreature(new OrdinaryCreature(new HealthPoints(1), new HealthPoints(10)));
+        board2.AddCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(10)));
 
         var simulator = new BattleSimulator(board1, board2);
 

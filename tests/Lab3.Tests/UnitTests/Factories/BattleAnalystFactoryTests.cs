@@ -19,7 +19,7 @@ public class BattleAnalystFactoryTests
 
         // Assert
         Assert.IsType<BattleAnalyst>(creature);
-        Assert.Equal(new HealthPoints(2), creature.AttackValue);
+        Assert.Equal(new AttackPoints(2), creature.AttackValue);
         Assert.Equal(new HealthPoints(4), creature.HealthValue);
     }
 }

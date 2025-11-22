@@ -6,7 +6,7 @@ public interface ICreature
 {
     HealthPoints HealthValue { get; }
 
-    HealthPoints AttackValue { get; }
+    AttackPoints AttackValue { get; }
 
     bool IsAlive { get; }
 
@@ -14,7 +14,7 @@ public interface ICreature
 
     void Attack(ICreature otherCreature);
 
-    void TakeDamage(HealthPoints damage);
+    void TakeDamage(AttackPoints damage);
 
     ICreature Clone();
 }

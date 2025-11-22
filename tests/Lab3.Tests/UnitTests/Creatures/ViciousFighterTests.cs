@@ -10,14 +10,14 @@ public class ViciousFighterTests
     public void TakeDamage_StaysAlive_ShouldMultiplyAttackValueByMultiplier()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(1);
+        var initialAttackValue = new AttackPoints(1);
         var initialHealthValue = new HealthPoints(6);
         int multiplier = 2;
 
         var fighter = new ViciousFighter(initialAttackValue, initialHealthValue, multiplier);
-        var damage = new HealthPoints(1);
+        var damage = new AttackPoints(1);
 
-        HealthPoints expectedNewAttackValue = initialAttackValue.MultipliedBy(multiplier);
+        AttackPoints expectedNewAttackValue = initialAttackValue.MultipliedBy(multiplier);
 
         // Act
         fighter.TakeDamage(damage);
@@ -30,14 +30,14 @@ public class ViciousFighterTests
     public void TakeDamage_StaysAliveMultipleTimes_ShouldMultiplyAttackValueExponentially()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(1);
+        var initialAttackValue = new AttackPoints(1);
         var initialHealthValue = new HealthPoints(6);
         int multiplier = 2;
 
         var fighter = new ViciousFighter(initialAttackValue, initialHealthValue, multiplier);
-        var damage = new HealthPoints(1);
+        var damage = new AttackPoints(1);
 
-        HealthPoints expectedNewAttackValue = initialAttackValue;
+        AttackPoints expectedNewAttackValue = initialAttackValue;
 
         int timesCount = 3;
 
@@ -60,12 +60,12 @@ public class ViciousFighterTests
     public void TakeDamage_WhenDies_ShouldNotIncreaseAttackValue()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(1);
+        var initialAttackValue = new AttackPoints(1);
         var initialHealthValue = new HealthPoints(6);
         int multiplier = 2;
 
         var fighter = new ViciousFighter(initialAttackValue, initialHealthValue, multiplier);
-        var damage = new HealthPoints(10);
+        var damage = new AttackPoints(10);
 
         // Act
         fighter.TakeDamage(damage);
@@ -78,12 +78,12 @@ public class ViciousFighterTests
     public void TakeDamage_TakesExactLethalDamage_ShouldNotIncreaseAttackValue()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(1);
+        var initialAttackValue = new AttackPoints(1);
         var initialHealthValue = new HealthPoints(6);
         int multiplier = 2;
 
         var fighter = new ViciousFighter(initialAttackValue, initialHealthValue, multiplier);
-        var damage = new HealthPoints(6);
+        var damage = new AttackPoints(6);
 
         // Act
         fighter.TakeDamage(damage);

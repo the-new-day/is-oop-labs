@@ -9,7 +9,7 @@ public class ImmortalHorrorFactory : ICreatureFactory
     public ICreature CreateCreature()
     {
         return new ImmortalHorror(
-            attackValue: new HealthPoints(4),
+            attackValue: new AttackPoints(4),
             healthValue: new HealthPoints(4),
             healthValueAfterRebirth: new HealthPoints(1));
     }

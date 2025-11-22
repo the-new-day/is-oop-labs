@@ -12,12 +12,12 @@ public readonly record struct HealthPoints
         Value = value;
     }
 
-    public HealthPoints MultipliedBy(int multiplier)
+    public HealthPoints ReducedByDamage(AttackPoints damage)
     {
-        if (multiplier < 0)
-            throw new ArgumentException("multiplier can't be negative", nameof(multiplier));
+        if (Value < damage.Value)
+            return new HealthPoints(0);
 
-        return new HealthPoints(Value * multiplier);
+        return new HealthPoints(Value - damage.Value);
     }
 
     public bool IsZero => Value == 0;
@@ -30,10 +30,4 @@ public readonly record struct HealthPoints
 
     public static HealthPoints operator -(HealthPoints left, HealthPoints right)
         => new HealthPoints(left.Value - right.Value);
-
-    public static bool operator >(HealthPoints left, HealthPoints right)
-        => left.Value > right.Value;
-
-    public static bool operator <(HealthPoints left, HealthPoints right)
-        => left.Value < right.Value;
 }

@@ -5,11 +5,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Spells.Decorators;
 
 public class StrengthPotionDecorator : CreatureDecorator
 {
-    private readonly HealthPoints _attackBonus;
+    private readonly AttackPoints _attackBonus;
 
-    public override HealthPoints AttackValue => base.AttackValue + _attackBonus;
+    public override AttackPoints AttackValue => base.AttackValue + _attackBonus;
 
-    public StrengthPotionDecorator(ICreature creature, HealthPoints attackBonus)
+    public StrengthPotionDecorator(ICreature creature, AttackPoints attackBonus)
         : base(creature)
     {
         _attackBonus = attackBonus;

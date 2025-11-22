@@ -5,9 +5,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Spells.Decorators;
 
 public class MagicMirrorDecorator : CreatureDecorator
 {
-    public override HealthPoints HealthValue => base.AttackValue;
+    public override AttackPoints AttackValue => new AttackPoints(base.HealthValue.Value);
 
-    public override HealthPoints AttackValue => base.HealthValue;
+    public override HealthPoints HealthValue => new HealthPoints(base.AttackValue.Value);
 
     public MagicMirrorDecorator(ICreature creature)
         : base(creature)

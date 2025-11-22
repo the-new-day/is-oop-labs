@@ -5,15 +5,15 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Tests.Mocks;
 
 public class CreatureMock : CreatureBase
 {
-    public HealthPoints? LastDamageTaken { get; private set; }
+    public AttackPoints? LastDamageTaken { get; private set; }
 
-    public HealthPoints TotalDamageTaken { get; private set; } = new HealthPoints(0);
+    public AttackPoints TotalDamageTaken { get; private set; } = new AttackPoints(0);
 
     public int HitCount { get; private set; } = 0;
 
     public int AttackCallCount { get; private set; } = 0;
 
-    public CreatureMock(HealthPoints attackValue, HealthPoints healthValue)
+    public CreatureMock(AttackPoints attackValue, HealthPoints healthValue)
         : base(attackValue, healthValue)
     {
     }
@@ -24,7 +24,7 @@ public class CreatureMock : CreatureBase
         ++AttackCallCount;
     }
 
-    public override void TakeDamage(HealthPoints damage)
+    public override void TakeDamage(AttackPoints damage)
     {
         base.TakeDamage(damage);
         LastDamageTaken = damage;

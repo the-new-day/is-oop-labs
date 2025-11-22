@@ -19,7 +19,7 @@ public class ImmortalHorrorFactoryTests
 
         // Assert
         Assert.IsType<ImmortalHorror>(creature);
-        Assert.Equal(new HealthPoints(4), creature.AttackValue);
+        Assert.Equal(new AttackPoints(4), creature.AttackValue);
         Assert.Equal(new HealthPoints(4), creature.HealthValue);
     }
 }

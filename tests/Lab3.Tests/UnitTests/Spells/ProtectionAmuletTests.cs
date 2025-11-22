@@ -14,7 +14,7 @@ public class ProtectionAmuletTests
     {
         // Arrange
         var amulet = new ProtectionAmulet();
-        var creature = new CreatureMock(new HealthPoints(2), new HealthPoints(10));
+        var creature = new CreatureMock(new AttackPoints(2), new HealthPoints(10));
 
         // Act
         ICreature result = amulet.GetCasted(creature);

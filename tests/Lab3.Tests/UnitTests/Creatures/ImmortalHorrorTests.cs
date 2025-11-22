@@ -10,14 +10,14 @@ public class ImmortalHorrorTests
     public void TakeDamage_NonLethalDamage_ShouldNotActivateReborn()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(4);
+        var initialAttackValue = new AttackPoints(4);
         var initialHealthValue = new HealthPoints(4);
         var healthValueAfterRebirth = new HealthPoints(1);
 
         var horror = new ImmortalHorror(initialAttackValue, initialHealthValue, healthValueAfterRebirth);
-        var damage = new HealthPoints(1);
+        var damage = new AttackPoints(1);
 
-        HealthPoints expectedNewHealthValue = initialHealthValue - damage;
+        HealthPoints expectedNewHealthValue = initialHealthValue.ReducedByDamage(damage);
 
         // Act
         horror.TakeDamage(damage);
@@ -30,12 +30,12 @@ public class ImmortalHorrorTests
     public void TakeDamage_FirstLethalDamage_ShouldRebornWithGivenHealth()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(4);
+        var initialAttackValue = new AttackPoints(4);
         var initialHealthValue = new HealthPoints(4);
         var healthValueAfterRebirth = new HealthPoints(1);
 
         var horror = new ImmortalHorror(initialAttackValue, initialHealthValue, healthValueAfterRebirth);
-        var damage = new HealthPoints(5);
+        var damage = new AttackPoints(5);
 
         HealthPoints expectedNewHealthValue = healthValueAfterRebirth;
 
@@ -50,12 +50,12 @@ public class ImmortalHorrorTests
     public void TakeDamage_SecondLethalDamage_ShouldDiePermanently()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(4);
+        var initialAttackValue = new AttackPoints(4);
         var initialHealthValue = new HealthPoints(4);
         var healthValueAfterRebirth = new HealthPoints(1);
 
         var horror = new ImmortalHorror(initialAttackValue, initialHealthValue, healthValueAfterRebirth);
-        var damage = new HealthPoints(5);
+        var damage = new AttackPoints(5);
 
         // Act
         horror.TakeDamage(damage);
@@ -69,12 +69,12 @@ public class ImmortalHorrorTests
     public void TakeDamage_ExactLethalDamage_ShouldReborn()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(4);
+        var initialAttackValue = new AttackPoints(4);
         var initialHealthValue = new HealthPoints(4);
         var healthValueAfterRebirth = new HealthPoints(1);
 
         var horror = new ImmortalHorror(initialAttackValue, initialHealthValue, healthValueAfterRebirth);
-        var damage = new HealthPoints(4);
+        var damage = new AttackPoints(4);
 
         HealthPoints expectedNewHealthValue = healthValueAfterRebirth;
 

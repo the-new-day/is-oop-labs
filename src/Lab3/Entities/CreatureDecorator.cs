@@ -4,7 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Entities;
 
 public abstract class CreatureDecorator : ICreature
 {
-    public virtual HealthPoints AttackValue => Creature.AttackValue;
+    public virtual AttackPoints AttackValue => Creature.AttackValue;
 
     public virtual HealthPoints HealthValue => Creature.HealthValue;
 
@@ -24,7 +24,7 @@ public abstract class CreatureDecorator : ICreature
         Creature.Attack(otherCreature);
     }
 
-    public virtual void TakeDamage(HealthPoints damage)
+    public virtual void TakeDamage(AttackPoints damage)
     {
         Creature.TakeDamage(damage);
     }

@@ -12,16 +12,16 @@ public class SpellCombinationTests
     public void MultipleSpells_ShouldApplyInSequence()
     {
         // Arrange
-        var strengthPotion = new StrengthPotion(new HealthPoints(2));
+        var strengthPotion = new StrengthPotion(new AttackPoints(2));
         var endurancePotion = new EndurancePotion(new HealthPoints(3));
-        var creature = new CreatureMock(new HealthPoints(1), new HealthPoints(5));
+        var creature = new CreatureMock(new AttackPoints(1), new HealthPoints(5));
 
         // Act
         ICreature stronger = strengthPotion.GetCasted(creature);
         ICreature tougher = endurancePotion.GetCasted(stronger);
 
         // Assert
-        Assert.Equal(new HealthPoints(3), tougher.AttackValue);
+        Assert.Equal(new AttackPoints(3), tougher.AttackValue);
         Assert.Equal(new HealthPoints(8), tougher.HealthValue);
     }
 
@@ -30,15 +30,15 @@ public class SpellCombinationTests
     {
         // Arrange
         var mirror = new MagicMirror();
-        var potion = new StrengthPotion(new HealthPoints(3));
-        var creature = new CreatureMock(new HealthPoints(2), new HealthPoints(6));
+        var potion = new StrengthPotion(new AttackPoints(3));
+        var creature = new CreatureMock(new AttackPoints(2), new HealthPoints(6));
 
         // Act
         ICreature mirrored = mirror.GetCasted(creature);
         ICreature buffed = potion.GetCasted(mirrored);
 
         // Assert
-        Assert.Equal(new HealthPoints(9), buffed.AttackValue);
+        Assert.Equal(new AttackPoints(9), buffed.AttackValue);
         Assert.Equal(new HealthPoints(2), buffed.HealthValue);
     }
 }

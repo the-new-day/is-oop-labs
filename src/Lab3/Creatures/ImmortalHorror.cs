@@ -9,13 +9,13 @@ public class ImmortalHorror : CreatureBase
 
     private bool _wasReborned = false;
 
-    public ImmortalHorror(HealthPoints attackValue, HealthPoints healthValue, HealthPoints healthValueAfterRebirth)
+    public ImmortalHorror(AttackPoints attackValue, HealthPoints healthValue, HealthPoints healthValueAfterRebirth)
         : base(attackValue, healthValue)
     {
         _healthValueAfterRebirth = healthValueAfterRebirth;
     }
 
-    public override void TakeDamage(HealthPoints damage)
+    public override void TakeDamage(AttackPoints damage)
     {
         base.TakeDamage(damage);
 

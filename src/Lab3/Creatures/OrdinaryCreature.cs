@@ -5,7 +5,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Creatures;
 
 public class OrdinaryCreature : CreatureBase
 {
-    public OrdinaryCreature(HealthPoints attackValue, HealthPoints healthValue)
+    public OrdinaryCreature(AttackPoints attackValue, HealthPoints healthValue)
         : base(attackValue, healthValue)
     {
     }

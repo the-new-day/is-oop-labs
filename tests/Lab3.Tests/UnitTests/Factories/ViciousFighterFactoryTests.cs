@@ -19,7 +19,7 @@ public class ViciousFighterFactoryTests
 
         // Assert
         Assert.IsType<ViciousFighter>(creature);
-        Assert.Equal(new HealthPoints(1), creature.AttackValue);
+        Assert.Equal(new AttackPoints(1), creature.AttackValue);
         Assert.Equal(new HealthPoints(6), creature.HealthValue);
     }
 }

@@ -12,9 +12,9 @@ public class StengthPotionTests
     public void GetCasted_ShouldIncreaseAttackValueByBonus()
     {
         // Arrange
-        var potion = new StrengthPotion(new HealthPoints(5));
-        var creature = new CreatureMock(new HealthPoints(2), new HealthPoints(10));
-        var expectedAttack = new HealthPoints(7);
+        var potion = new StrengthPotion(new AttackPoints(5));
+        var creature = new CreatureMock(new AttackPoints(2), new HealthPoints(10));
+        var expectedAttack = new AttackPoints(7);
 
         // Act
         ICreature result = potion.GetCasted(creature);

@@ -9,7 +9,7 @@ public class MimicChestFactory : ICreatureFactory
     public ICreature CreateCreature()
     {
         return new MimicChest(
-            attackValue: new HealthPoints(1),
+            attackValue: new AttackPoints(1),
             healthValue: new HealthPoints(1));
     }
 }

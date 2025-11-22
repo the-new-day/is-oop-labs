@@ -5,14 +5,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Creatures;
 
 public class MimicChest : CreatureBase
 {
-    public MimicChest(HealthPoints attackValue, HealthPoints healthValue)
+    public MimicChest(AttackPoints attackValue, HealthPoints healthValue)
         : base(attackValue, healthValue)
     {
     }
 
     public override void Attack(ICreature otherCreature)
     {
-        AttackValue = HealthPoints.Max(AttackValue, otherCreature.AttackValue);
+        AttackValue = AttackPoints.Max(AttackValue, otherCreature.AttackValue);
         HealthValue = HealthPoints.Max(HealthValue, otherCreature.HealthValue);
 
         base.Attack(otherCreature);

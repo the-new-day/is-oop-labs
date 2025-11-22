@@ -11,9 +11,9 @@ public class AttackMasteryModifierTests
     public void Attack_NonLethalDamage_ShouldAttackTwice()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(4);
+        var initialAttackValue = new AttackPoints(4);
         var initialHealthValue = new HealthPoints(4);
-        var initialTargetAttackValue = new HealthPoints(10);
+        var initialTargetAttackValue = new AttackPoints(10);
         var initialTargetHealthValue = new HealthPoints(10);
 
         var masteryBaseCreature = new CreatureMock(initialAttackValue, initialHealthValue);
@@ -23,7 +23,7 @@ public class AttackMasteryModifierTests
 
         int expectedHitCount = 2;
         HealthPoints expectedNewTargetHealth =
-            initialTargetHealthValue - initialAttackValue.MultipliedBy(expectedHitCount);
+            initialTargetHealthValue.ReducedByDamage(initialAttackValue.MultipliedBy(expectedHitCount));
 
         // Act
         mastery.Attack(target);
@@ -37,9 +37,9 @@ public class AttackMasteryModifierTests
     public void Attack_TargetDiesAfterFirstHit_ShouldLeaveTargetDead()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(4);
+        var initialAttackValue = new AttackPoints(4);
         var initialHealthValue = new HealthPoints(4);
-        var initialTargetAttackValue = new HealthPoints(10);
+        var initialTargetAttackValue = new AttackPoints(10);
         var initialTargetHealthValue = new HealthPoints(4);
 
         var masteryBaseCreature = new CreatureMock(initialAttackValue, initialHealthValue);

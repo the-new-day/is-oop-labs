@@ -12,7 +12,7 @@ public class MagicShieldModifier : CreatureDecorator
     {
     }
 
-    public override void TakeDamage(HealthPoints damage)
+    public override void TakeDamage(AttackPoints damage)
     {
         if (_isShieldActive)
         {

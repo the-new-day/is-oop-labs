@@ -19,7 +19,7 @@ public class MimicChestFactoryTests
 
         // Assert
         Assert.IsType<MimicChest>(creature);
-        Assert.Equal(new HealthPoints(1), creature.AttackValue);
+        Assert.Equal(new AttackPoints(1), creature.AttackValue);
         Assert.Equal(new HealthPoints(1), creature.HealthValue);
     }
 }

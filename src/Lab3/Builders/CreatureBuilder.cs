@@ -8,11 +8,11 @@ public class CreatureBuilder : ICreatureBuilder
 {
     private readonly List<Func<ICreature, ICreature>> _modifiers = new();
 
-    private readonly HealthPoints _attackValue;
+    private readonly AttackPoints _attackValue;
 
     private readonly HealthPoints _healthValue;
 
-    public CreatureBuilder(HealthPoints attackValue, HealthPoints healthValue)
+    public CreatureBuilder(AttackPoints attackValue, HealthPoints healthValue)
     {
         _attackValue = attackValue;
         _healthValue = healthValue;

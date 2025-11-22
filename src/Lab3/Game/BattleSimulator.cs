@@ -6,26 +6,26 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Game;
 
 public class BattleSimulator
 {
-    private readonly IPlayerBoard _initialBoard1;
+    private readonly IPlayerBoard _firstInitialBoard;
 
-    private readonly IPlayerBoard _initialBoard2;
+    private readonly IPlayerBoard _secondInitialBoard;
 
     public BattleSimulator(IPlayerBoard board1, IPlayerBoard board2)
     {
-        _initialBoard1 = board1.Clone();
-        _initialBoard2 = board2.Clone();
+        _firstInitialBoard = board1.Clone();
+        _secondInitialBoard = board2.Clone();
     }
 
     public BattleResult StartBattle()
     {
-        IPlayerBoard board1 = _initialBoard1.Clone();
-        IPlayerBoard board2 = _initialBoard2.Clone();
-        var attackerSelector1 = new PlayerBoardAttackerSelector(board1);
-        var attackerSelector2 = new PlayerBoardAttackerSelector(board2);
+        IPlayerBoard firstBoard = _firstInitialBoard.Clone();
+        IPlayerBoard secondBoard = _secondInitialBoard.Clone();
+        var firstAttackerSelector = new PlayerBoardAttackerSelector(firstBoard);
+        var secondAttackerSelector = new PlayerBoardAttackerSelector(secondBoard);
 
-        IPlayerBoard attackingBoard = board1;
-        IPlayerBoard targetsBoard = board2;
-        PlayerBoardAttackerSelector attackerSelector = attackerSelector1;
+        IPlayerBoard attackingBoard = firstBoard;
+        IPlayerBoard targetsBoard = secondBoard;
+        PlayerBoardAttackerSelector attackerSelector = firstAttackerSelector;
 
         while (true)
         {
@@ -36,13 +36,13 @@ public class BattleSimulator
                 case TurnPerformingResult.AttackerPasses:
                 case TurnPerformingResult.PerformedNormally:
                     (attackingBoard, targetsBoard) = (targetsBoard, attackingBoard);
-                    attackerSelector = (attackerSelector == attackerSelector1)
-                        ? attackerSelector2
-                        : attackerSelector1;
+                    attackerSelector = (attackerSelector == firstAttackerSelector)
+                        ? secondAttackerSelector
+                        : firstAttackerSelector;
                     break;
 
                 case TurnPerformingResult.AttackerWins:
-                    return attackingBoard == board1
+                    return attackingBoard == firstBoard
                         ? new BattleResult.FirstWins()
                         : new BattleResult.SecondWins();
 

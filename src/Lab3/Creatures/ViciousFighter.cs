@@ -7,7 +7,7 @@ public class ViciousFighter : CreatureBase
 {
     private readonly int _multiplier;
 
-    public ViciousFighter(HealthPoints attackValue, HealthPoints healthValue, int multiplier)
+    public ViciousFighter(AttackPoints attackValue, HealthPoints healthValue, int multiplier)
         : base(attackValue, healthValue)
     {
         if (multiplier < 0)
@@ -16,7 +16,7 @@ public class ViciousFighter : CreatureBase
         _multiplier = multiplier;
     }
 
-    public override void TakeDamage(HealthPoints damage)
+    public override void TakeDamage(AttackPoints damage)
     {
         base.TakeDamage(damage);
 

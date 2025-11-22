@@ -11,14 +11,14 @@ public class BattleAnalystTests
     public void Attack_FirstTime_ShouldIncreaseAttackValueByBonus()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(2);
+        var initialAttackValue = new AttackPoints(2);
         var initialHealthValue = new HealthPoints(4);
-        var attackBonus = new HealthPoints(2);
+        var attackBonus = new AttackPoints(2);
 
         var analyst = new BattleAnalyst(initialAttackValue, initialHealthValue, attackBonus);
-        var target = new CreatureMock(new HealthPoints(1), new HealthPoints(10));
+        var target = new CreatureMock(new AttackPoints(1), new HealthPoints(10));
 
-        HealthPoints expectedNewAttackValue = initialAttackValue + attackBonus;
+        AttackPoints expectedNewAttackValue = initialAttackValue + attackBonus;
 
         // Act
         analyst.Attack(target);
@@ -31,15 +31,15 @@ public class BattleAnalystTests
     public void Attack_MultipleTimes_ShouldIncreaseAttackValueByBonusEachTime()
     {
         // Arrange
-        var initialAttackValue = new HealthPoints(2);
+        var initialAttackValue = new AttackPoints(2);
         var initialHealthValue = new HealthPoints(4);
-        var attackBonus = new HealthPoints(2);
+        var attackBonus = new AttackPoints(2);
 
         var analyst = new BattleAnalyst(initialAttackValue, initialHealthValue, attackBonus);
-        var target = new CreatureMock(new HealthPoints(1), new HealthPoints(10));
+        var target = new CreatureMock(new AttackPoints(1), new HealthPoints(10));
 
         int timesCount = 3;
-        HealthPoints expectedNewAttackValue = initialAttackValue + attackBonus.MultipliedBy(timesCount);
+        AttackPoints expectedNewAttackValue = initialAttackValue + attackBonus.MultipliedBy(timesCount);
 
         // Act
         for (int i = 0; i < timesCount; ++i)

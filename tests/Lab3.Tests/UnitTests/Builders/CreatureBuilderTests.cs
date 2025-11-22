@@ -12,13 +12,13 @@ public class CreatureBuilderTests
     public void Build_WithBaseStatsOnly_ShouldReturnCreatureWithGivenStats()
     {
         // Arrange
-        var builder = new CreatureBuilder(new HealthPoints(3), new HealthPoints(8));
+        var builder = new CreatureBuilder(new AttackPoints(3), new HealthPoints(8));
 
         // Act
         ICreature creature = builder.Build();
 
         // Assert
-        Assert.Equal(new HealthPoints(3), creature.AttackValue);
+        Assert.Equal(new AttackPoints(3), creature.AttackValue);
         Assert.Equal(new HealthPoints(8), creature.HealthValue);
     }
 
@@ -26,7 +26,7 @@ public class CreatureBuilderTests
     public void Build_WithMagicShield_ShouldReturnCreatureWithMagicShield()
     {
         // Arrange
-        var builder = new CreatureBuilder(new HealthPoints(3), new HealthPoints(8));
+        var builder = new CreatureBuilder(new AttackPoints(3), new HealthPoints(8));
         builder.WithModifier(creature => new MagicShieldModifier(creature));
 
         // Act
@@ -40,7 +40,7 @@ public class CreatureBuilderTests
     public void Build_WithAttackMastery_ShouldReturnCreatureWithAttackMastery()
     {
         // Arrange
-        var builder = new CreatureBuilder(new HealthPoints(3), new HealthPoints(8));
+        var builder = new CreatureBuilder(new AttackPoints(3), new HealthPoints(8));
         builder.WithModifier(creature => new AttackMasteryModifier(creature));
 
         // Act
@@ -54,7 +54,7 @@ public class CreatureBuilderTests
     public void Build_ShouldReturnNewInstanceEachTime()
     {
         // Arrange
-        var builder = new CreatureBuilder(new HealthPoints(3), new HealthPoints(8));
+        var builder = new CreatureBuilder(new AttackPoints(3), new HealthPoints(8));
         builder.WithModifier(creature => new MagicShieldModifier(creature));
 
         // Act
@@ -64,7 +64,7 @@ public class CreatureBuilderTests
         // Assert
         Assert.NotSame(creature1, creature2);
 
-        creature1.TakeDamage(new HealthPoints(100));
+        creature1.TakeDamage(new AttackPoints(100));
         Assert.Equal(new HealthPoints(8), creature2.HealthValue);
     }
 }

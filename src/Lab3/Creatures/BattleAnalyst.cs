@@ -5,9 +5,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Creatures;
 
 public class BattleAnalyst : CreatureBase
 {
-    private readonly HealthPoints _attackBonus;
+    private readonly AttackPoints _attackBonus;
 
-    public BattleAnalyst(HealthPoints attackValue, HealthPoints healthValue, HealthPoints attackBonus)
+    public BattleAnalyst(AttackPoints attackValue, HealthPoints healthValue, AttackPoints attackBonus)
         : base(attackValue, healthValue)
     {
         _attackBonus = attackBonus;

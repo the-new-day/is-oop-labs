@@ -13,7 +13,7 @@ public class EndurancePotionTests
     {
         // Arrange
         var potion = new EndurancePotion(new HealthPoints(5));
-        var creature = new CreatureMock(new HealthPoints(2), new HealthPoints(10));
+        var creature = new CreatureMock(new AttackPoints(2), new HealthPoints(10));
         var expectedHealth = new HealthPoints(15);
 
         // Act

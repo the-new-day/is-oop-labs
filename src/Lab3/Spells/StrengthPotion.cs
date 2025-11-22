@@ -6,9 +6,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Spells;
 
 public class StrengthPotion : ISpell
 {
-    private readonly HealthPoints _attackBonus;
+    private readonly AttackPoints _attackBonus;
 
-    public StrengthPotion(HealthPoints attackBonus)
+    public StrengthPotion(AttackPoints attackBonus)
     {
         _attackBonus = attackBonus;
     }

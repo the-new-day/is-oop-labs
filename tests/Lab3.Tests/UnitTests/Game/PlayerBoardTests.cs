@@ -14,7 +14,7 @@ public class PlayerBoardTests
     {
         // Arrange
         var board = new PlayerBoard(maxCreaturesCount: 3);
-        var creature = new CreatureMock(new HealthPoints(2), new HealthPoints(4));
+        var creature = new CreatureMock(new AttackPoints(2), new HealthPoints(4));
 
         // Act
         PlayerBoardAddingCreatureResult result = board.AddCreature(creature);
@@ -35,8 +35,8 @@ public class PlayerBoardTests
     {
         // Arrange
         var board = new PlayerBoard(maxCreaturesCount: 1);
-        var creature1 = new CreatureMock(new HealthPoints(2), new HealthPoints(4));
-        var creature2 = new CreatureMock(new HealthPoints(1), new HealthPoints(3));
+        var creature1 = new CreatureMock(new AttackPoints(2), new HealthPoints(4));
+        var creature2 = new CreatureMock(new AttackPoints(1), new HealthPoints(3));
 
         board.AddCreature(creature1);
 
@@ -54,9 +54,9 @@ public class PlayerBoardTests
     {
         // Arrange
         var board = new PlayerBoard(3);
-        var attacker = new CreatureMock(new HealthPoints(2), new HealthPoints(4));
-        var deadCreature = new CreatureMock(new HealthPoints(2), new HealthPoints(0));
-        var zeroAttackCreature = new CreatureMock(new HealthPoints(0), new HealthPoints(4));
+        var attacker = new CreatureMock(new AttackPoints(2), new HealthPoints(4));
+        var deadCreature = new CreatureMock(new AttackPoints(2), new HealthPoints(0));
+        var zeroAttackCreature = new CreatureMock(new AttackPoints(0), new HealthPoints(4));
 
         board.AddCreature(attacker);
         board.AddCreature(deadCreature);
@@ -77,8 +77,8 @@ public class PlayerBoardTests
     {
         // Arrange
         var board = new PlayerBoard(3);
-        var aliveCreature = new CreatureMock(new HealthPoints(2), new HealthPoints(4));
-        var deadCreature = new CreatureMock(new HealthPoints(2), new HealthPoints(0));
+        var aliveCreature = new CreatureMock(new AttackPoints(2), new HealthPoints(4));
+        var deadCreature = new CreatureMock(new AttackPoints(2), new HealthPoints(0));
 
         board.AddCreature(aliveCreature);
         board.AddCreature(deadCreature);
@@ -99,7 +99,7 @@ public class PlayerBoardTests
     {
         // Arrange
         var board = new PlayerBoard(3);
-        var creature = new CreatureMock(new HealthPoints(2), new HealthPoints(4));
+        var creature = new CreatureMock(new AttackPoints(2), new HealthPoints(4));
         var spell = new SpellMock();
 
         board.AddCreature(creature);
@@ -148,14 +148,14 @@ public class PlayerBoardTests
     {
         // Arrange
         var original = new PlayerBoard(3);
-        var creature = new CreatureMock(new HealthPoints(2), new HealthPoints(4));
+        var creature = new CreatureMock(new AttackPoints(2), new HealthPoints(4));
         original.AddCreature(creature);
 
         // Act
         PlayerBoard clone = original.Clone();
 
         ICreature cloneCreature = clone.GetAttackers().First();
-        cloneCreature.TakeDamage(new HealthPoints(10));
+        cloneCreature.TakeDamage(new AttackPoints(10));
 
         // Assert
         Assert.NotSame(original, clone);
