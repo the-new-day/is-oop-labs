@@ -2,6 +2,8 @@ using Itmo.ObjectOrientedProgramming.Lab3.Builders;
 using Itmo.ObjectOrientedProgramming.Lab3.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Modifiers;
+using Itmo.ObjectOrientedProgramming.Lab3.Modifiers.Factories;
+using Itmo.ObjectOrientedProgramming.Lab3.Tests.Mocks;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Tests.UnitTests.Builders;
@@ -12,7 +14,9 @@ public class CreatureBuilderTests
     public void Build_WithBaseStatsOnly_ShouldReturnCreatureWithGivenStats()
     {
         // Arrange
-        var builder = new CreatureBuilder(new AttackPoints(3), new HealthPoints(8));
+        ICreatureBuilder builder = new CreatureBuilder(new CreatureFactoryMock())
+            .WithAttack(new AttackPoints(3))
+            .WithHealth(new HealthPoints(8));
 
         // Act
         ICreature creature = builder.Build();
@@ -26,8 +30,10 @@ public class CreatureBuilderTests
     public void Build_WithMagicShield_ShouldReturnCreatureWithMagicShield()
     {
         // Arrange
-        var builder = new CreatureBuilder(new AttackPoints(3), new HealthPoints(8));
-        builder.WithModifier(creature => new MagicShieldModifier(creature));
+        ICreatureBuilder builder = new CreatureBuilder(new CreatureFactoryMock())
+            .WithAttack(new AttackPoints(3))
+            .WithHealth(new HealthPoints(8))
+            .WithModifier(new MagicShieldModifierFactory());
 
         // Act
         ICreature creature = builder.Build();
@@ -40,8 +46,10 @@ public class CreatureBuilderTests
     public void Build_WithAttackMastery_ShouldReturnCreatureWithAttackMastery()
     {
         // Arrange
-        var builder = new CreatureBuilder(new AttackPoints(3), new HealthPoints(8));
-        builder.WithModifier(creature => new AttackMasteryModifier(creature));
+        ICreatureBuilder builder = new CreatureBuilder(new CreatureFactoryMock())
+            .WithAttack(new AttackPoints(3))
+            .WithHealth(new HealthPoints(8))
+            .WithModifier(new AttackMasteryModifierFactory());
 
         // Act
         ICreature creature = builder.Build();
@@ -54,8 +62,10 @@ public class CreatureBuilderTests
     public void Build_ShouldReturnNewInstanceEachTime()
     {
         // Arrange
-        var builder = new CreatureBuilder(new AttackPoints(3), new HealthPoints(8));
-        builder.WithModifier(creature => new MagicShieldModifier(creature));
+        ICreatureBuilder builder = new CreatureBuilder(new CreatureFactoryMock())
+            .WithAttack(new AttackPoints(3))
+            .WithHealth(new HealthPoints(8))
+            .WithModifier(new MagicShieldModifierFactory());
 
         // Act
         ICreature creature1 = builder.Build();
