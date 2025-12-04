@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 
 public abstract record CommandResult
 {

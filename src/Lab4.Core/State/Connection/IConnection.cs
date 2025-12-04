@@ -1,5 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.Paths;
+using DirectoryNode = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.DirectoryNode;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
 
@@ -7,5 +7,5 @@ public interface IConnection
 {
     IFileSystem FileSystem { get; }
 
-    IPath Address { get; }
+    DirectoryNode RootAddress { get; }
 }
