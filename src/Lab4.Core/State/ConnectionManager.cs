@@ -1,13 +1,13 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
-using DirectoryNode = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.DirectoryNode;
+using IDirectory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.IDirectory;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.State;
 
-public class StateManager
+public class ConnectionManager
 {
     public IConnection? CurrentConnection { get; private set; }
 
-    public void Connect(DirectoryNode rootDirectory, IConnectionFactory connectionFactory)
+    public void Connect(IDirectory rootDirectory, IConnectionFactory connectionFactory)
     {
         CurrentConnection = connectionFactory.Create(rootDirectory);
     }

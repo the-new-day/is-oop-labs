@@ -1,10 +1,10 @@
-namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Paths;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Paths.Unix;
 
-internal class UnixPathNormalizer
+public class UnixPathResolver
 {
-    public Path Normalize(Path rootPath, string path)
+    public UnixPath Resolve(UnixPath rootPath, string relativePath)
     {
-        string[] rawSegments = path.Split('/');
+        string[] rawSegments = relativePath.Split('/');
 
         if (rawSegments.Length == 0)
             return rootPath;
@@ -23,6 +23,11 @@ internal class UnixPathNormalizer
 
             if (segment == "..")
             {
+                if (segments.Count == 0)
+                {
+                    break; // TODO: failure
+                }
+
                 segments.Pop();
                 continue;
             }
@@ -30,11 +35,11 @@ internal class UnixPathNormalizer
             segments.Push(segment);
         }
 
-        return new Path(string.Join('/', segments.ToArray()));
+        return new UnixPath(string.Join('/', segments.ToArray()));
     }
 
-    private string[] SplitPath(Path path)
+    private string[] SplitPath(UnixPath path)
     {
-        return path.NormalizedFullPath.Split('/');
+        return path.Value.Split('/');
     }
 }

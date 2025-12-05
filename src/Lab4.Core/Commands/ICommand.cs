@@ -5,5 +5,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands;
 
 public interface ICommand
 {
-    CommandResult Execute(CommandData commandData, IConnection connection);
+    CommandExecutionResult Execute(IConnection connection);
 }

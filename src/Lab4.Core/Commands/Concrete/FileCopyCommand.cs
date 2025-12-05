@@ -1,23 +1,28 @@
-using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete.Data;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
-public class FileCopyCommand : CommandBase<FileCopyData>
+public class FileCopyCommand : ICommand
 {
-    public FileCopyCommand(ICommandDataParser<FileCopyData> dataParser)
-        : base(dataParser)
+    private readonly IFile _sourcePath;
+
+    private readonly IDirectory _destinationPath;
+
+    public FileCopyCommand(IFile sourcePath, IDirectory destinationPath)
     {
+        _sourcePath = sourcePath;
+        _destinationPath = destinationPath;
     }
 
-    protected override CommandResult ExecuteWithParsedData(FileCopyData data, IConnection connection)
+    public CommandExecutionResult Execute(IConnection connection)
     {
-        FileSystemResult result = connection.FileSystem.CopyFile(data.SourcePath, data.DestinationPath);
+        FileSystemResult result = connection.FileSystem.CopyFile(_sourcePath, _destinationPath);
 
         return result is FileSystemResult.Success
-            ? new CommandResult.Success()
-            : new CommandResult.Failure();
+            ? new CommandExecutionResult.Success()
+            : new CommandExecutionResult.Failure();
     }
 }

@@ -2,7 +2,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 
 public interface IFileSystemNodeVisitor
 {
-    void Visit(DirectoryNode node);
+    void Visit(IDirectory node);
 
-    void Visit(FileNode node);
+    void Visit(IFile node);
 }

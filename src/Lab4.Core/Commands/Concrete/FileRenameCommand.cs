@@ -1,23 +1,28 @@
-using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete.Data;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
-public class FileRenameCommand : CommandBase<FileRenameData>
+public class FileRenameCommand : ICommand
 {
-    public FileRenameCommand(ICommandDataParser<FileRenameData> dataParser)
-        : base(dataParser)
+    private readonly IFile _path;
+
+    private readonly string _name;
+
+    public FileRenameCommand(IFile path, string name)
     {
+        _path = path;
+        _name = name;
     }
 
-    protected override CommandResult ExecuteWithParsedData(FileRenameData data, IConnection connection)
+    public CommandExecutionResult Execute(IConnection connection)
     {
-        FileSystemResult result = connection.FileSystem.RenameFile(data.Path, data.Name);
+        FileSystemResult result = connection.FileSystem.RenameFile(_path, _name);
 
         return result is FileSystemResult.Success
-            ? new CommandResult.Success()
-            : new CommandResult.Failure();
+            ? new CommandExecutionResult.Success()
+            : new CommandExecutionResult.Failure();
     }
 }

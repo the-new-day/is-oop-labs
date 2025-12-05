@@ -1,30 +1,32 @@
-using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete.Data;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
-public class FileShowCommand : CommandBase<FileShowData>
+public class FileShowCommand : ICommand
 {
     private readonly IFileContentDisplayer _contentDisplayer;
 
-    public FileShowCommand(ICommandDataParser<FileShowData> dataParser, IFileContentDisplayer contentDisplayer)
-        : base(dataParser)
+    private readonly IFile _path;
+
+    public FileShowCommand(IFile path, IFileContentDisplayer contentDisplayer)
     {
+        _path = path;
         _contentDisplayer = contentDisplayer;
     }
 
-    protected override CommandResult ExecuteWithParsedData(FileShowData data, IConnection connection)
+    public CommandExecutionResult Execute(IConnection connection)
     {
-        FileReadOpeningResult result = connection.FileSystem.OpenRead(data.Path);
+        FileReadOpeningResult result = connection.FileSystem.OpenRead(_path);
 
         if (result is FileReadOpeningResult.Success success)
         {
-            _contentDisplayer.Display(success.FileStream, success.File);
-            return new CommandResult.Success();
+            _contentDisplayer.Display(success.FileStream);
+            return new CommandExecutionResult.Success();
         }
 
-        return new CommandResult.Failure();
+        return new CommandExecutionResult.Failure();
     }
 }

@@ -6,7 +6,7 @@ public abstract record FileReadOpeningResult
 {
     private FileReadOpeningResult() { }
 
-    public sealed record Success(Stream FileStream, FileNode File) : FileReadOpeningResult;
+    public sealed record Success(Stream FileStream, IFile File) : FileReadOpeningResult;
 
     public sealed record Failure : FileReadOpeningResult;
 }

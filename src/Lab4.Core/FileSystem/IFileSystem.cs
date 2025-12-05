@@ -1,30 +1,22 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
-using DirectoryNode = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.DirectoryNode;
-using FileNode = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.FileNode;
-using Path = Itmo.ObjectOrientedProgramming.Lab4.Core.Paths.Path;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.Paths;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
 
 public interface IFileSystem
 {
-    DirectoryNode Root { get; }
+    IEnumerable<IFileSystemNode> GetContents(IDirectory directory);
 
-    FileSystemResult SetRoot(DirectoryNode path);
+    FileReadOpeningResult OpenRead(IFile file);
 
-    IFileSystemNode GetNode(Path path);
+    FileSystemResult MoveFile(IFile file, IDirectory moveTo);
 
-    IEnumerable<IFileSystemNode> GetChildren(DirectoryNode directory);
+    FileSystemResult CopyFile(IFile file, IDirectory copyTo);
 
-    FileReadOpeningResult OpenRead(FileNode file);
+    FileSystemResult DeleteFile(IFile file);
 
-    FileSystemResult MoveFile(FileNode file, DirectoryNode moveTo);
+    FileSystemResult RenameFile(IFile file, string newName);
 
-    FileSystemResult CopyFile(FileNode file, DirectoryNode copyTo);
-
-    FileSystemResult DeleteFile(FileNode file);
-
-    FileSystemResult RenameFile(FileNode file, string newName);
-
-    bool Exists(Path path);
+    bool Exists(IPath path);
 }

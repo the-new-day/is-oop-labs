@@ -1,14 +1,10 @@
-using Path = Itmo.ObjectOrientedProgramming.Lab4.Core.Paths.Path;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.Paths;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 
 public interface IFileSystemNode
 {
-    string Name { get; }
-
-    Path FullPath { get; }
-
-    IFileSystemNode? FindParent();
+    IPath Path { get; }
 
     void Accept(IFileSystemNodeVisitor visitor);
 }

@@ -1,25 +1,27 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
-public class TreeGotoCommand : ICommand
+public class TreeListCommand : ICommand
 {
     private readonly IDirectory _path;
 
-    public TreeGotoCommand(IDirectory path)
+    private readonly int _maxDepth;
+
+    private readonly ITreeListDisplayer _displayer;
+
+    public TreeListCommand(IDirectory path, int maxDepth, ITreeListDisplayer displayer)
     {
         _path = path;
+        _maxDepth = maxDepth;
+        _displayer = displayer;
     }
 
     public CommandExecutionResult Execute(IConnection connection)
     {
-        ConnectionChangeDirectoryResult result = connection.TryChangeDirectory(_path);
-
-        return result is ConnectionChangeDirectoryResult.Success
-            ? new CommandExecutionResult.Success()
-            : new CommandExecutionResult.Failure();
+        _displayer.Display(_path, _maxDepth, connection.FileSystem);
+        return new CommandExecutionResult.Success();
     }
 }
