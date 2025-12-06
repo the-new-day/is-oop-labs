@@ -7,6 +7,6 @@ public class MagicMirror : ISpell
 {
     public ICreature GetCasted(ICreature creature)
     {
-        return new MagicMirrorDecorator(creature);
+        return new MagicMirrorCasted(creature);
     }
 }

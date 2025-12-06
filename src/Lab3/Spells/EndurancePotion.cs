@@ -15,6 +15,6 @@ public class EndurancePotion : ISpell
 
     public ICreature GetCasted(ICreature creature)
     {
-        return new EndurancePotionDecorator(creature, _healthBonus);
+        return new EndurancePotionCasted(creature, _healthBonus);
     }
 }

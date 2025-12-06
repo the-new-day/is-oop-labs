@@ -1,3 +1,4 @@
+using Itmo.ObjectOrientedProgramming.Lab3.Builders;
 using Itmo.ObjectOrientedProgramming.Lab3.Creatures;
 using Itmo.ObjectOrientedProgramming.Lab3.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Game;
@@ -13,10 +14,13 @@ public class BattleSimulatorTests
     public void StartBattle_WhenOnePlayerHasNoTargets_ShouldDeclareAttackerWinner()
     {
         // Arrange
-        var board1 = new PlayerBoard(3);
-        var board2 = new PlayerBoard(3); // stays empty
+        var boardBuilder1 = new PlayerBoardBuilder(3);
+        boardBuilder1.WithCreature(new OrdinaryCreature(new AttackPoints(2), new HealthPoints(4)));
 
-        board1.AddCreature(new OrdinaryCreature(new AttackPoints(2), new HealthPoints(4)));
+        var boardBuilder2 = new PlayerBoardBuilder(3); // stays empty
+
+        PlayerBoard board1 = boardBuilder1.Build();
+        PlayerBoard board2 = boardBuilder2.Build();
 
         var simulator = new BattleSimulator(board1, board2);
 
@@ -31,12 +35,15 @@ public class BattleSimulatorTests
     public void StartBattle_WhenBothPlayersHaveNoAttackers_ShouldDeclareTie()
     {
         // Arrange
-        var board1 = new PlayerBoard(3);
-        var board2 = new PlayerBoard(3);
+        var boardBuilder1 = new PlayerBoardBuilder(3);
+        var boardBuilder2 = new PlayerBoardBuilder(3);
 
         var deadCreature = new OrdinaryCreature(new AttackPoints(2), new HealthPoints(0));
-        board1.AddCreature(deadCreature);
-        board2.AddCreature(deadCreature);
+        boardBuilder1.WithCreature(deadCreature);
+        boardBuilder2.WithCreature(deadCreature);
+
+        PlayerBoard board1 = boardBuilder1.Build();
+        PlayerBoard board2 = boardBuilder2.Build();
 
         var simulator = new BattleSimulator(board1, board2);
 
@@ -51,11 +58,14 @@ public class BattleSimulatorTests
     public void StartBattle_WhenOnePlayerHasNoAttackers_ShouldSkipTurn()
     {
         // Arrange
-        var board1 = new PlayerBoard(3);
-        var board2 = new PlayerBoard(3);
+        var boardBuilder1 = new PlayerBoardBuilder(3);
+        var boardBuilder2 = new PlayerBoardBuilder(3);
 
-        board1.AddCreature(new OrdinaryCreature(new AttackPoints(0), new HealthPoints(4)));
-        board2.AddCreature(new OrdinaryCreature(new AttackPoints(2), new HealthPoints(4)));
+        boardBuilder1.WithCreature(new OrdinaryCreature(new AttackPoints(0), new HealthPoints(4)));
+        boardBuilder2.WithCreature(new OrdinaryCreature(new AttackPoints(2), new HealthPoints(4)));
+
+        PlayerBoard board1 = boardBuilder1.Build();
+        PlayerBoard board2 = boardBuilder2.Build();
 
         var simulator = new BattleSimulator(board1, board2);
 
@@ -70,14 +80,17 @@ public class BattleSimulatorTests
     public void StartBattle_ShouldCompleteWithPlayer1Win()
     {
         // Arrange
-        var board1 = new PlayerBoard(3);
-        var board2 = new PlayerBoard(3);
+        var boardBuilder1 = new PlayerBoardBuilder(3);
+        var boardBuilder2 = new PlayerBoardBuilder(3);
 
         // Player 1: strong creature
-        board1.AddCreature(new OrdinaryCreature(new AttackPoints(5), new HealthPoints(10)));
+        boardBuilder1.WithCreature(new OrdinaryCreature(new AttackPoints(5), new HealthPoints(10)));
 
         // Player 2: weak creature
-        board2.AddCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(3)));
+        boardBuilder2.WithCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(3)));
+
+        PlayerBoard board1 = boardBuilder1.Build();
+        PlayerBoard board2 = boardBuilder2.Build();
 
         var simulator = new BattleSimulator(board1, board2);
 
@@ -92,14 +105,17 @@ public class BattleSimulatorTests
     public void StartBattle_ShouldCompleteWithPlayer2Win()
     {
         // Arrange
-        var board1 = new PlayerBoard(3);
-        var board2 = new PlayerBoard(3);
+        var boardBuilder1 = new PlayerBoardBuilder(3);
+        var boardBuilder2 = new PlayerBoardBuilder(3);
 
         // Player 1: weak creature
-        board1.AddCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(3)));
+        boardBuilder1.WithCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(3)));
 
         // Player 2: strong creature
-        board2.AddCreature(new OrdinaryCreature(new AttackPoints(5), new HealthPoints(10)));
+        boardBuilder2.WithCreature(new OrdinaryCreature(new AttackPoints(5), new HealthPoints(10)));
+
+        PlayerBoard board1 = boardBuilder1.Build();
+        PlayerBoard board2 = boardBuilder2.Build();
 
         var simulator = new BattleSimulator(board1, board2);
 
@@ -114,15 +130,18 @@ public class BattleSimulatorTests
     public void StartBattle_WithMultipleCreatures_ShouldUseAllAttackers()
     {
         // Arrange
-        var board1 = new PlayerBoard(3);
-        var board2 = new PlayerBoard(3);
+        var boardBuilder1 = new PlayerBoardBuilder(3);
+        var boardBuilder2 = new PlayerBoardBuilder(3);
 
         // Player 1: 2 attackers
-        board1.AddCreature(new OrdinaryCreature(new AttackPoints(2), new HealthPoints(4)));
-        board1.AddCreature(new OrdinaryCreature(new AttackPoints(3), new HealthPoints(5)));
+        boardBuilder1.WithCreature(new OrdinaryCreature(new AttackPoints(2), new HealthPoints(4)));
+        boardBuilder1.WithCreature(new OrdinaryCreature(new AttackPoints(3), new HealthPoints(5)));
 
         // Player 2: 1 target
-        board2.AddCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(20)));
+        boardBuilder2.WithCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(20)));
+
+        PlayerBoard board1 = boardBuilder1.Build();
+        PlayerBoard board2 = boardBuilder2.Build();
 
         var simulator = new BattleSimulator(board1, board2);
 
@@ -137,11 +156,14 @@ public class BattleSimulatorTests
     public void StartBattle_ShouldNotModifyOriginalBoards()
     {
         // Arrange
-        var originalBoard1 = new PlayerBoard(3);
-        var originalBoard2 = new PlayerBoard(3);
+        var boardBuilder1 = new PlayerBoardBuilder(3);
+        var boardBuilder2 = new PlayerBoardBuilder(3);
 
-        originalBoard1.AddCreature(new OrdinaryCreature(new AttackPoints(2), new HealthPoints(4)));
-        originalBoard2.AddCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(3)));
+        boardBuilder1.WithCreature(new OrdinaryCreature(new AttackPoints(2), new HealthPoints(4)));
+        boardBuilder2.WithCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(3)));
+
+        PlayerBoard originalBoard1 = boardBuilder1.Build();
+        PlayerBoard originalBoard2 = boardBuilder2.Build();
 
         var simulator = new BattleSimulator(originalBoard1, originalBoard2);
 
@@ -160,14 +182,17 @@ public class BattleSimulatorTests
     public void StartBattle_WithSpecialAbilities_ShouldWorkCorrectly()
     {
         // Arrange
-        var board1 = new PlayerBoard(3);
-        var board2 = new PlayerBoard(3);
+        var boardBuilder1 = new PlayerBoardBuilder(3);
+        var boardBuilder2 = new PlayerBoardBuilder(3);
 
         var analyst = new BattleAnalyst(
             new AttackPoints(2), new HealthPoints(4), new AttackPoints(2));
-        board1.AddCreature(analyst);
+        boardBuilder1.WithCreature(analyst);
 
-        board2.AddCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(10)));
+        boardBuilder2.WithCreature(new OrdinaryCreature(new AttackPoints(1), new HealthPoints(10)));
+
+        PlayerBoard board1 = boardBuilder1.Build();
+        PlayerBoard board2 = boardBuilder2.Build();
 
         var simulator = new BattleSimulator(board1, board2);
 

@@ -3,19 +3,19 @@ using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Spells.Decorators;
 
-public class MagicMirrorDecorator : CreatureDecorator
+public class MagicMirrorCasted : CreatureDecorator
 {
     public override AttackPoints AttackValue => new AttackPoints(base.HealthValue.Value);
 
     public override HealthPoints HealthValue => new HealthPoints(base.AttackValue.Value);
 
-    public MagicMirrorDecorator(ICreature creature)
+    public MagicMirrorCasted(ICreature creature)
         : base(creature)
     {
     }
 
-    public override MagicMirrorDecorator Clone()
+    public override MagicMirrorCasted Clone()
     {
-        return new MagicMirrorDecorator(Creature.Clone());
+        return new MagicMirrorCasted(Creature.Clone());
     }
 }

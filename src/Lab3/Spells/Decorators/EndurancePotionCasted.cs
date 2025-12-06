@@ -3,20 +3,20 @@ using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Spells.Decorators;
 
-public class EndurancePotionDecorator : CreatureDecorator
+public class EndurancePotionCasted : CreatureDecorator
 {
     private readonly HealthPoints _healthBonus;
 
     public override HealthPoints HealthValue => base.HealthValue + _healthBonus;
 
-    public EndurancePotionDecorator(ICreature creature, HealthPoints healthBonus)
+    public EndurancePotionCasted(ICreature creature, HealthPoints healthBonus)
         : base(creature)
     {
         _healthBonus = healthBonus;
     }
 
-    public override EndurancePotionDecorator Clone()
+    public override EndurancePotionCasted Clone()
     {
-        return new EndurancePotionDecorator(Creature.Clone(), _healthBonus);
+        return new EndurancePotionCasted(Creature.Clone(), _healthBonus);
     }
 }

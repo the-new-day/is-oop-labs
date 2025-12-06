@@ -15,6 +15,6 @@ public class StrengthPotion : ISpell
 
     public ICreature GetCasted(ICreature creature)
     {
-        return new StrengthPotionDecorator(creature, _attackBonus);
+        return new StrengthPotionCasted(creature, _attackBonus);
     }
 }
