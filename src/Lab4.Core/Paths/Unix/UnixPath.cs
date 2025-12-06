@@ -4,7 +4,9 @@ public class UnixPath : IPath
 {
     public string Value { get; }
 
-    public bool IsAbsolute => Value.StartsWith('/');
+    public bool IsAbsolute => Value.StartsWith(RootPath);
+
+    private const string RootPath = "/";
 
     private readonly UnixPathResolver _pathResolver = new();
 
@@ -15,7 +17,7 @@ public class UnixPath : IPath
 
     public IPath? FindParent()
     {
-        if (Value == "/")
+        if (Value == RootPath)
             return null;
 
         return _pathResolver.Resolve(this, "..");

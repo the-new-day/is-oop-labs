@@ -42,7 +42,7 @@ public class ConsoleCommandParser : ICommandParser
         if (commandName is null)
             return new CommandParsingResult.UnknownCommand(tokens[0]);
 
-        (Dictionary<string, string> parameters, Dictionary<string, string> flags)
+        (Dictionary<int, string> parameters, Dictionary<string, string> flags)
             = ParseArguments(tokens.Skip(consumedTokens));
 
         var parsedCommand = new ParsedCommand(commandName, parameters, flags);
@@ -73,10 +73,10 @@ public class ConsoleCommandParser : ICommandParser
         return _commandsByWordCount.Keys.Count != 0 ? _commandsByWordCount.Keys.Max() : 0;
     }
 
-    private (Dictionary<string, string> Parameters, Dictionary<string, string> Flags)
+    private (Dictionary<int, string> Parameters, Dictionary<string, string> Flags)
         ParseArguments(IEnumerable<string> args)
     {
-        var parameters = new Dictionary<string, string>();
+        var parameters = new Dictionary<int, string>();
         var flags = new Dictionary<string, string>();
 
         var argsList = args.ToList();
@@ -101,7 +101,7 @@ public class ConsoleCommandParser : ICommandParser
             }
             else
             {
-                parameters[$"param{paramIndex}"] = arg;
+                parameters[paramIndex] = arg;
                 paramIndex++;
             }
         }

@@ -23,11 +23,6 @@ public class UnixPathResolver
 
             if (segment == "..")
             {
-                if (segments.Count == 0)
-                {
-                    break; // TODO: failure
-                }
-
                 segments.Pop();
                 continue;
             }

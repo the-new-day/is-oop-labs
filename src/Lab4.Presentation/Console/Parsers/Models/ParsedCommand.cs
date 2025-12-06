@@ -4,7 +4,7 @@ public class ParsedCommand
 {
     public string CommandName { get; init; } = string.Empty;
 
-    public IReadOnlyDictionary<string, string> Parameters { get; init; } = new Dictionary<string, string>();
+    public IReadOnlyDictionary<int, string> Parameters { get; init; } = new Dictionary<int, string>();
 
     public IReadOnlyDictionary<string, string> Flags { get; init; } = new Dictionary<string, string>();
 
@@ -14,7 +14,7 @@ public class ParsedCommand
 
     public ParsedCommand(
         string commandName,
-        IReadOnlyDictionary<string, string> parameters,
+        IReadOnlyDictionary<int, string> parameters,
         IReadOnlyDictionary<string, string> flags)
     {
         CommandName = commandName;
