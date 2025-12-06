@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.Console.Parsers.Models;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Infrastructure.ConsoleIO.Parsers.Models;
 
 public class ParsedCommand
 {

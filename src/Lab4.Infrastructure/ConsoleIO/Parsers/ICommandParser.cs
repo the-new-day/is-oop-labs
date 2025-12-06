@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.Console.Parsers;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Infrastructure.ConsoleIO.Parsers;
 
 public interface ICommandParser
 {

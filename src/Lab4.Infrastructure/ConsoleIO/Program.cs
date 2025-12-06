@@ -1,7 +1,7 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
-using Itmo.ObjectOrientedProgramming.Lab4.Presentation.Console.Parsers;
+using Itmo.ObjectOrientedProgramming.Lab4.Infrastructure.ConsoleIO.Parsers;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.Console;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Infrastructure.ConsoleIO;
 
 public class Program
 {
@@ -13,11 +13,11 @@ public class Program
         ];
         var commandParser = new ConsoleCommandParser(availableCommands);
 
-        System.Console.WriteLine("File System. Waiting for you command...");
+        Console.WriteLine("File System. Waiting for you command...");
 
         while (true)
         {
-            string? input = System.Console.ReadLine();
+            string? input = Console.ReadLine();
 
             if (string.IsNullOrEmpty(input))
             {
@@ -31,21 +31,21 @@ public class Program
 
             if (parsingResult is CommandParsingResult.Success command)
             {
-                System.Console.Write("Name: ");
-                System.Console.WriteLine(command.ParsedCommand.CommandName);
+                Console.Write("Name: ");
+                Console.WriteLine(command.ParsedCommand.CommandName);
 
-                System.Console.WriteLine("Parameters:");
+                Console.WriteLine("Parameters:");
                 foreach ((int name, string value) in command.ParsedCommand.Parameters)
                 {
-                    System.Console.Write("    ");
-                    System.Console.WriteLine($"[{name}] = \"{value}\"");
+                    Console.Write("    ");
+                    Console.WriteLine($"[{name}] = \"{value}\"");
                 }
 
-                System.Console.WriteLine("Flags:");
+                Console.WriteLine("Flags:");
                 foreach ((string name, string value) in command.ParsedCommand.Flags)
                 {
-                    System.Console.Write("    ");
-                    System.Console.WriteLine($"[{name}] = \"{value}\"");
+                    Console.Write("    ");
+                    Console.WriteLine($"[{name}] = \"{value}\"");
                 }
 
                 continue;
@@ -53,13 +53,13 @@ public class Program
 
             if (parsingResult is CommandParsingResult.NoTokensFound)
             {
-                System.Console.WriteLine("No tokens found in input");
+                Console.WriteLine("No tokens found in input");
                 continue;
             }
 
             if (parsingResult is CommandParsingResult.UnknownCommand unknownCommand)
             {
-                System.Console.WriteLine($"Unknown command '{unknownCommand.CommandName}'");
+                Console.WriteLine($"Unknown command '{unknownCommand.CommandName}'");
             }
         }
     }

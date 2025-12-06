@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.Console.Parsers.Tokenizers;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Infrastructure.ConsoleIO.Parsers.Tokenizers;
 
 public class CommandTokenizer : ITokenizer
 {

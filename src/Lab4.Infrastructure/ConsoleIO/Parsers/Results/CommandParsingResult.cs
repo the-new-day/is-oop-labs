@@ -1,4 +1,4 @@
-using Itmo.ObjectOrientedProgramming.Lab4.Presentation.Console.Parsers.Models;
+using Itmo.ObjectOrientedProgramming.Lab4.Infrastructure.ConsoleIO.Parsers.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 

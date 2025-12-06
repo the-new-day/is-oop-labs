@@ -1,8 +1,8 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
-using Itmo.ObjectOrientedProgramming.Lab4.Presentation.Console.Parsers.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.Presentation.Console.Parsers.Tokenizers;
+using Itmo.ObjectOrientedProgramming.Lab4.Infrastructure.ConsoleIO.Parsers.Models;
+using Itmo.ObjectOrientedProgramming.Lab4.Infrastructure.ConsoleIO.Parsers.Tokenizers;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.Console.Parsers;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Infrastructure.ConsoleIO.Parsers;
 
 public class ConsoleCommandParser : ICommandParser
 {
