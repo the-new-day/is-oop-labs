@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <RootNamespace>Itmo.ObjectOrientedProgramming.Lab5.Application</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Abstractions\Lab5.Application.Abstractions.csproj" />
+        <ProjectReference Include="..\Contracts\Lab5.Application.Contracts.csproj" />
+    </ItemGroup>
+</Project>
