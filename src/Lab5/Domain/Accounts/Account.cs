@@ -9,10 +9,13 @@ public sealed class Account
 
     public Money Balance { get; private set; }
 
-    public Account(AccountId id, Money initialBalance)
+    public PinCode Pin { get; }
+
+    public Account(AccountId id, Money initialBalance, PinCode pin)
     {
         Id = id;
         Balance = initialBalance;
+        Pin = pin;
     }
 
     public AccountWithdrawalResult Withdraw(Money amount)
