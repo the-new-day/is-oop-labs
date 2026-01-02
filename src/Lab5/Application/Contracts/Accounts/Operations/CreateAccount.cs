@@ -1,3 +1,5 @@
+using Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Accounts.Models;
+
 namespace Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Accounts.Operations;
 
 public static class CreateAccount
@@ -8,8 +10,10 @@ public static class CreateAccount
     {
         private Response() { }
 
-        public sealed record Success : Response;
+        public sealed record Success(AccountDto Account) : Response;
 
-        public sealed record UserIsNotPermittedToCreateAccounts : Response;
+        public sealed record InvalidSessionKey : Response;
+
+        public sealed record OperationIsNotAllowed : Response;
     }
 }

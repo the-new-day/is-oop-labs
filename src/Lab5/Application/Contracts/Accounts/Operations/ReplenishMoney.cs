@@ -10,8 +10,8 @@ public static class ReplenishMoney
 
         public sealed record Success : Response;
 
-        public sealed record AccountNotFound : Response;
+        public sealed record InvalidSessionKey : Response;
 
-        public sealed record UserIsNotPermittedToReplenishMoney : Response;
+        public sealed record OperationIsNotAllowed : Response;
     }
 }

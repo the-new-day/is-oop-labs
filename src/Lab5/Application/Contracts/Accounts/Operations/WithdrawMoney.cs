@@ -10,10 +10,10 @@ public static class WithdrawMoney
 
         public sealed record Success : Response;
 
-        public sealed record AccountNotFound : Response;
+        public sealed record InvalidSessionKey : Response;
 
         public sealed record NotEnoughMoney : Response;
 
-        public sealed record UserIsNotPermittedToWithdrawMoney : Response;
+        public sealed record OperationIsNotAllowed : Response;
     }
 }
