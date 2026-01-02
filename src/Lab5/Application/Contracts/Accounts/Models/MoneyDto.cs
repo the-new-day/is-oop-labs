@@ -1,0 +1,3 @@
+namespace Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Accounts.Models;
+
+public sealed record MoneyDto(decimal Amount);

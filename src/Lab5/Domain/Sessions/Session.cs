@@ -4,11 +4,11 @@ public sealed class Session
 {
     public SessionKey Key { get; }
 
-    public SessionType Type { get; }
+    public ISessionType Type { get; }
 
-    public Session(SessionKey key, SessionType type)
+    public Session(ISessionType type)
     {
-        Key = key;
+        Key = new SessionKey(Guid.NewGuid());
         Type = type;
     }
 }

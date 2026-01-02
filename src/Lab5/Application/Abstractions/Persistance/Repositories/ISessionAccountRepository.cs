@@ -1,11 +1,12 @@
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Queries;
+using Itmo.ObjectOrientedProgramming.Lab5.Domain.Accounts;
 using Itmo.ObjectOrientedProgramming.Lab5.Domain.Sessions;
 
 namespace Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistance.Repositories;
 
-public interface ISessionRepository
+public interface ISessionAccountRepository
 {
-    void Add(Session session);
+    void Add(SessionKey sessionKey, AccountId accountId);
 
-    IEnumerable<Session> Query(SessionQuery query);
+    IEnumerable<AccountId> Query(SessionAccountQuery query);
 }

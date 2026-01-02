@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab5.Domain.AccountOperationHistory;
+namespace Itmo.ObjectOrientedProgramming.Lab5.Domain.AccountOperations;
 
 public readonly record struct OperationId(long Value)
 {

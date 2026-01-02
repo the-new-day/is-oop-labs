@@ -6,12 +6,6 @@ public sealed record PinCode
 
     public PinCode(string value)
     {
-        if (value.Length != 4)
-            throw new ArgumentException("PinCode must contain exactly 4 characters");
-
-        if (value.All(char.IsDigit) is false)
-            throw new ArgumentException("PinCode must contain only numeric characters");
-
         _value = value;
     }
 

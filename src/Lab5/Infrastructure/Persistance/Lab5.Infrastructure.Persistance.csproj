@@ -4,4 +4,8 @@
       <ProjectReference Include="..\..\Application\Abstractions\Lab5.Application.Abstractions.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageVersion Include="Microsoft.Extensions.DependencyInjection" />
+    </ItemGroup>
+
 </Project>

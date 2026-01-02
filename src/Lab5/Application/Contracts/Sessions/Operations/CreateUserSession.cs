@@ -1,12 +1,10 @@
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Sessions.Models;
-using Itmo.ObjectOrientedProgramming.Lab5.Domain.Accounts;
-using Itmo.ObjectOrientedProgramming.Lab5.Domain.ValueObjects;
 
 namespace Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Sessions.Operations;
 
 public static class CreateUserSession
 {
-    public readonly record struct Request(AccountId AccountId, PinCode PinCode);
+    public readonly record struct Request(long AccountId, string PinCode);
 
     public abstract record Response
     {

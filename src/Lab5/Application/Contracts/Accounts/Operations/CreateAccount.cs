@@ -1,11 +1,8 @@
-using Itmo.ObjectOrientedProgramming.Lab5.Domain.Sessions;
-using Itmo.ObjectOrientedProgramming.Lab5.Domain.ValueObjects;
-
 namespace Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Accounts.Operations;
 
 public static class CreateAccount
 {
-    public readonly record struct Request(Money Balance, PinCode PinCode, SessionKey SessionKey);
+    public readonly record struct Request(decimal Balance, string PinCode, Guid SessionKey);
 
     public abstract record Response
     {

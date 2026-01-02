@@ -9,4 +9,6 @@ public interface IPersistanceContext
     IAccountRepository Accounts { get; }
 
     ISessionRepository Sessions { get; }
+
+    ISessionAccountRepository SessionAccounts { get; }
 }
