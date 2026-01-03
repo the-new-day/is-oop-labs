@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab5.Presentation;
+namespace Itmo.ObjectOrientedProgramming.Lab5.Presentation.Http;
 
 public static class ServiceCollectionExtensions
 {

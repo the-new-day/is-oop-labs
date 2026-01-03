@@ -1,5 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistence.Repositories;
-using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Queries;
+using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistence.Queries;
 using Itmo.ObjectOrientedProgramming.Lab5.Domain.AccountOperations;
 using Itmo.ObjectOrientedProgramming.Lab5.Domain.Accounts;
 
