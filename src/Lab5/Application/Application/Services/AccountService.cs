@@ -3,6 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Queries;
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Accounts;
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Accounts.Operations;
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Mapping;
+using Itmo.ObjectOrientedProgramming.Lab5.Domain.AccountOperations;
 using Itmo.ObjectOrientedProgramming.Lab5.Domain.Accounts;
 using Itmo.ObjectOrientedProgramming.Lab5.Domain.Accounts.Results;
 using Itmo.ObjectOrientedProgramming.Lab5.Domain.Sessions;
@@ -39,6 +40,7 @@ internal sealed class AccountService : IAccountService
             .Query(new AccountQuery.Builder().WithId(accountId).Build())
             .Single();
 
+        _context.AccountOperations.Add(new Operation(accountId, OperationType.BalanceCheck));
         return new CheckBalance.Response.Success(account.Balance.MapToDto());
     }
 
@@ -58,6 +60,7 @@ internal sealed class AccountService : IAccountService
             new PinCode(request.PinCode));
         account = _context.Accounts.Add(account);
 
+        _context.AccountOperations.Add(new Operation(account.Id, OperationType.Creation));
         return new CreateAccount.Response.Success(account.MapToDto());
     }
 
@@ -81,6 +84,7 @@ internal sealed class AccountService : IAccountService
             .Single();
 
         account.Replenish(new Money(request.Amount));
+        _context.AccountOperations.Add(new Operation(accountId, OperationType.MoneyReplenishment));
         return new ReplenishMoney.Response.Success();
     }
 
@@ -104,6 +108,8 @@ internal sealed class AccountService : IAccountService
             .Single();
 
         AccountWithdrawalResult result = account.Withdraw(new Money(request.Amount));
+
+        _context.AccountOperations.Add(new Operation(accountId, OperationType.MoneyWithdrawal));
 
         return result switch
         {

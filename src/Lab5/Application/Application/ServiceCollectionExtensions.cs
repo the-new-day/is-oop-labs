@@ -1,4 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions;
+using Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.AccountOperations;
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Accounts;
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Sessions;
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Services;
@@ -9,14 +10,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab5.Application;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddApplication(this IServiceCollection collection)
-    {
-        collection.AddScoped<IAccountService, AccountService>();
-
-        return collection;
-    }
-
-    public static IServiceCollection AddSessionService(
+    public static IServiceCollection AddApplication(
         this IServiceCollection collection,
         IConfiguration configuration)
     {
@@ -28,6 +22,9 @@ public static class ServiceCollectionExtensions
             var context = sp.GetRequiredService<IPersistenceContext>();
             return new SessionService(context, systemPassword);
         });
+
+        collection.AddScoped<IAccountService, AccountService>();
+        collection.AddScoped<IAccountOperationService, AccountOperationService>();
 
         return collection;
     }

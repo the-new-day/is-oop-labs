@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using AccountOperations = Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Accounts.Operations;
 
-namespace Itmo.ObjectOrientedProgramming.Lab5.Presentation.Http;
+namespace Itmo.ObjectOrientedProgramming.Lab5.Presentation.Http.Controllers;
 
 [ApiController]
 [Route("/api/account")]

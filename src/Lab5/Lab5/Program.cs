@@ -5,8 +5,7 @@ using Itmo.ObjectOrientedProgramming.Lab5.Presentation;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddApplication()
-    .AddSessionService(builder.Configuration)
+    .AddApplication(builder.Configuration)
     .AddInfrastructurePersistence()
     .AddPresentationHttp();
 

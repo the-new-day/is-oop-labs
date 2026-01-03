@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using SessionOperations = Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Sessions.Operations;
 
-namespace Itmo.ObjectOrientedProgramming.Lab5.Presentation.Http;
+namespace Itmo.ObjectOrientedProgramming.Lab5.Presentation.Http.Controllers;
 
 [ApiController]
 [Route("/api/session")]

@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab5.Infrastructure.Persistence.Reposit
 
 internal sealed class InMemoryAccountOperationRepository : IAccountOperationRepository
 {
-    private readonly Dictionary<AccountId, Operation> _values = [];
+    private readonly List<(AccountId, Operation)> _values = [];
 
     public Operation Add(Operation operation)
     {
@@ -15,13 +15,14 @@ internal sealed class InMemoryAccountOperationRepository : IAccountOperationRepo
             operation.AccountId,
             operation.Type);
 
-        _values.Add(operation.AccountId, operation);
+        _values.Add((operation.AccountId, operation));
         return operation;
     }
 
     public IEnumerable<Operation> Query(AccountOperationQuery query)
     {
-        return _values.Values
-            .Where(x => query.AccountIds is [] || query.AccountIds.Contains(x.AccountId));
+        return _values
+            .Where(pair => query.AccountIds is [] || query.AccountIds.Contains(pair.Item1))
+            .Select(pair => pair.Item2);
     }
 }
