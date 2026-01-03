@@ -1,4 +1,4 @@
-using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions;
+using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistence;
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistence.Queries;
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Sessions;
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Sessions.Operations;

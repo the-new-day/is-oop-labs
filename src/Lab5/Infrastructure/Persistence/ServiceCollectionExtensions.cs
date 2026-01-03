@@ -1,4 +1,4 @@
-using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions;
+using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistence;
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistence.Repositories;
 using Itmo.ObjectOrientedProgramming.Lab5.Infrastructure.Persistence.Repositories;
 using Microsoft.Extensions.DependencyInjection;
