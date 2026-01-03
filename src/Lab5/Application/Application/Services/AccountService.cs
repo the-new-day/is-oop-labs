@@ -11,11 +11,11 @@ using System.Diagnostics;
 
 namespace Itmo.ObjectOrientedProgramming.Lab5.Application.Services;
 
-public sealed class AccountService : IAccountService
+internal sealed class AccountService : IAccountService
 {
-    private readonly IPersistanceContext _context;
+    private readonly IPersistenceContext _context;
 
-    public AccountService(IPersistanceContext context)
+    public AccountService(IPersistenceContext context)
     {
         _context = context;
     }

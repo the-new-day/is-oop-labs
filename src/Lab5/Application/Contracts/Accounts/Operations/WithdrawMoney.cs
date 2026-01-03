@@ -2,7 +2,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Accounts.Ope
 
 public static class WithdrawMoney
 {
-    public readonly record struct Request(Guid SessionKey, decimal Amount);
+    public readonly record struct Request(decimal Amount, Guid SessionKey);
 
     public abstract record Response
     {

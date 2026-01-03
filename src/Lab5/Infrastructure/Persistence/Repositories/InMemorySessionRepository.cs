@@ -1,10 +1,10 @@
-using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistance.Repositories;
+using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistence.Repositories;
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Queries;
 using Itmo.ObjectOrientedProgramming.Lab5.Domain.Sessions;
 
-namespace Itmo.ObjectOrientedProgramming.Lab5.Infrastructure.Persistance.Repositories;
+namespace Itmo.ObjectOrientedProgramming.Lab5.Infrastructure.Persistence.Repositories;
 
-public sealed class InMemorySessionRepository : ISessionRepository
+internal sealed class InMemorySessionRepository : ISessionRepository
 {
     private readonly Dictionary<SessionKey, Session> _values = [];
 

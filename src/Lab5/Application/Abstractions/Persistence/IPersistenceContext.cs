@@ -1,8 +1,8 @@
-using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistance.Repositories;
+using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistence.Repositories;
 
 namespace Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions;
 
-public interface IPersistanceContext
+public interface IPersistenceContext
 {
     IAccountOperationRepository AccountOperations { get; }
 

@@ -1,9 +1,9 @@
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions;
-using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistance.Repositories;
+using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistence.Repositories;
 
-namespace Itmo.ObjectOrientedProgramming.Lab5.Infrastructure.Persistance;
+namespace Itmo.ObjectOrientedProgramming.Lab5.Infrastructure.Persistence;
 
-internal sealed class PersistanceContext : IPersistanceContext
+internal sealed class PersistenceContext : IPersistenceContext
 {
     public IAccountOperationRepository AccountOperations { get; }
 
@@ -13,7 +13,7 @@ internal sealed class PersistanceContext : IPersistanceContext
 
     public ISessionAccountRepository SessionAccounts { get; }
 
-    public PersistanceContext(
+    public PersistenceContext(
         IAccountOperationRepository accountOperationRepository,
         IAccountRepository accountRepository,
         ISessionRepository sessionRepository,

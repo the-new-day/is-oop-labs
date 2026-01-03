@@ -1,10 +1,10 @@
-using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistance.Repositories;
+using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Persistence.Repositories;
 using Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Queries;
 using Itmo.ObjectOrientedProgramming.Lab5.Domain.Accounts;
 
-namespace Itmo.ObjectOrientedProgramming.Lab5.Infrastructure.Persistance.Repositories;
+namespace Itmo.ObjectOrientedProgramming.Lab5.Infrastructure.Persistence.Repositories;
 
-public sealed class InMemoryAccountRepository : IAccountRepository
+internal sealed class InMemoryAccountRepository : IAccountRepository
 {
     private readonly Dictionary<AccountId, Account> _values = [];
 

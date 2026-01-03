@@ -9,19 +9,21 @@ using Itmo.ObjectOrientedProgramming.Lab5.Domain.ValueObjects;
 
 namespace Itmo.ObjectOrientedProgramming.Lab5.Application.Services;
 
-public sealed class SessionService : ISessionService
+internal sealed class SessionService : ISessionService
 {
-    private readonly IPersistanceContext _context;
+    private readonly IPersistenceContext _context;
 
-    public SessionService(IPersistanceContext context)
+    private readonly string _systemPassword;
+
+    public SessionService(IPersistenceContext context, string systemPassword)
     {
         _context = context;
+        _systemPassword = systemPassword;
     }
 
     public CreateAdminSession.Response CreateAdminSession(CreateAdminSession.Request request)
     {
-        // TODO: config file
-        if (request.SystemPassword != "admin")
+        if (request.SystemPassword != _systemPassword)
             return new CreateAdminSession.Response.WrongSystemPassword();
 
         Session session = new Session(new AdminSession());
