@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab5.Domain.Sessions;
 
 namespace Itmo.ObjectOrientedProgramming.Lab5.Infrastructure.Persistance.Repositories;
 
-public sealed class SessionRepository : ISessionRepository
+public sealed class InMemorySessionRepository : ISessionRepository
 {
     private readonly Dictionary<SessionKey, Session> _values = [];
 

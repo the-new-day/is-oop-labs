@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab5.Domain.AccountOperations;
 
 namespace Itmo.ObjectOrientedProgramming.Lab5.Infrastructure.Persistance.Repositories;
 
-public sealed class AccountOperationRepository : IAccountOperationRepository
+public sealed class InMemoryAccountOperationRepository : IAccountOperationRepository
 {
     private readonly Dictionary<OperationId, Operation> _values = [];
 
