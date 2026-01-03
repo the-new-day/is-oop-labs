@@ -20,7 +20,14 @@ public sealed class SessionService : ISessionService
 
     public CreateAdminSession.Response CreateAdminSession(CreateAdminSession.Request request)
     {
-        throw new NotImplementedException();
+        // TODO: config file
+        if (request.SystemPassword != "admin")
+            return new CreateAdminSession.Response.WrongSystemPassword();
+
+        Session session = new Session(new AdminSession());
+        _context.Sessions.Add(session);
+
+        return new CreateAdminSession.Response.Success(session.MapToDto());
     }
 
     public CreateUserSession.Response CreateUserSession(CreateUserSession.Request request)
@@ -39,7 +46,8 @@ public sealed class SessionService : ISessionService
         if (account.PinCode.Verify(pinCode) is false)
             return new CreateUserSession.Response.WrongPinCode();
 
-        Session session = new Session(new UserSessionType());
+        Session session = new Session(new UserSession());
+        _context.Sessions.Add(session);
         _context.SessionAccounts.Add(session.Key, accountId);
 
         return new CreateUserSession.Response.Success(session.MapToDto());

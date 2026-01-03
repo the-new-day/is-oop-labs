@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab5.Domain.Sessions;
 
-public sealed class UserSessionType : ISessionType
+public sealed class UserSession : ISessionType
 {
     public SessionType Type => SessionType.User;
 
