@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab5.Application;
 using Itmo.ObjectOrientedProgramming.Lab5.Infrastructure.Persistence;
-using Itmo.ObjectOrientedProgramming.Lab5.Presentation;
+using Itmo.ObjectOrientedProgramming.Lab5.Presentation.Http;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
