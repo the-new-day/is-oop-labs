@@ -26,7 +26,7 @@ internal sealed class SessionService : ISessionService
         if (request.SystemPassword != _systemPassword)
             return new CreateAdminSession.Response.WrongSystemPassword();
 
-        Session session = new Session(new AdminSession());
+        var session = new Session(new AdminSession());
         _context.Sessions.Add(session);
 
         return new CreateAdminSession.Response.Success(session.MapToDto());
@@ -43,12 +43,12 @@ internal sealed class SessionService : ISessionService
         if (account is null)
             return new CreateUserSession.Response.AccountNotFound();
 
-        PinCode pinCode = new PinCode(request.PinCode);
+        var pinCode = new PinCode(request.PinCode);
 
         if (account.PinCode.Verify(pinCode) is false)
             return new CreateUserSession.Response.WrongPinCode();
 
-        Session session = new Session(new UserSession());
+        var session = new Session(new UserSession());
         _context.Sessions.Add(session);
         _context.SessionAccounts.Add(session.Key, accountId);
 
