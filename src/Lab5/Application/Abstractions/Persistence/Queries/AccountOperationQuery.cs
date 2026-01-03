@@ -1,21 +1,21 @@
-using Itmo.ObjectOrientedProgramming.Lab5.Domain.AccountOperations;
+using Itmo.ObjectOrientedProgramming.Lab5.Domain.Accounts;
 
 namespace Itmo.ObjectOrientedProgramming.Lab5.Application.Abstractions.Queries;
 
-public sealed record AccountOperationQuery(OperationId[] OperationIds)
+public sealed record AccountOperationQuery(AccountId[] AccountIds)
 {
     public sealed class Builder
     {
-        private readonly List<OperationId> _operationIds = [];
+        private readonly List<AccountId> _ids = [];
 
         public AccountOperationQuery Build()
         {
-            return new AccountOperationQuery(_operationIds.ToArray());
+            return new AccountOperationQuery(_ids.ToArray());
         }
 
-        public Builder WithId(OperationId id)
+        public Builder WithAccountId(AccountId id)
         {
-            _operationIds.Add(id);
+            _ids.Add(id);
             return this;
         }
     }

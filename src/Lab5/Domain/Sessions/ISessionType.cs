@@ -11,4 +11,6 @@ public interface ISessionType
     bool CanWithdrawMoney();
 
     bool CanReplenishMoney();
+
+    bool CanCheckHistory();
 }

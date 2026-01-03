@@ -11,4 +11,6 @@ public sealed class UserSession : ISessionType
     public bool CanWithdrawMoney() => true;
 
     public bool CanReplenishMoney() => true;
+
+    public bool CanCheckHistory() => true;
 }

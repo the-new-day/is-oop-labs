@@ -11,4 +11,6 @@ public sealed class AdminSession : ISessionType
     public bool CanWithdrawMoney() => false;
 
     public bool CanReplenishMoney() => false;
+
+    public bool CanCheckHistory() => false;
 }
