@@ -1,5 +1,4 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
@@ -8,26 +7,26 @@ public class ConnectionBridge : IConnection
 {
     public IFileSystem FileSystem { get; }
 
-    public IDirectory RootDirectory { get; }
+    public Nodes.Directory RootDirectory { get; }
 
-    public IDirectory CurrentDirectory { get; private set; }
+    public Nodes.Directory CurrentDirectory { get; private set; }
 
-    private readonly IDirectoryScopeEvaluator _scoreEvaluator;
+    private readonly IDirectoryScopeEvaluator _scopeEvaluator;
 
     public ConnectionBridge(
         IFileSystem fileSystem,
-        IDirectory rootDirectory,
+        Nodes.Directory rootDirectory,
         IDirectoryScopeEvaluator scopeEvaluator)
     {
         FileSystem = fileSystem;
         RootDirectory = rootDirectory;
         CurrentDirectory = rootDirectory;
-        _scoreEvaluator = scopeEvaluator;
+        _scopeEvaluator = scopeEvaluator;
     }
 
-    public ConnectionChangeDirectoryResult TryChangeDirectory(IDirectory newDirectory)
+    public ConnectionChangeDirectoryResult TryChangeDirectory(Nodes.Directory newDirectory)
     {
-        if (_scoreEvaluator.IsDirectoryWithinRootScore(RootDirectory, newDirectory))
+        if (_scopeEvaluator.IsNodeWithinRootScore(RootDirectory, newDirectory))
         {
             CurrentDirectory = newDirectory;
             return new ConnectionChangeDirectoryResult.Success();

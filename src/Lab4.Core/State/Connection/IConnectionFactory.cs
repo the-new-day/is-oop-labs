@@ -1,8 +1,8 @@
-using IDirectory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.IDirectory;
+using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
 
 public interface IConnectionFactory
 {
-    IConnection Create(IDirectory rootDirectory);
+    IConnection Create(Directory rootDirectory);
 }

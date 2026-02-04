@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection.Results;
-using IDirectory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.IDirectory;
+using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
 
@@ -8,9 +8,9 @@ public interface IConnection
 {
     IFileSystem FileSystem { get; }
 
-    IDirectory RootDirectory { get; }
+    Directory RootDirectory { get; }
 
-    IDirectory CurrentDirectory { get; }
+    Directory CurrentDirectory { get; }
 
-    ConnectionChangeDirectoryResult TryChangeDirectory(IDirectory newDirectory);
+    ConnectionChangeDirectoryResult TryChangeDirectory(Directory newDirectory);
 }

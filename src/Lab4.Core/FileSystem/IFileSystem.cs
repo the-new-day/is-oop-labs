@@ -1,22 +1,23 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.Paths;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
 
 public interface IFileSystem
 {
-    IEnumerable<IFileSystemNode> GetContents(IDirectory directory);
+    DirectoryContentsResult GetContents(Nodes.Directory directory);
 
-    FileReadOpeningResult OpenRead(IFile file);
+    FileReadOpeningResult OpenRead(Nodes.File file);
 
-    FileSystemResult MoveFile(IFile file, IDirectory moveTo);
+    FileSystemResult MoveFile(Nodes.File file, Nodes.Directory moveTo);
 
-    FileSystemResult CopyFile(IFile file, IDirectory copyTo);
+    FileSystemResult CopyFile(Nodes.File file, Nodes.Directory copyTo);
 
-    FileSystemResult DeleteFile(IFile file);
+    FileSystemResult DeleteFile(Nodes.File file);
 
-    FileSystemResult RenameFile(IFile file, string newName);
+    FileSystemResult RenameFile(Nodes.File file, string newName);
 
-    bool Exists(IPath path);
+    bool IsFile(UnixPath path);
+
+    bool IsDirectory(UnixPath path);
 }

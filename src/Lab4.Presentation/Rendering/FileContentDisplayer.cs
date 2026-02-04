@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.Renderering;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.Rendering;
 
 public class FileContentDisplayer : IFileContentDisplayer
 {

@@ -1,17 +1,16 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
 public class FileCopyCommand : ICommand
 {
-    private readonly IFile _sourcePath;
+    private readonly Nodes.File _sourcePath;
 
-    private readonly IDirectory _destinationPath;
+    private readonly Nodes.Directory _destinationPath;
 
-    public FileCopyCommand(IFile sourcePath, IDirectory destinationPath)
+    public FileCopyCommand(Nodes.File sourcePath, Nodes.Directory destinationPath)
     {
         _sourcePath = sourcePath;
         _destinationPath = destinationPath;

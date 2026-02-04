@@ -1,5 +1,4 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection.Results;
 
@@ -7,9 +6,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
 public class TreeGotoCommand : ICommand
 {
-    private readonly IDirectory _path;
+    private readonly Nodes.Directory _path;
 
-    public TreeGotoCommand(IDirectory path)
+    public TreeGotoCommand(Nodes.Directory path)
     {
         _path = path;
     }

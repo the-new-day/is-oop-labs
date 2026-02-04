@@ -1,8 +1,19 @@
-namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Paths.Unix;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 
-public class UnixPathResolver
+public class UnixPath
 {
-    public UnixPath Resolve(UnixPath rootPath, string relativePath)
+    public string Value { get; }
+
+    public bool IsAbsolute => Value.StartsWith(RootPath);
+
+    private const string RootPath = "/";
+
+    public UnixPath(string value)
+    {
+        Value = Resolve(RootPath, value);
+    }
+
+    private static string Resolve(string rootPath, string relativePath)
     {
         string[] rawSegments = relativePath.Split('/');
 
@@ -12,7 +23,7 @@ public class UnixPathResolver
         Stack<string> segments = new();
 
         if (rawSegments[0].Length != 0)
-            segments = new(SplitPath(rootPath));
+            segments = new(rootPath.Split('/'));
 
         foreach (string segment in rawSegments)
         {
@@ -30,11 +41,6 @@ public class UnixPathResolver
             segments.Push(segment);
         }
 
-        return new UnixPath(string.Join('/', segments.ToArray()));
-    }
-
-    private string[] SplitPath(UnixPath path)
-    {
-        return path.Value.Split('/');
+        return string.Join('/', segments.ToArray());
     }
 }

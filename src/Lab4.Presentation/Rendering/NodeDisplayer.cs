@@ -1,6 +1,4 @@
-using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
-
-namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.Renderering;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.Rendering;
 
 public class NodeDisplayer
 {
@@ -16,12 +14,12 @@ public class NodeDisplayer
         _nodeDisplayFormatter = nodeDisplayFormatter;
     }
 
-    public void Display(IDirectory node, int depth)
+    public void Display(Core.Nodes.Directory node, int depth)
     {
         _outputRenderer.Render(_nodeDisplayFormatter.Format(node, depth));
     }
 
-    public void Display(IFile node, int depth)
+    public void Display(Core.Nodes.File node, int depth)
     {
         _outputRenderer.Render(_nodeDisplayFormatter.Format(node, depth));
     }
