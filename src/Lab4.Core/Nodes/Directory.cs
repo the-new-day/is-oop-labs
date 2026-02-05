@@ -9,6 +9,11 @@ public class Directory : IFileSystemNode
         Path = path;
     }
 
+    public Directory(string path)
+    {
+        Path = new UnixPath(path);
+    }
+
     public UnixPath Combine(UnixPath relative)
     {
         return new UnixPath(Path.Value + "/" + relative.Value);

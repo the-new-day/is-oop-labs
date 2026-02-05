@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.State;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
@@ -13,9 +13,9 @@ public class FileDeleteCommand : ICommand
         _path = path;
     }
 
-    public CommandExecutionResult Execute(IConnection connection)
+    public CommandExecutionResult Execute(IFileSystem fileSystem)
     {
-        FileSystemResult result = connection.FileSystem.DeleteFile(_path);
+        FileSystemResult result = fileSystem.DeleteFile(_path);
 
         return result is FileSystemResult.Success
             ? new CommandExecutionResult.Success()

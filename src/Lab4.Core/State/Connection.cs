@@ -1,9 +1,9 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection.Results;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Results;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Core.State;
 
-public class ConnectionBridge : IConnection
+public class Connection : IConnection
 {
     public IFileSystem FileSystem { get; }
 
@@ -13,7 +13,7 @@ public class ConnectionBridge : IConnection
 
     private readonly IDirectoryScopeEvaluator _scopeEvaluator;
 
-    public ConnectionBridge(
+    public Connection(
         IFileSystem fileSystem,
         Nodes.Directory rootDirectory,
         IDirectoryScopeEvaluator scopeEvaluator)

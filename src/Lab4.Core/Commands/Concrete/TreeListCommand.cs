@@ -1,5 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.State;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
@@ -18,9 +18,9 @@ public class TreeListCommand : ICommand
         _displayer = displayer;
     }
 
-    public CommandExecutionResult Execute(IConnection connection)
+    public CommandExecutionResult Execute(IFileSystem fileSystem)
     {
-        _displayer.Display(_path, _maxDepth, connection.FileSystem);
+        _displayer.Display(_path, _maxDepth, fileSystem);
         return new CommandExecutionResult.Success();
     }
 }

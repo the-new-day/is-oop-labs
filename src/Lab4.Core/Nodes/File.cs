@@ -21,6 +21,11 @@ public class File : IFileSystemNode
         Path = path;
     }
 
+    public File(string path)
+    {
+        Path = new UnixPath(path);
+    }
+
     public void Accept(IFileSystemNodeVisitor visitor)
     {
         visitor.Visit(this);

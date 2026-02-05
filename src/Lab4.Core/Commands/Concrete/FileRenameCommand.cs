@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.State;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
@@ -16,9 +16,9 @@ public class FileRenameCommand : ICommand
         _name = name;
     }
 
-    public CommandExecutionResult Execute(IConnection connection)
+    public CommandExecutionResult Execute(IFileSystem fileSystem)
     {
-        FileSystemResult result = connection.FileSystem.RenameFile(_path, _name);
+        FileSystemResult result = fileSystem.RenameFile(_path, _name);
 
         return result is FileSystemResult.Success
             ? new CommandExecutionResult.Success()

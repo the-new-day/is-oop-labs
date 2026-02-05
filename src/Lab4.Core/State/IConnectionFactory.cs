@@ -1,6 +1,6 @@
 using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Core.State;
 
 public interface IConnectionFactory
 {

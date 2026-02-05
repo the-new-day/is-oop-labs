@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.State;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
@@ -16,9 +16,9 @@ public class FileShowCommand : ICommand
         _contentDisplayer = contentDisplayer;
     }
 
-    public CommandExecutionResult Execute(IConnection connection)
+    public CommandExecutionResult Execute(IFileSystem fileSystem)
     {
-        FileReadOpeningResult result = connection.FileSystem.OpenRead(_path);
+        FileReadOpeningResult result = fileSystem.OpenRead(_path);
 
         if (result is FileReadOpeningResult.Success success)
         {

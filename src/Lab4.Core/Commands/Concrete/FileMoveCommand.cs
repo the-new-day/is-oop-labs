@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.State;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
@@ -16,9 +16,9 @@ public class FileMoveCommand : ICommand
         _destinationPath = destinationPath;
     }
 
-    public CommandExecutionResult Execute(IConnection connection)
+    public CommandExecutionResult Execute(IFileSystem fileSystem)
     {
-        FileSystemResult result = connection.FileSystem.MoveFile(_sourcePath, _destinationPath);
+        FileSystemResult result = fileSystem.MoveFile(_sourcePath, _destinationPath);
 
         return result is FileSystemResult.Success
             ? new CommandExecutionResult.Success()

@@ -1,21 +1,24 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Connection.Results;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.State;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
 public class TreeGotoCommand : ICommand
 {
     private readonly Nodes.Directory _path;
+    
+    private readonly IConnection _connection;
 
-    public TreeGotoCommand(Nodes.Directory path)
+    public TreeGotoCommand(IConnection connection, Nodes.Directory path)
     {
         _path = path;
+        _connection = connection;
     }
 
-    public CommandExecutionResult Execute(IConnection connection)
+    public CommandExecutionResult Execute(IFileSystem fileSystem)
     {
-        ConnectionChangeDirectoryResult result = connection.TryChangeDirectory(_path);
+        ConnectionChangeDirectoryResult result = _connection.TryChangeDirectory(_path);
 
         return result is ConnectionChangeDirectoryResult.Success
             ? new CommandExecutionResult.Success()
