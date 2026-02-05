@@ -1,3 +1,8 @@
+using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.State;
+using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Results;
+using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
+
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Parsers;
 
 public class TreeGotoParser : ParserHandler
@@ -9,16 +14,20 @@ public class TreeGotoParser : ParserHandler
         _connection = connection;
     }
 
-    protected override ICommand? TryParse(CommandTokens args)
+    protected override CommandParsingResult TryParse(CommandTokens tokens)
     {
-        if (tokens.Arguments.Count < 2) return null;
-        if (tokens.Arguments[0] != "tree" || tokens.Arguments[1] != "goto") return null;
+        if (tokens.Arguments.Count < 2)
+            return CallNext(tokens);
+
+        if (tokens.Arguments[0] != "tree" || tokens.Arguments[1] != "goto")
+            return CallNext(tokens);
 
         if (tokens.Arguments.Count < 3)
-            throw new ArgumentException("Path required");
+            return new CommandParsingResult.Failure("Path required");
 
         string path = tokens.Arguments[2];
 
-        return new TreeGotoCommand(_connection, new Nodes.Directory(path));
+        return new CommandParsingResult.CommandCreated(
+            new TreeGotoCommand(_connection, new Directory(path)));
     }
 }

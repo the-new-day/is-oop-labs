@@ -1,4 +1,4 @@
-using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands;
+using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing;
 
@@ -6,22 +6,25 @@ public abstract class ParserHandler
 {
     private ParserHandler? _next;
 
-    public ParserHandler SetNext(ParserHandler next)
+    public ParserHandler AddNext(ParserHandler next)
     {
-        _next = next;
-        return next;
-    }
-
-    public ICommand? Parse(CommandTokens args)
-    {
-        ICommand? command = TryParse(args);
-        if (command != null)
+        if (_next is null)
         {
-            return command;
+            _next = next;
+        }
+        else
+        {
+            _next.AddNext(next);
         }
 
-        return _next?.Parse(args);
+        return this;
     }
 
-    protected abstract ICommand? TryParse(CommandTokens args);
+    protected CommandParsingResult CallNext(CommandTokens args)
+    {
+        return _next?.TryParse(args)
+            ?? throw new InvalidOperationException("Chain missing terminal link");
+    }
+
+    protected abstract CommandParsingResult TryParse(CommandTokens tokens);
 }

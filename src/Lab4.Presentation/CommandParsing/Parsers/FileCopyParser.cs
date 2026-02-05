@@ -1,18 +1,27 @@
+using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
+using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Results;
+using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
+using File = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.File;
+
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Parsers;
 
 public class FileCopyParser : ParserHandler
 {
-    protected override ICommand? TryParse(CommandTokens args)
+    protected override CommandParsingResult TryParse(CommandTokens tokens)
     {
-        if (tokens.Arguments.Count < 2) return null;
-        if (tokens.Arguments[0] != "file" || tokens.Arguments[1] != "copy") return null;
+        if (tokens.Arguments.Count < 2)
+            return CallNext(tokens);
+
+        if (tokens.Arguments[0] != "file" || tokens.Arguments[1] != "copy")
+            return CallNext(tokens);
 
         if (tokens.Arguments.Count < 4)
-            throw new ArgumentException("Source and Destination required");
+            return new CommandParsingResult.Failure("Source and Destination required");
 
         string source = tokens.Arguments[2];
         string dest = tokens.Arguments[3];
 
-        return new FileCopyCommand(new Nodes.Directory(source), new Nodes.File(dest));
+        return new CommandParsingResult.CommandCreated(
+            new FileCopyCommand(new File(source), new Directory(dest)));
     }
 }

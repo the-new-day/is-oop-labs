@@ -1,18 +1,27 @@
+using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
+using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Results;
+using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
+using File = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.File;
+
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Parsers;
 
 public class FileMoveParser : ParserHandler
 {
-    protected override ICommand? TryParse(CommandTokens args)
+    protected override CommandParsingResult TryParse(CommandTokens tokens)
     {
-        if (tokens.Arguments.Count < 2) return null;
-        if (tokens.Arguments[0] != "file" || tokens.Arguments[1] != "move") return null;
+        if (tokens.Arguments.Count < 2)
+            return CallNext(tokens);
+
+        if (tokens.Arguments[0] != "file" || tokens.Arguments[1] != "move")
+            return CallNext(tokens);
 
         if (tokens.Arguments.Count < 4)
-            throw new ArgumentException("Source and Destination required");
+            return new CommandParsingResult.Failure("Source and Destination required");
 
         string source = tokens.Arguments[2];
         string dest = tokens.Arguments[3];
 
-        return new FileMoveCommand(new Nodes.Directory(source), new Nodes.File(dest));
+        return new CommandParsingResult.CommandCreated(
+            new FileMoveCommand(new File(dest), new Directory(dest)));
     }
 }

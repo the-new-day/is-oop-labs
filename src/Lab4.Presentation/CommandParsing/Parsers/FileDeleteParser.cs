@@ -1,26 +1,25 @@
-using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
+using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Results;
+using File = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.File;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Parsers;
 
 public class FileDeleteParser : ParserHandler
 {
-    private readonly Nodes.Directory _path;
-
-    public FileDeleteParser(Nodes.Directory path)
+    protected override CommandParsingResult TryParse(CommandTokens tokens)
     {
-        _path = path;
-    }
+        if (tokens.Arguments.Count < 2)
+            return CallNext(tokens);
 
-    protected override ICommand? TryParse(CommandTokens args)
-    {
-        if (tokens.Arguments.Count < 2) return null;
-        if (tokens.Arguments[0] != "file" || tokens.Arguments[1] != "delete") return null;
+        if (tokens.Arguments[0] != "file" || tokens.Arguments[1] != "delete")
+            return CallNext(tokens);
 
         if (tokens.Arguments.Count < 3)
-            throw new ArgumentException("Path required");
+            return new CommandParsingResult.Failure("Path required");
 
         string path = tokens.Arguments[2];
 
-        return new FileDeleteCommand(new Nodes.File(_path));
+        return new CommandParsingResult.CommandCreated(
+            new FileDeleteCommand(new File(path)));
     }
 }

@@ -1,8 +1,11 @@
+using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Results;
+using System.Collections.ObjectModel;
+
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing;
 
 public class Tokenizer
 {
-    public CommandTokens Tokenize(string input)
+    public TokenizingResult Tokenize(string input)
     {
         string[] parts = input.Trim().Split(' ');
         List<string> arguments = new();
@@ -14,11 +17,11 @@ public class Tokenizer
             {
                 if (parts.Length == i + 1)
                 {
-                    throw new ArgumentException("No value provided for the flag: " + parts[0], nameof(input));
+                    return new TokenizingResult.Failure($"No value provided for the flag: {parts[0]}");
                 }
 
                 string value = parts[i + 1];
-                flags.Add(parts[i].Substring(1), value);
+                flags[parts[i].Substring(1)] = value;
 
                 i++;
                 continue;
@@ -27,6 +30,10 @@ public class Tokenizer
             arguments.Add(parts[i]);
         }
 
-        return new CommandTokens(arguments, flags);
+        var tokens = new CommandTokens(
+            new ReadOnlyCollection<string>(arguments),
+            new ReadOnlyDictionary<string, string>(flags));
+
+        return new TokenizingResult.Success(tokens);
     }
 }
