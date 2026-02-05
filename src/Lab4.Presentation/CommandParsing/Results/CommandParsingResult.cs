@@ -9,4 +9,8 @@ public abstract record CommandParsingResult
     public sealed record CommandCreated(ICommand Command) : CommandParsingResult;
 
     public sealed record Failure(string Message) : CommandParsingResult;
+
+    public sealed record Connect(string Address, string Mode) : CommandParsingResult;
+
+    public sealed record Disconnect : CommandParsingResult;
 }

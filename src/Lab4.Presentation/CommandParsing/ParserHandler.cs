@@ -23,7 +23,7 @@ public abstract class ParserHandler
     protected CommandParsingResult CallNext(CommandTokens args)
     {
         return _next?.TryParse(args)
-            ?? throw new InvalidOperationException("Chain missing terminal link");
+            ?? new CommandParsingResult.Failure("Unknown command");
     }
 
     protected abstract CommandParsingResult TryParse(CommandTokens tokens);
