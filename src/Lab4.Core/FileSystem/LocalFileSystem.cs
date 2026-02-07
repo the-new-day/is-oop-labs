@@ -9,7 +9,7 @@ public class LocalFileSystem : IFileSystem
     {
         try
         {
-            System.IO.File.Copy(file.Path.Value, copyTo.Path + "/" + file.Name);
+            System.IO.File.Copy(file.Path.Value, copyTo.Path.Value + "/" + file.Name);
             return new FileSystemResult.Success();
         }
         catch (Exception e)
@@ -64,7 +64,7 @@ public class LocalFileSystem : IFileSystem
     {
         try
         {
-            System.IO.File.Move(file.Path.Value, moveTo.Path + "/" + file.Name);
+            System.IO.File.Move(file.Path.Value, moveTo.Path.Value + "/" + file.Name, true);
             return new FileSystemResult.Success();
         }
         catch (Exception e)
@@ -99,7 +99,7 @@ public class LocalFileSystem : IFileSystem
     {
         try
         {
-            System.IO.File.Move(file.Path.Value, file.ParentDir.Path.Value + "/" + file.Name);
+            System.IO.File.Move(file.Path.Value, file.ParentDir.Path.Combine(newName).Value);
             return new FileSystemResult.Success();
         }
         catch (Exception e)

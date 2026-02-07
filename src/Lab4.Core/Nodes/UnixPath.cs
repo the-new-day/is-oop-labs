@@ -10,7 +10,8 @@ public class UnixPath
 
     public UnixPath(string value)
     {
-        Value = Normalize(value);
+        string sanitized = value.Replace('\\', '/');
+        Value = Normalize(sanitized);
     }
 
     public UnixPath Combine(UnixPath other)
@@ -19,6 +20,11 @@ public class UnixPath
 
         string combined = Value + "/" + other.Value;
         return new UnixPath(combined);
+    }
+
+    public UnixPath Combine(string other)
+    {
+        return Combine(new UnixPath(other));
     }
 
     private static string Normalize(string path)
