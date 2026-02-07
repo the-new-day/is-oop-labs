@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab5.Infrastructure.Persistence;
 
 public static class ServiceCollectionExtensions
 {
-     public static IServiceCollection AddInfrastructurePersistence(this IServiceCollection collection)
+    public static IServiceCollection AddInfrastructurePersistence(this IServiceCollection collection)
     {
         collection.AddScoped<IPersistenceContext, PersistenceContext>();
 
