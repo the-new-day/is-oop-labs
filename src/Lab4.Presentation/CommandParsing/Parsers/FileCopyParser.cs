@@ -12,14 +12,14 @@ public class FileCopyParser : ParserHandler
         if (tokens.Arguments.Count < 2)
             return CallNext(tokens);
 
-        if (tokens.Arguments[0] != "file" || tokens.Arguments[1] != "copy")
+        if (tokens.Arguments.ElementAt(0) != "file" || tokens.Arguments.ElementAt(1) != "copy")
             return CallNext(tokens);
 
         if (tokens.Arguments.Count < 4)
             return new CommandParsingResult.Failure("Source and Destination required");
 
-        string source = tokens.Arguments[2];
-        string dest = tokens.Arguments[3];
+        string source = tokens.Arguments.ElementAt(2);
+        string dest = tokens.Arguments.ElementAt(3);
 
         return new CommandParsingResult.CommandCreated(
             new FileCopyCommand(new File(source), new Directory(dest)));

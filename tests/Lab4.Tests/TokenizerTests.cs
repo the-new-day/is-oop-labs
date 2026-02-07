@@ -19,9 +19,9 @@ public class TokenizerTests
         // Assert
         TokenizingResult.Success success = Assert.IsType<TokenizingResult.Success>(result);
         Assert.Equal(3, success.Tokens.Arguments.Count);
-        Assert.Equal("tree", success.Tokens.Arguments[0]);
-        Assert.Equal("goto", success.Tokens.Arguments[1]);
-        Assert.Equal("/home/user", success.Tokens.Arguments[2]);
+        Assert.Equal("tree", success.Tokens.Arguments.ElementAt(0));
+        Assert.Equal("goto", success.Tokens.Arguments.ElementAt(1));
+        Assert.Equal("/home/user", success.Tokens.Arguments.ElementAt(2));
         Assert.Empty(success.Tokens.Flags);
     }
 

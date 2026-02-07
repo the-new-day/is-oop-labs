@@ -19,7 +19,7 @@ public class TreeListParser : ParserHandler
         if (tokens.Arguments.Count < 2)
             return CallNext(tokens);
 
-        if (tokens.Arguments[0] != "tree" || tokens.Arguments[1] != "list")
+        if (tokens.Arguments.ElementAt(0) != "tree" || tokens.Arguments.ElementAt(1) != "list")
             return CallNext(tokens);
 
         if (!tokens.Flags.TryGetValue("d", out string? value))

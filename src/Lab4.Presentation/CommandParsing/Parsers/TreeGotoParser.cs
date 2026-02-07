@@ -19,13 +19,13 @@ public class TreeGotoParser : ParserHandler
         if (tokens.Arguments.Count < 2)
             return CallNext(tokens);
 
-        if (tokens.Arguments[0] != "tree" || tokens.Arguments[1] != "goto")
+        if (tokens.Arguments.ElementAt(0) != "tree" || tokens.Arguments.ElementAt(1) != "goto")
             return CallNext(tokens);
 
         if (tokens.Arguments.Count < 3)
             return new CommandParsingResult.Failure("Path required");
 
-        string path = tokens.Arguments[2];
+        string path = tokens.Arguments.ElementAt(2);
 
         return new CommandParsingResult.CommandCreated(
             new TreeGotoCommand(_connection, new Directory(path)));

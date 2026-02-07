@@ -19,7 +19,7 @@ public class FileShowParser : ParserHandler
         if (tokens.Arguments.Count < 2)
             return CallNext(tokens);
 
-        if (tokens.Arguments[0] != "file" || tokens.Arguments[1] != "show")
+        if (tokens.Arguments.ElementAt(0) != "file" || tokens.Arguments.ElementAt(1) != "show")
             return CallNext(tokens);
 
         if (tokens.Arguments.Count < 3)
@@ -28,7 +28,7 @@ public class FileShowParser : ParserHandler
         if (!tokens.Flags.TryGetValue("m", out string? mode))
             return new CommandParsingResult.Failure("Mode required");
 
-        string path = tokens.Arguments[2];
+        string path = tokens.Arguments.ElementAt(2);
 
         if (!_supportedModes.TryGetValue(mode, out IFileContentDisplayer? displayer))
             return new CommandParsingResult.Failure("Unsupported mode provided");

@@ -16,17 +16,17 @@ public class ConnectParser : ParserHandler
 
     public override CommandParsingResult TryParse(CommandTokens tokens)
     {
-        if (tokens.Arguments[0] != "connect")
+        if (tokens.Arguments.ElementAt(0) != "connect")
             return CallNext(tokens);
 
         if (tokens.Arguments.Count < 2)
             return new CommandParsingResult.Failure("Address is required");
 
-        string address = tokens.Arguments[1];
+        string address = tokens.Arguments.ElementAt(1);
         string mode = _defaultMode;
 
         if (tokens.Arguments.Count > 2)
-            mode = tokens.Arguments[2];
+            mode = tokens.Arguments.ElementAt(2);
 
         if (!_supportedModes.Contains(mode))
             return new CommandParsingResult.Failure("Unsupported mode provided");

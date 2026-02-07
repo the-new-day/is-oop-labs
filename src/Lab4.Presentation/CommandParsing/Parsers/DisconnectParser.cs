@@ -6,7 +6,7 @@ public class DisconnectParser : ParserHandler
 {
     public override CommandParsingResult TryParse(CommandTokens tokens)
     {
-        if (tokens.Arguments[0] == "disconnect")
+        if (tokens.Arguments.ElementAt(0) == "disconnect")
             return new CommandParsingResult.Disconnect();
 
         return CallNext(tokens);
