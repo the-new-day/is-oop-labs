@@ -148,8 +148,8 @@ public class RouteScenarios
         RouteSimulationResult result = route.Simulate(train);
 
         // Assert
-        var segmentFail = Assert.IsType<RouteSimulationResult.SegmentPassFailed>(result);
-        var trainFail = Assert.IsType<SegmentPassingResult.TrainTravelFailed>(segmentFail.SegmentPassingResult);
+        RouteSimulationResult.SegmentPassFailed segmentFail = Assert.IsType<RouteSimulationResult.SegmentPassFailed>(result);
+        SegmentPassingResult.TrainTravelFailed trainFail = Assert.IsType<SegmentPassingResult.TrainTravelFailed>(segmentFail.SegmentPassingResult);
         Assert.IsType<TrainTravelResult.AccelerationAndSpeedAreZero>(trainFail.TrainTravelResult);
     }
 
@@ -169,8 +169,8 @@ public class RouteScenarios
         RouteSimulationResult result = route.Simulate(train);
 
         // Assert
-        var segmentFail = Assert.IsType<RouteSimulationResult.SegmentPassFailed>(result);
-        var trainFail = Assert.IsType<SegmentPassingResult.TrainTravelFailed>(segmentFail.SegmentPassingResult);
+        RouteSimulationResult.SegmentPassFailed segmentFail = Assert.IsType<RouteSimulationResult.SegmentPassFailed>(result);
+        SegmentPassingResult.TrainTravelFailed trainFail = Assert.IsType<SegmentPassingResult.TrainTravelFailed>(segmentFail.SegmentPassingResult);
         Assert.IsType<TrainTravelResult.SpeedBecameNonPositive>(trainFail.TrainTravelResult);
     }
 
