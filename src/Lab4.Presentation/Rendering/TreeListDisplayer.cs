@@ -25,29 +25,29 @@ public class TreeListDisplayer : ITreeListDisplayer
 
     private void DisplayDirectory(Directory directory, int currentDepth, int maxDepth, IFileSystem fileSystem)
     {
-        if (currentDepth > maxDepth) return;
+        DisplayNode(directory, currentDepth);
+
+        if (currentDepth >= maxDepth) return;
 
         DirectoryContentsResult result = fileSystem.GetContents(directory);
+
         if (result is DirectoryContentsResult.Success success)
         {
             foreach (IFileSystemNode node in success.Nodes)
             {
-                if (fileSystem.IsDirectory(node.Path))
+                if (node is Directory subDir)
                 {
-                    DisplayDirectory(new Directory(node.Path), currentDepth + 1, maxDepth, fileSystem);
+                    DisplayDirectory(subDir, currentDepth + 1, maxDepth, fileSystem);
                 }
                 else
                 {
-                    DisplayNode(node, currentDepth);
+                    DisplayNode(node, currentDepth + 1);
                 }
             }
         }
-
-        if (result is DirectoryContentsResult.Failure failure)
+        else if (result is DirectoryContentsResult.Failure failure)
         {
-            throw new ArgumentException(
-                $"Directory {directory.Path.Value} contents can't be displayed: {failure.Message}",
-                nameof(directory));
+            _renderer.RenderLine($"{new string(' ', currentDepth * 2)} [Error: {failure.Message}]");
         }
     }
 

@@ -35,14 +35,14 @@ public class LocalFileSystem : IFileSystem
     {
         try
         {
-            string[] names = System.IO.Directory.GetFiles(directory.Path.Value);
+            string[] entries = System.IO.Directory.GetFileSystemEntries(directory.Path.Value);
             List<IFileSystemNode> nodes = new();
 
-            foreach (string name in names)
+            foreach (string fullPath in entries)
             {
-                UnixPath path = directory.Combine(new UnixPath(name));
+                var path = new UnixPath(fullPath);
 
-                if (IsDirectory(path))
+                if (System.IO.Directory.Exists(fullPath))
                 {
                     nodes.Add(new Nodes.Directory(path));
                 }
