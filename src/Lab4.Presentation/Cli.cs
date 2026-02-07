@@ -2,8 +2,8 @@ using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing;
 using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Results;
-using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.State;
 using Itmo.ObjectOrientedProgramming.Lab4.Presentation.Connection;
+using Itmo.ObjectOrientedProgramming.Lab4.Presentation.Connection.State;
 using Itmo.ObjectOrientedProgramming.Lab4.Presentation.Rendering;
 using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
 

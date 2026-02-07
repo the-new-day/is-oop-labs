@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
-using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.State;
+using Itmo.ObjectOrientedProgramming.Lab4.Presentation.Connection.State;
 using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.Connection;
