@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 using Itmo.ObjectOrientedProgramming.Lab4.Presentation.Connection.State;
 using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.Tests.Mocks;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Tests.Stubs;
 
 public class StubConnection : IFileSystemConnection
 {

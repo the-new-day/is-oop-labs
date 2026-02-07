@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.Tests.Mocks;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Tests.Stubs;
 
 public class StubFileContentDisplayer : IFileContentDisplayer
 {

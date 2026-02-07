@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing;
 using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Results;
 using Xunit;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Tests;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Tests;
 
 public class TokenizerTests
 {

@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing;
 using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Parsers;
 using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Results;
-using Itmo.ObjectOrientedProgramming.Lab4.Tests.Mocks;
+using Itmo.ObjectOrientedProgramming.Lab4.Tests.Stubs;
 using System.Collections.ObjectModel;
 using Xunit;
 

@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
 using File = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.File;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.Tests.Mocks;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Tests.Stubs;
 
 public class StubFileSystem : IFileSystem
 {
