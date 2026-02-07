@@ -5,22 +5,22 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
 public class TreeListCommand : ICommand
 {
-    private readonly Nodes.Directory _path;
+    public Nodes.Directory Path { get; }
 
-    private readonly int _maxDepth;
+    public int MaxDepth { get; }
 
-    private readonly ITreeListDisplayer _displayer;
+    public ITreeListDisplayer Displayer { get; }
 
     public TreeListCommand(Nodes.Directory path, int maxDepth, ITreeListDisplayer displayer)
     {
-        _path = path;
-        _maxDepth = maxDepth;
-        _displayer = displayer;
+        Path = path;
+        MaxDepth = maxDepth;
+        Displayer = displayer;
     }
 
     public CommandExecutionResult Execute(IFileSystem fileSystem)
     {
-        _displayer.Display(_path, _maxDepth, fileSystem);
+        Displayer.Display(Path, MaxDepth, fileSystem);
         return new CommandExecutionResult.Success();
     }
 }

@@ -6,19 +6,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
 public class FileRenameCommand : ICommand
 {
-    private readonly Nodes.File _path;
+    public Nodes.File Path { get; }
 
-    private readonly string _name;
+    public string Name { get; }
 
     public FileRenameCommand(Nodes.File path, string name)
     {
-        _path = path;
-        _name = name;
+        Path = path;
+        Name = name;
     }
 
     public CommandExecutionResult Execute(IFileSystem fileSystem)
     {
-        FileSystemResult result = fileSystem.RenameFile(_path, _name);
+        FileSystemResult result = fileSystem.RenameFile(Path, Name);
 
         if (result is FileSystemResult.Failure failure)
             return new CommandExecutionResult.Failure(failure.Message);

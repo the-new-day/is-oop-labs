@@ -6,24 +6,24 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
 public class TreeGotoCommand : ICommand
 {
-    private readonly Nodes.Directory _path;
+    public Nodes.Directory Path { get; }
 
-    private readonly IFileSystemConnection _connection;
+    public IFileSystemConnection Connection { get; }
 
     public TreeGotoCommand(IFileSystemConnection connection, Nodes.Directory path)
     {
-        _path = path;
-        _connection = connection;
+        Path = path;
+        Connection = connection;
     }
 
     public CommandExecutionResult Execute(IFileSystem fileSystem)
     {
-        UnixPath newAbsolutePath = _connection.CurrentDirectory.Combine(_path.Path);
+        UnixPath newAbsolutePath = Connection.CurrentDirectory.Combine(Path.Path);
 
         if (!fileSystem.IsDirectory(newAbsolutePath))
             return new CommandExecutionResult.Failure("Directory not found");
 
-        _connection.ChangeDirectory(new Nodes.Directory(newAbsolutePath));
+        Connection.ChangeDirectory(new Nodes.Directory(newAbsolutePath));
         return new CommandExecutionResult.Success();
     }
 }

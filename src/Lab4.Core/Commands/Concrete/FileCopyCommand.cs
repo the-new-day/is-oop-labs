@@ -6,19 +6,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
 public class FileCopyCommand : ICommand
 {
-    private readonly Nodes.File _sourcePath;
+    public Nodes.File SourcePath { get; }
 
-    private readonly Nodes.Directory _destinationPath;
+    public Nodes.Directory DestinationPath { get; }
 
     public FileCopyCommand(Nodes.File sourcePath, Nodes.Directory destinationPath)
     {
-        _sourcePath = sourcePath;
-        _destinationPath = destinationPath;
+        SourcePath = sourcePath;
+        DestinationPath = destinationPath;
     }
 
     public CommandExecutionResult Execute(IFileSystem fileSystem)
     {
-        FileSystemResult result = fileSystem.CopyFile(_sourcePath, _destinationPath);
+        FileSystemResult result = fileSystem.CopyFile(SourcePath, DestinationPath);
 
         if (result is FileSystemResult.Failure failure)
             return new CommandExecutionResult.Failure(failure.Message);

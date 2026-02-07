@@ -6,16 +6,16 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
 public class FileDeleteCommand : ICommand
 {
-    private readonly Nodes.File _path;
+    public Nodes.File Path { get; }
 
     public FileDeleteCommand(Nodes.File path)
     {
-        _path = path;
+        Path = path;
     }
 
     public CommandExecutionResult Execute(IFileSystem fileSystem)
     {
-        FileSystemResult result = fileSystem.DeleteFile(_path);
+        FileSystemResult result = fileSystem.DeleteFile(Path);
 
         if (result is FileSystemResult.Failure failure)
             return new CommandExecutionResult.Failure(failure.Message);
