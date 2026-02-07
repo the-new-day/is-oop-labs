@@ -40,7 +40,7 @@ public class AccountServiceTests
         SetupValidUserSessionAndAccount(account);
 
         // Act
-        var result = _accountService.WithdrawMoney(
+        WithdrawMoney.Response result = _accountService.WithdrawMoney(
             new WithdrawMoney.Request(500, _validSessionKey));
 
         // Assert
@@ -60,7 +60,7 @@ public class AccountServiceTests
         SetupValidUserSessionAndAccount(account);
 
         // Act
-        var result = _accountService.WithdrawMoney(
+        WithdrawMoney.Response result = _accountService.WithdrawMoney(
             new WithdrawMoney.Request(500, _validSessionKey));
 
         // Assert
@@ -80,7 +80,7 @@ public class AccountServiceTests
         SetupValidUserSessionAndAccount(account);
 
         // Act
-        var result = _accountService.ReplenishMoney(
+        ReplenishMoney.Response result = _accountService.ReplenishMoney(
             new ReplenishMoney.Request(500, _validSessionKey));
 
         // Assert

@@ -33,7 +33,7 @@ internal sealed class AccountOperationService : IAccountOperationService
         if (accountId == AccountId.Default)
             return new CheckOperationHistory.Response.InvalidSessionKey();
 
-        var operations = _context
+        OperationDto[] operations = _context
             .AccountOperations
             .Query(new AccountOperationQuery.Builder().WithAccountId(accountId).Build())
             .Select(op => op.MapToDto())

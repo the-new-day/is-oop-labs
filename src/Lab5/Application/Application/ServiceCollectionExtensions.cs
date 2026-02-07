@@ -14,12 +14,12 @@ public static class ServiceCollectionExtensions
         this IServiceCollection collection,
         IConfiguration configuration)
     {
-        var systemPassword = configuration["Admin:SystemPassword"]
+        string systemPassword = configuration["Admin:SystemPassword"]
             ?? throw new InvalidOperationException("Admin:SystemPassword is not configured");
 
         collection.AddScoped<ISessionService>(sp =>
         {
-            var context = sp.GetRequiredService<IPersistenceContext>();
+            IPersistenceContext context = sp.GetRequiredService<IPersistenceContext>();
             return new SessionService(context, systemPassword);
         });
 
