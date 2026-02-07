@@ -20,11 +20,11 @@ public abstract class ParserHandler
         return this;
     }
 
+    public abstract CommandParsingResult TryParse(CommandTokens tokens);
+
     protected CommandParsingResult CallNext(CommandTokens args)
     {
         return _next?.TryParse(args)
             ?? new CommandParsingResult.Failure("Unknown command");
     }
-
-    protected abstract CommandParsingResult TryParse(CommandTokens tokens);
 }

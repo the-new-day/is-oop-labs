@@ -6,5 +6,5 @@ public abstract record CommandExecutionResult
 
     public sealed record Success : CommandExecutionResult;
 
-    public sealed record Failure : CommandExecutionResult;
+    public sealed record Failure(string Message) : CommandExecutionResult;
 }

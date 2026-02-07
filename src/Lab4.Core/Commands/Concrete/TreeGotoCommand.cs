@@ -1,7 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.State;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.State.Results;
+using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
@@ -9,9 +8,9 @@ public class TreeGotoCommand : ICommand
 {
     private readonly Nodes.Directory _path;
 
-    private readonly IConnection _connection;
+    private readonly IFileSystemConnection _connection;
 
-    public TreeGotoCommand(IConnection connection, Nodes.Directory path)
+    public TreeGotoCommand(IFileSystemConnection connection, Nodes.Directory path)
     {
         _path = path;
         _connection = connection;
@@ -19,10 +18,12 @@ public class TreeGotoCommand : ICommand
 
     public CommandExecutionResult Execute(IFileSystem fileSystem)
     {
-        ConnectionChangeDirectoryResult result = _connection.TryChangeDirectory(_path);
+        UnixPath newAbsolutePath = _connection.CurrentDirectory.Combine(_path.Path);
 
-        return result is ConnectionChangeDirectoryResult.Success
-            ? new CommandExecutionResult.Success()
-            : new CommandExecutionResult.Failure();
+        if (!fileSystem.IsDirectory(newAbsolutePath))
+            return new CommandExecutionResult.Failure("Directory not found");
+
+        _connection.ChangeDirectory(new Nodes.Directory(newAbsolutePath));
+        return new CommandExecutionResult.Success();
     }
 }

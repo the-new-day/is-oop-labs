@@ -8,5 +8,5 @@ public abstract record DirectoryContentsResult
 
     public sealed record Success(IEnumerable<IFileSystemNode> Nodes) : DirectoryContentsResult;
 
-    public sealed record Failure(Exception? Exception) : DirectoryContentsResult;
+    public sealed record Failure(string Message) : DirectoryContentsResult;
 }

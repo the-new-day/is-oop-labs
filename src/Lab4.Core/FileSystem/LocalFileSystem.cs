@@ -14,7 +14,7 @@ public class LocalFileSystem : IFileSystem
         }
         catch (Exception e)
         {
-            return new FileSystemResult.Failure(e);
+            return new FileSystemResult.Failure(e.Message);
         }
     }
 
@@ -27,7 +27,7 @@ public class LocalFileSystem : IFileSystem
         }
         catch (Exception e)
         {
-            return new FileSystemResult.Failure(e);
+            return new FileSystemResult.Failure(e.Message);
         }
     }
 
@@ -56,7 +56,7 @@ public class LocalFileSystem : IFileSystem
         }
         catch (Exception e)
         {
-            return new DirectoryContentsResult.Failure(e);
+            return new DirectoryContentsResult.Failure(e.Message);
         }
     }
 
@@ -69,7 +69,7 @@ public class LocalFileSystem : IFileSystem
         }
         catch (Exception e)
         {
-            return new FileSystemResult.Failure(e);
+            return new FileSystemResult.Failure(e.Message);
         }
     }
 
@@ -91,7 +91,7 @@ public class LocalFileSystem : IFileSystem
         }
         catch (Exception e)
         {
-            return new FileReadOpeningResult.Failure(e);
+            return new FileReadOpeningResult.Failure(e.Message);
         }
     }
 
@@ -104,7 +104,7 @@ public class LocalFileSystem : IFileSystem
         }
         catch (Exception e)
         {
-            return new FileSystemResult.Failure(e);
+            return new FileSystemResult.Failure(e.Message);
         }
     }
 }

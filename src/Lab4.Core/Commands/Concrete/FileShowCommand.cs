@@ -1,6 +1,7 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
+using System.Diagnostics;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
@@ -25,7 +26,11 @@ public class FileShowCommand : ICommand
             _contentDisplayer.Display(success.FileStream);
             return new CommandExecutionResult.Success();
         }
+        else if (result is FileReadOpeningResult.Failure failure)
+        {
+            return new CommandExecutionResult.Failure(failure.Message);
+        }
 
-        return new CommandExecutionResult.Failure();
+        throw new UnreachableException();
     }
 }

@@ -1,5 +1,5 @@
+using Itmo.ObjectOrientedProgramming.Lab4.Core;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
-using Itmo.ObjectOrientedProgramming.Lab4.Core.State;
 using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Results;
 using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
 
@@ -7,14 +7,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Parser
 
 public class TreeGotoParser : ParserHandler
 {
-    private readonly IConnection _connection;
+    private readonly IFileSystemConnection _connection;
 
-    public TreeGotoParser(IConnection connection)
+    public TreeGotoParser(IFileSystemConnection connection)
     {
         _connection = connection;
     }
 
-    protected override CommandParsingResult TryParse(CommandTokens tokens)
+    public override CommandParsingResult TryParse(CommandTokens tokens)
     {
         if (tokens.Arguments.Count < 2)
             return CallNext(tokens);

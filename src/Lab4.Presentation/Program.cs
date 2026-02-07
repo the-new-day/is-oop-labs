@@ -1,5 +1,8 @@
+using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands;
 using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing;
-using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Results;
+using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.State;
+using Itmo.ObjectOrientedProgramming.Lab4.Presentation.Connection;
+using Itmo.ObjectOrientedProgramming.Lab4.Presentation.Rendering;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation;
 
@@ -7,51 +10,34 @@ public class Program
 {
     public static void Main()
     {
+        string defaultConnectionMode = "local";
+
+        Dictionary<string, IConnectionFactory> supportedConnectionModes = new();
+
+        var localFactory = new LocalConnectionFactory(
+                new DisconnectedState(supportedConnectionModes.Keys.ToHashSet(), defaultConnectionMode));
+
+        supportedConnectionModes.Add("local", localFactory);
+
+        Dictionary<string, IFileContentDisplayer> supportedFileShowModes = new()
+        {
+            { "console", new FileContentDisplayer(new ConsoleOutputRenderer()) },
+        };
+
         var tokenizer = new Tokenizer();
-        StartRepl(tokenizer);
-    }
+        var cli = new Cli(
+            tokenizer,
+            supportedFileShowModes,
+            supportedConnectionModes,
+            defaultConnectionMode);
 
-    private static void StartRepl(Tokenizer tokenizer)
-    {
-        while (true)
+        try
         {
-            Console.Write("> ");
-            string? input = Console.ReadLine();
-
-            if (string.IsNullOrWhiteSpace(input)) continue;
-
-            TokenizingResult result = tokenizer.Tokenize(input);
-            switch (result)
-            {
-                case TokenizingResult.Success success:
-                    PrintTokens(success.Tokens);
-                    break;
-                case TokenizingResult.Failure failure:
-                    PrintError(failure.Message);
-                    break;
-            }
+            cli.Start();
         }
-    }
-
-    private static void PrintTokens(CommandTokens tokens)
-    {
-        Console.WriteLine("Arguments:");
-        foreach (string arg in tokens.Arguments)
+        catch (Exception e)
         {
-            Console.WriteLine($"\t{arg}");
+            cli.PrintError(e.Message);
         }
-
-        Console.WriteLine("Flags:");
-        foreach ((string? name, string? value) in tokens.Flags)
-        {
-            Console.WriteLine($"\t{name}: {value}");
-        }
-    }
-
-    private static void PrintError(string message)
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine($"Error: {message}");
-        Console.ResetColor();
     }
 }

@@ -6,5 +6,5 @@ public abstract record FileSystemResult
 
     public sealed record Success : FileSystemResult;
 
-    public sealed record Failure(Exception? Exception) : FileSystemResult;
+    public sealed record Failure(string Message) : FileSystemResult;
 }

@@ -4,43 +4,59 @@ public class UnixPath
 {
     public string Value { get; }
 
-    public bool IsAbsolute => Value.StartsWith(RootPath);
+    public bool IsAbsolute => Value.StartsWith('/');
 
-    private const string RootPath = "/";
+    public string Name => Value.Split('/', StringSplitOptions.RemoveEmptyEntries).LastOrDefault() ?? (IsAbsolute ? "/" : ".");
 
     public UnixPath(string value)
     {
-        Value = Resolve(RootPath, value);
+        Value = Normalize(value);
     }
 
-    private static string Resolve(string rootPath, string relativePath)
+    public UnixPath Combine(UnixPath other)
     {
-        string[] rawSegments = relativePath.Split('/');
+        if (other.IsAbsolute) return other;
 
-        if (rawSegments.Length == 0)
-            return rootPath;
+        string combined = Value + "/" + other.Value;
+        return new UnixPath(combined);
+    }
 
-        Stack<string> segments = new();
+    private static string Normalize(string path)
+    {
+        if (string.IsNullOrWhiteSpace(path)) return ".";
 
-        if (rawSegments[0].Length != 0)
-            segments = new(rootPath.Split('/'));
+        bool startsWithSlash = path.StartsWith('/');
+        string[] rawSegments = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
+        List<string> resultSegments = new();
 
         foreach (string segment in rawSegments)
         {
-            if (segment.Length == 0 || segment == ".")
-            {
-                continue;
-            }
+            if (segment == ".") continue;
 
             if (segment == "..")
             {
-                segments.Pop();
+                if (resultSegments.Count > 0 && resultSegments[^1] != "..")
+                {
+                    resultSegments.RemoveAt(resultSegments.Count - 1);
+                }
+                else if (!startsWithSlash)
+                {
+                    resultSegments.Add("..");
+                }
+
                 continue;
             }
 
-            segments.Push(segment);
+            resultSegments.Add(segment);
         }
 
-        return string.Join('/', segments.ToArray());
+        string joined = string.Join('/', resultSegments);
+
+        if (startsWithSlash)
+        {
+            return "/" + joined;
+        }
+
+        return resultSegments.Count == 0 ? "." : joined;
     }
 }

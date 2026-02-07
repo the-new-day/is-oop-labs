@@ -4,6 +4,8 @@ public class Directory : IFileSystemNode
 {
     public UnixPath Path { get; }
 
+    public string Name => Path.Name;
+
     public Directory(UnixPath path)
     {
         Path = path;
@@ -16,7 +18,7 @@ public class Directory : IFileSystemNode
 
     public UnixPath Combine(UnixPath relative)
     {
-        return new UnixPath(Path.Value + "/" + relative.Value);
+        return Path.Combine(relative);
     }
 
     public void Accept(IFileSystemNodeVisitor visitor)

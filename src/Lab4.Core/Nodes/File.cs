@@ -4,7 +4,7 @@ public class File : IFileSystemNode
 {
     public UnixPath Path { get; }
 
-    public string Name => Path.Value.Split('/').Last();
+    public string Name => Path.Name;
 
     public Directory ParentDir
     {

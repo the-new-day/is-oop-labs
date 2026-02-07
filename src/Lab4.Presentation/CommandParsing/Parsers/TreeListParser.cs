@@ -7,17 +7,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Parser
 
 public class TreeListParser : ParserHandler
 {
-    private readonly Directory _path;
-
     private readonly ITreeListDisplayer _displayer;
 
-    public TreeListParser(Directory path, ITreeListDisplayer displayer)
+    public TreeListParser(ITreeListDisplayer displayer)
     {
-        _path = path;
         _displayer = displayer;
     }
 
-    protected override CommandParsingResult TryParse(CommandTokens tokens)
+    public override CommandParsingResult TryParse(CommandTokens tokens)
     {
         if (tokens.Arguments.Count < 2)
             return CallNext(tokens);
@@ -25,13 +22,13 @@ public class TreeListParser : ParserHandler
         if (tokens.Arguments[0] != "tree" || tokens.Arguments[1] != "list")
             return CallNext(tokens);
 
-        if (tokens.Arguments.Count < 3 || !tokens.Flags.ContainsKey("d"))
+        if (!tokens.Flags.TryGetValue("d", out string? value))
             return new CommandParsingResult.Failure("Depth required");
 
-        string rawDepth = tokens.Arguments[2];
-        int depth = 1; // TODO: parse flag
+        if (!int.TryParse(value, out int depth))
+            return new CommandParsingResult.Failure("Can't parse Depth: not an integer");
 
         return new CommandParsingResult.CommandCreated(
-            new TreeListCommand(_path, depth, _displayer));
+            new TreeListCommand(new Directory("."), depth, _displayer));
     }
 }

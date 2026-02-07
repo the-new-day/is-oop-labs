@@ -20,8 +20,9 @@ public class FileCopyCommand : ICommand
     {
         FileSystemResult result = fileSystem.CopyFile(_sourcePath, _destinationPath);
 
-        return result is FileSystemResult.Success
-            ? new CommandExecutionResult.Success()
-            : new CommandExecutionResult.Failure();
+        if (result is FileSystemResult.Failure failure)
+            return new CommandExecutionResult.Failure(failure.Message);
+
+        return new CommandExecutionResult.Success();
     }
 }

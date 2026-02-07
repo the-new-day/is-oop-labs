@@ -20,8 +20,9 @@ public class FileRenameCommand : ICommand
     {
         FileSystemResult result = fileSystem.RenameFile(_path, _name);
 
-        return result is FileSystemResult.Success
-            ? new CommandExecutionResult.Success()
-            : new CommandExecutionResult.Failure();
+        if (result is FileSystemResult.Failure failure)
+            return new CommandExecutionResult.Failure(failure.Message);
+
+        return new CommandExecutionResult.Success();
     }
 }

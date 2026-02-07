@@ -14,7 +14,7 @@ public class FileShowParser : ParserHandler
         _supportedModes = supportedModes;
     }
 
-    protected override CommandParsingResult TryParse(CommandTokens tokens)
+    public override CommandParsingResult TryParse(CommandTokens tokens)
     {
         if (tokens.Arguments.Count < 2)
             return CallNext(tokens);

@@ -6,5 +6,5 @@ public abstract record FileReadOpeningResult
 
     public sealed record Success(FileStream FileStream) : FileReadOpeningResult;
 
-    public sealed record Failure(Exception? Exception) : FileReadOpeningResult;
+    public sealed record Failure(string Message) : FileReadOpeningResult;
 }

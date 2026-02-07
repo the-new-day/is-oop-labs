@@ -4,7 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Parser
 
 public class DisconnectParser : ParserHandler
 {
-    protected override CommandParsingResult TryParse(CommandTokens tokens)
+    public override CommandParsingResult TryParse(CommandTokens tokens)
     {
         if (tokens.Arguments[0] == "disconnect")
             return new CommandParsingResult.Disconnect();

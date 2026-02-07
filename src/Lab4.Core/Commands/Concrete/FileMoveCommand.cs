@@ -20,8 +20,9 @@ public class FileMoveCommand : ICommand
     {
         FileSystemResult result = fileSystem.MoveFile(_sourcePath, _destinationPath);
 
-        return result is FileSystemResult.Success
-            ? new CommandExecutionResult.Success()
-            : new CommandExecutionResult.Failure();
+        if (result is FileSystemResult.Failure failure)
+            return new CommandExecutionResult.Failure(failure.Message);
+
+        return new CommandExecutionResult.Success();
     }
 }

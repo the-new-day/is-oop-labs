@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab4.Core.State.Results;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 
 public abstract record ConnectionChangeDirectoryResult
 {
