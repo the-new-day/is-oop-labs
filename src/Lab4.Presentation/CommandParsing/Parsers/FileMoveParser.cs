@@ -22,6 +22,6 @@ public class FileMoveParser : ParserHandler
         string dest = tokens.Arguments[3];
 
         return new CommandParsingResult.CommandCreated(
-            new FileMoveCommand(new File(dest), new Directory(dest)));
+            new FileMoveCommand(new File(source), new Directory(dest)));
     }
 }
