@@ -1,14 +1,15 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
+using File = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.File;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
 public class FileDeleteCommand : ICommand
 {
-    public Nodes.File Path { get; }
+    public File Path { get; }
 
-    public FileDeleteCommand(Nodes.File path)
+    public FileDeleteCommand(File path)
     {
         Path = path;
     }

@@ -1,16 +1,18 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
+using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
+using File = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.File;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
 public class FileCopyCommand : ICommand
 {
-    public Nodes.File SourcePath { get; }
+    public File SourcePath { get; }
 
-    public Nodes.Directory DestinationPath { get; }
+    public Directory DestinationPath { get; }
 
-    public FileCopyCommand(Nodes.File sourcePath, Nodes.Directory destinationPath)
+    public FileCopyCommand(File sourcePath, Directory destinationPath)
     {
         SourcePath = sourcePath;
         DestinationPath = destinationPath;

@@ -1,16 +1,17 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
+using File = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.File;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
 public class FileRenameCommand : ICommand
 {
-    public Nodes.File Path { get; }
+    public File Path { get; }
 
     public string Name { get; }
 
-    public FileRenameCommand(Nodes.File path, string name)
+    public FileRenameCommand(File path, string name)
     {
         Path = path;
         Name = name;

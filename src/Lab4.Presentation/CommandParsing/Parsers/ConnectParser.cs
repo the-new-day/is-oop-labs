@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Parsers;
 
-public class ConnectParser : ParserHandler
+public class ConnectParser : CommandLeafParser
 {
     private readonly HashSet<string> _supportedModes;
 
@@ -14,19 +14,16 @@ public class ConnectParser : ParserHandler
         _defaultMode = defaultMode;
     }
 
-    public override CommandParsingResult TryParse(CommandTokens tokens)
+    protected override CommandParsingResult BuildCommand(CommandTokens tokens)
     {
-        if (tokens.Arguments.ElementAt(0) != "connect")
-            return CallNext(tokens);
-
-        if (tokens.Arguments.Count < 2)
+        if (tokens.Arguments.Count < 1)
             return new CommandParsingResult.Failure("Address is required");
 
-        string address = tokens.Arguments.ElementAt(1);
+        string address = tokens.Arguments.ElementAt(0);
         string mode = _defaultMode;
 
-        if (tokens.Arguments.Count > 2)
-            mode = tokens.Arguments.ElementAt(2);
+        if (tokens.Arguments.Count > 1)
+            mode = tokens.Arguments.ElementAt(1);
 
         if (!_supportedModes.Contains(mode))
             return new CommandParsingResult.Failure("Unsupported mode provided");

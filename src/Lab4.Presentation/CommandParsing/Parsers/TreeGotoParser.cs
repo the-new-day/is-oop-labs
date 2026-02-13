@@ -5,7 +5,7 @@ using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Parsers;
 
-public class TreeGotoParser : ParserHandler
+public class TreeGotoParser : CommandLeafParser
 {
     private readonly IFileSystemConnection _connection;
 
@@ -14,18 +14,12 @@ public class TreeGotoParser : ParserHandler
         _connection = connection;
     }
 
-    public override CommandParsingResult TryParse(CommandTokens tokens)
+    protected override CommandParsingResult BuildCommand(CommandTokens tokens)
     {
-        if (tokens.Arguments.Count < 2)
-            return CallNext(tokens);
-
-        if (tokens.Arguments.ElementAt(0) != "tree" || tokens.Arguments.ElementAt(1) != "goto")
-            return CallNext(tokens);
-
-        if (tokens.Arguments.Count < 3)
+        if (tokens.Arguments.Count == 0)
             return new CommandParsingResult.Failure("Path required");
 
-        string path = tokens.Arguments.ElementAt(2);
+        string path = tokens.Arguments.ElementAt(0);
 
         return new CommandParsingResult.CommandCreated(
             new TreeGotoCommand(_connection, new Directory(path)));

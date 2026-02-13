@@ -25,13 +25,17 @@ public class ConnectedState : IConnectionState
 
     public ParserHandler GetParserHandler()
     {
-        return new DisconnectParser()
-            .AddNext(new FileCopyParser())
-            .AddNext(new FileDeleteParser())
-            .AddNext(new FileMoveParser())
-            .AddNext(new FileRenameParser())
-            .AddNext(new FileShowParser(_supportedFileShowModes))
-            .AddNext(new TreeGotoParser(_connection))
-            .AddNext(new TreeListParser(_treeListDisplayer));
+        ParserHandler fileChain = new CommandNodeParser("copy", new FileCopyParser())
+            .AddNext(new CommandNodeParser("delete", new FileDeleteParser()))
+            .AddNext(new CommandNodeParser("move", new FileMoveParser()))
+            .AddNext(new CommandNodeParser("rename", new FileRenameParser()))
+            .AddNext(new CommandNodeParser("show", new FileShowParser(_supportedFileShowModes)));
+
+        ParserHandler treeChain = new CommandNodeParser("goto", new TreeGotoParser(_connection))
+            .AddNext(new CommandNodeParser("list", new TreeListParser(_treeListDisplayer)));
+
+        return new CommandNodeParser("disconnect", new DisconnectParser())
+            .AddNext(new CommandNodeParser("file", fileChain))
+            .AddNext(new CommandNodeParser("tree", treeChain));
     }
 }

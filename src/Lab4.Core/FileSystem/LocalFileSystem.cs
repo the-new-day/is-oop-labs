@@ -1,11 +1,13 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
+using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
+using File = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.File;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
 
 public class LocalFileSystem : IFileSystem
 {
-    public FileSystemResult CopyFile(Nodes.File file, Nodes.Directory copyTo)
+    public FileSystemResult CopyFile(File file, Directory copyTo)
     {
         try
         {
@@ -18,7 +20,7 @@ public class LocalFileSystem : IFileSystem
         }
     }
 
-    public FileSystemResult DeleteFile(Nodes.File file)
+    public FileSystemResult DeleteFile(File file)
     {
         try
         {
@@ -31,7 +33,7 @@ public class LocalFileSystem : IFileSystem
         }
     }
 
-    public DirectoryContentsResult GetContents(Nodes.Directory directory)
+    public DirectoryContentsResult GetContents(Directory directory)
     {
         try
         {
@@ -44,11 +46,11 @@ public class LocalFileSystem : IFileSystem
 
                 if (System.IO.Directory.Exists(fullPath))
                 {
-                    nodes.Add(new Nodes.Directory(path));
+                    nodes.Add(new Directory(path));
                 }
                 else
                 {
-                    nodes.Add(new Nodes.File(path));
+                    nodes.Add(new File(path));
                 }
             }
 
@@ -60,7 +62,7 @@ public class LocalFileSystem : IFileSystem
         }
     }
 
-    public FileSystemResult MoveFile(Nodes.File file, Nodes.Directory moveTo)
+    public FileSystemResult MoveFile(File file, Directory moveTo)
     {
         try
         {
@@ -83,7 +85,7 @@ public class LocalFileSystem : IFileSystem
         return System.IO.File.Exists(path.Value);
     }
 
-    public FileReadOpeningResult OpenRead(Nodes.File file)
+    public FileReadOpeningResult OpenRead(File file)
     {
         try
         {
@@ -95,7 +97,7 @@ public class LocalFileSystem : IFileSystem
         }
     }
 
-    public FileSystemResult RenameFile(Nodes.File file, string newName)
+    public FileSystemResult RenameFile(File file, string newName)
     {
         try
         {

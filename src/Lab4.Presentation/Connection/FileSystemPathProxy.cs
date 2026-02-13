@@ -1,6 +1,8 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes;
+using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
+using File = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.File;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.Connection;
 
@@ -8,26 +10,26 @@ public class FileSystemPathProxy : IFileSystem, IChangeDirectorySubscriber
 {
     private readonly IFileSystem _fileSystem;
 
-    private Core.Nodes.Directory _currentDirectory;
+    private Directory _currentDirectory;
 
-    public FileSystemPathProxy(IFileSystem fileSystem, Core.Nodes.Directory currentDirectory)
+    public FileSystemPathProxy(IFileSystem fileSystem, Directory currentDirectory)
     {
         _fileSystem = fileSystem;
         _currentDirectory = currentDirectory;
     }
 
-    public FileSystemResult CopyFile(Core.Nodes.File file, Core.Nodes.Directory copyTo)
+    public FileSystemResult CopyFile(File file, Directory copyTo)
     {
         return _fileSystem.CopyFile(GetFile(file), GetDirectory(copyTo));
     }
 
-    public FileSystemResult DeleteFile(Core.Nodes.File file)
+    public FileSystemResult DeleteFile(File file)
     {
         Console.WriteLine(GetFile(file).Path.Value);
         return _fileSystem.DeleteFile(GetFile(file));
     }
 
-    public DirectoryContentsResult GetContents(Core.Nodes.Directory directory)
+    public DirectoryContentsResult GetContents(Directory directory)
     {
         return _fileSystem.GetContents(GetDirectory(directory));
     }
@@ -42,34 +44,34 @@ public class FileSystemPathProxy : IFileSystem, IChangeDirectorySubscriber
         return _fileSystem.IsFile(_currentDirectory.Path.Combine(path));
     }
 
-    public FileSystemResult MoveFile(Core.Nodes.File file, Core.Nodes.Directory moveTo)
+    public FileSystemResult MoveFile(File file, Directory moveTo)
     {
         return _fileSystem.MoveFile(GetFile(file), GetDirectory(moveTo));
     }
 
-    public FileReadOpeningResult OpenRead(Core.Nodes.File file)
+    public FileReadOpeningResult OpenRead(File file)
     {
         return _fileSystem.OpenRead(GetFile(file));
     }
 
-    public FileSystemResult RenameFile(Core.Nodes.File file, string newName)
+    public FileSystemResult RenameFile(File file, string newName)
     {
         return _fileSystem.RenameFile(GetFile(file), newName);
     }
 
-    public void OnChangeDirectory(Core.Nodes.Directory newDirectory)
+    public void OnChangeDirectory(Directory newDirectory)
     {
         _currentDirectory = newDirectory;
     }
 
-    private Core.Nodes.File GetFile(Core.Nodes.File file)
+    private File GetFile(File file)
     {
         UnixPath resolvedPath = _currentDirectory.Path.Combine(file.Path);
-        return new Core.Nodes.File(resolvedPath);
+        return new File(resolvedPath);
     }
 
-    private Core.Nodes.Directory GetDirectory(Core.Nodes.Directory directory)
+    private Directory GetDirectory(Directory directory)
     {
-        return new Core.Nodes.Directory(_currentDirectory.Combine(directory.Path));
+        return new Directory(_currentDirectory.Combine(directory.Path));
     }
 }

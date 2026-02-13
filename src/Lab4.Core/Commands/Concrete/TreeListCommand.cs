@@ -1,17 +1,18 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Results;
 using Itmo.ObjectOrientedProgramming.Lab4.Core.FileSystem;
+using Directory = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.Directory;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Core.Commands.Concrete;
 
 public class TreeListCommand : ICommand
 {
-    public Nodes.Directory Path { get; }
+    public Directory Path { get; }
 
     public int MaxDepth { get; }
 
     public ITreeListDisplayer Displayer { get; }
 
-    public TreeListCommand(Nodes.Directory path, int maxDepth, ITreeListDisplayer displayer)
+    public TreeListCommand(Directory path, int maxDepth, ITreeListDisplayer displayer)
     {
         Path = path;
         MaxDepth = maxDepth;

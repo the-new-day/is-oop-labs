@@ -19,6 +19,8 @@ public class DisconnectedState : IConnectionState
 
     public ParserHandler GetParserHandler()
     {
-        return new ConnectParser(_supportedConnectionModes, _defaultConnectionMode);
+        return new CommandNodeParser(
+            "connect",
+            new ConnectParser(_supportedConnectionModes, _defaultConnectionMode));
     }
 }

@@ -4,21 +4,15 @@ using File = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.File;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Parsers;
 
-public class FileRenameParser : ParserHandler
+public class FileRenameParser : CommandLeafParser
 {
-    public override CommandParsingResult TryParse(CommandTokens tokens)
+    protected override CommandParsingResult BuildCommand(CommandTokens tokens)
     {
         if (tokens.Arguments.Count < 2)
-            return CallNext(tokens);
-
-        if (tokens.Arguments.ElementAt(0) != "file" || tokens.Arguments.ElementAt(1) != "rename")
-            return CallNext(tokens);
-
-        if (tokens.Arguments.Count < 4)
             return new CommandParsingResult.Failure("Path and Name required");
 
-        string path = tokens.Arguments.ElementAt(2);
-        string name = tokens.Arguments.ElementAt(3);
+        string path = tokens.Arguments.ElementAt(0);
+        string name = tokens.Arguments.ElementAt(1);
 
         return new CommandParsingResult.CommandCreated(
             new FileRenameCommand(new File(path), name));

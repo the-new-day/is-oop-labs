@@ -4,20 +4,14 @@ using File = Itmo.ObjectOrientedProgramming.Lab4.Core.Nodes.File;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Presentation.CommandParsing.Parsers;
 
-public class FileDeleteParser : ParserHandler
+public class FileDeleteParser : CommandLeafParser
 {
-    public override CommandParsingResult TryParse(CommandTokens tokens)
+    protected override CommandParsingResult BuildCommand(CommandTokens tokens)
     {
-        if (tokens.Arguments.Count < 2)
-            return CallNext(tokens);
-
-        if (tokens.Arguments.ElementAt(0) != "file" || tokens.Arguments.ElementAt(1) != "delete")
-            return CallNext(tokens);
-
-        if (tokens.Arguments.Count < 3)
+        if (tokens.Arguments.Count == 0)
             return new CommandParsingResult.Failure("Path required");
 
-        string path = tokens.Arguments.ElementAt(2);
+        string path = tokens.Arguments.ElementAt(0);
 
         return new CommandParsingResult.CommandCreated(
             new FileDeleteCommand(new File(path)));
