@@ -25,7 +25,6 @@ public class FileSystemPathProxy : IFileSystem, IChangeDirectorySubscriber
 
     public FileSystemResult DeleteFile(File file)
     {
-        Console.WriteLine(GetFile(file).Path.Value);
         return _fileSystem.DeleteFile(GetFile(file));
     }
 
