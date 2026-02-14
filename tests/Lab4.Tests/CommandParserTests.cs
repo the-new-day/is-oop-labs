@@ -16,18 +16,25 @@ public class CommandParserTests
     public CommandParserTests()
     {
         var connection = new StubConnection();
-        var displayer = new StubDisplayer();
+        var displayer = new StubTreeListDisplayer();
 
         Dictionary<string, IFileContentDisplayer> supportedFileDisplayModes = new()
         {
             { "console", new StubFileContentDisplayer() },
         };
 
-        _chain = new TreeGotoParser(connection);
-        _chain.AddNext(new FileDeleteParser())
-              .AddNext(new FileCopyParser())
-              .AddNext(new FileShowParser(supportedFileDisplayModes))
-              .AddNext(new TreeListParser(displayer));
+        ParserHandler fileChain = new CommandNodeParser("copy", new FileCopyParser())
+            .AddNext(new CommandNodeParser("delete", new FileDeleteParser()))
+            .AddNext(new CommandNodeParser("move", new FileMoveParser()))
+            .AddNext(new CommandNodeParser("rename", new FileRenameParser()))
+            .AddNext(new CommandNodeParser("show", new FileShowParser(supportedFileDisplayModes)));
+
+        ParserHandler treeChain = new CommandNodeParser("goto", new TreeGotoParser(connection))
+            .AddNext(new CommandNodeParser("list", new TreeListParser(displayer)));
+
+        _chain = new CommandNodeParser("disconnect", new DisconnectParser())
+            .AddNext(new CommandNodeParser("file", fileChain))
+            .AddNext(new CommandNodeParser("tree", treeChain));
     }
 
     [Fact]
