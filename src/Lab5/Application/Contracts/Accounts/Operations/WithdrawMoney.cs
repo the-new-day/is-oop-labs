@@ -1,0 +1,19 @@
+namespace Itmo.ObjectOrientedProgramming.Lab5.Application.Contracts.Accounts.Operations;
+
+public static class WithdrawMoney
+{
+    public readonly record struct Request(decimal Amount, Guid SessionKey);
+
+    public abstract record Response
+    {
+        private Response() { }
+
+        public sealed record Success : Response;
+
+        public sealed record InvalidSessionKey : Response;
+
+        public sealed record NotEnoughMoney : Response;
+
+        public sealed record OperationIsNotAllowed : Response;
+    }
+}

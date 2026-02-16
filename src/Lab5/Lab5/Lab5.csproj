@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application\Lab5.Application.csproj" />
+    <ProjectReference Include="..\Infrastructure\Persistence\Lab5.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Presentation\Http\Lab5.Presentation.Http.csproj" />
+  </ItemGroup>
+
+</Project>
